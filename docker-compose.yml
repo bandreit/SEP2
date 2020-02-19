@@ -1,0 +1,15 @@
+version: "3"
+services:
+  scrapper-service:
+    build: "./scrapper-service"
+    ports:
+      - "4000:4000"
+    depends_on:
+      - database
+    volumes:
+      - ./scrapper-service:/opt/app
+
+  database:
+    image: mongo
+    ports:
+      - "27017:27017"
