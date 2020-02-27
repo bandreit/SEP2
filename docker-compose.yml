@@ -2,14 +2,20 @@ version: "3"
 services:
   scrapper-service:
     build: "./scrapper-service"
+    restart: always
     ports:
       - "4000:4000"
     depends_on:
-      - database
+      - postgres
     volumes:
       - ./scrapper-service:/opt/app
 
-  database:
-    image: mongo
+  postgres:
+    image: postgres
+    restart: always
     ports:
-      - "27017:27017"
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: discounts

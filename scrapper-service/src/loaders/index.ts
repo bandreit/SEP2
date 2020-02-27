@@ -1,7 +1,7 @@
 import { Express } from "express";
 
 import expressLoader from "./expressLoader";
-import mongooseLoader from "./mongooseLoader";
+import databaseLoader from "./databaseLoader";
 import cronLoader from "./cronLoader";
 
 interface IProps {
@@ -9,8 +9,8 @@ interface IProps {
 }
 
 export default async ({ expressApp }: IProps) => {
-  await mongooseLoader();
-  console.log("✅ MongoDB Intialized");
+  await databaseLoader();
+  console.log("✅ Database Intialized");
 
   await expressLoader({ expressApp });
   console.log("✅ Express Intialized");
