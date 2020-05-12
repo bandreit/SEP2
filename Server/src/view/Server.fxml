@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="510.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.ServerViewController">
+   <children>
+      <Label layoutX="18.0" layoutY="43.0" text="Recipe View">
+         <font>
+            <Font name="System Bold" size="27.0" />
+         </font>
+      </Label>
+      <Label layoutX="18.0" layoutY="152.0" text="Name:">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="18.0" layoutY="190.0" text="Number:">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <TextField fx:id="nameField" layoutX="98.0" layoutY="155.0" />
+      <TextField fx:id="numberField" layoutX="98.0" layoutY="193.0" />
+      <Button layoutX="98.0" layoutY="236.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="149.0" text="Create New" disable="true" onAction="#addStudent"/>
+      <TableView fx:id="studentListTable" layoutX="261.0" layoutY="43.0" prefHeight="440.0" prefWidth="368.0">
+        <columns>
+          <TableColumn prefWidth="194.4000244140625" text="Number" fx:id="numberColumn" />
+          <TableColumn prefWidth="174.4000244140625" text="Name" fx:id="nameColumn"/>
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>
