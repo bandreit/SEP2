@@ -14,11 +14,13 @@ public class LocalModelManager implements LocalModel, LocalListener<Recipe, Reci
 {
   private ClientModel clientModel;
   private PropertyChangeAction<String, String> property;
+  private boolean loggedIn;
 
   public LocalModelManager() throws IOException
   {
     try
     {
+      this.loggedIn = false;
       clientModel = new StudentListClient(this);
       clientModel.addListener(this);
     }
@@ -51,6 +53,28 @@ public class LocalModelManager implements LocalModel, LocalListener<Recipe, Reci
     //hz
   }
 
+  @Override public void login(String user, String password)
+  {
+    validateLogin(user, password);
+    loggedIn = true;
+  }
+
+  private void validateLogin(String user, String password)
+  {
+    if (user == null || user.isEmpty())
+    {
+      throw new IllegalArgumentException("Username cannot be empty");
+    }
+    if (password == null || password.length() < 6)
+    {
+      throw new IllegalArgumentException("Password must contain at least 6 characters");
+    }
+  }
+
+  @Override public boolean isLoggedIn()
+  {
+    return loggedIn;
+  }
 
   @Override public void propertyChange(ObserverEvent<Recipe, Recipe> event)
   {
@@ -69,4 +93,7 @@ public class LocalModelManager implements LocalModel, LocalListener<Recipe, Reci
   {
     return property.removeListener(listener, propertyNames);
   }
+
+
+
 }

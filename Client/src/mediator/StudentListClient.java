@@ -26,7 +26,7 @@ public class StudentListClient
   public StudentListClient(LocalModel model)
       throws RemoteException, NotBoundException, MalformedURLException
   {
-    this (model, HOST);
+    this(model, HOST);
   }
 
   public StudentListClient(LocalModel model, String host)
@@ -87,11 +87,12 @@ public class StudentListClient
   @Override public void propertyChange(ObserverEvent<Recipe, Recipe> event)
       throws RemoteException
   {
-    property.firePropertyChange(event.getPropertyName(), null, event.getValue2());
+    property
+        .firePropertyChange(event.getPropertyName(), null, event.getValue2());
   }
 
-  @Override public boolean addListener(
-      GeneralListener<Recipe, Recipe> listener, String... propertyNames)
+  @Override public boolean addListener(GeneralListener<Recipe, Recipe> listener,
+      String... propertyNames)
   {
     return property.addListener(listener, propertyNames);
   }
