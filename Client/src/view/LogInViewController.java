@@ -19,6 +19,12 @@ public class LogInViewController extends ViewController
     super();
   }
 
+  @Override public void init(ViewHandler viewHandler,
+      ViewModelFactory viewModels, Region root)
+  {
+    super.init(viewHandler, viewModels, root);
+  }
+
   public void openRegisterPage(ActionEvent event)
   {
     super.getHandler().openView("RegisterView");
