@@ -98,4 +98,17 @@ public class RemoteModelManager implements RemoteModel, LocalListener<Recipe, Re
     {
     }
   }
+
+  @Override public boolean login(String username, String password)
+  {
+    model.login(username,password);
+    return true;
+  }
+
+  @Override public boolean register(String user, String password, String email,
+      String confirmPassword)
+  {
+    model.register(user, password, email, confirmPassword);
+    return true;
+  }
 }

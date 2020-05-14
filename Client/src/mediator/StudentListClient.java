@@ -79,9 +79,36 @@ public class StudentListClient
     }
   }
 
+  @Override public boolean login(String username, String password)
+  {
+    try
+    {
+      remoteModel.login(username,password);
+    }
+    catch (Exception e)
+    {
+      throw new IllegalStateException(getExceptionMessage(e), e);
+    }
+    return true;
+  }
+
   @Override public void close() throws Exception
   {
     //idk
+  }
+
+  @Override public boolean register(String user, String password, String email,
+      String confirmPassword)
+  {
+    try
+    {
+      remoteModel.register(user, password, email, confirmPassword);
+    }
+    catch (Exception e)
+    {
+      throw new IllegalStateException(getExceptionMessage(e), e);
+    }
+    return true;
   }
 
   @Override public void propertyChange(ObserverEvent<Recipe, Recipe> event)

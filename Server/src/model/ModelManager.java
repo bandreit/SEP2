@@ -51,6 +51,19 @@ public class ModelManager implements Model
     property.close();
   }
 
+  @Override public boolean login(String username, String password)
+  {
+   //database
+    return true;
+  }
+
+  @Override public boolean register(String user, String password, String email,
+      String confirmPassword)
+  {
+    //adding to database
+    return true;
+  }
+
   @Override public boolean addListener(
       GeneralListener<Recipe, Recipe> listener, String... propertyNames)
   {

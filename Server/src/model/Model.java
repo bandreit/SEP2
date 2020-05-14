@@ -13,4 +13,6 @@ public interface Model extends LocalSubject<Recipe, Recipe>
   int getStudentListSize() throws Exception, RemoteException;
   Recipe getStudent(int index) throws Exception, RemoteException;
   public void close();
+  boolean login(String username,String password);
+  boolean register(String user, String password,String email,String confirmPassword);
 }
