@@ -9,14 +9,14 @@ public class LogInViewModel
   private LocalModel model;
   private StringProperty username;
   private StringProperty password;
-  private StringProperty error;
+  private StringProperty errorLabel;
 
   public LogInViewModel(LocalModel model)
   {
     this.model = model;
     this.username = new SimpleStringProperty();
     this.password = new SimpleStringProperty();
-    this.error = new SimpleStringProperty();
+    this.errorLabel = new SimpleStringProperty();
   }
 
   public StringProperty getUsernameProperty()
@@ -31,19 +31,53 @@ public class LogInViewModel
 
   public StringProperty getErrorProperty()
   {
-    return error;
+    return errorLabel;
   }
 
-  public void loginButtonPressed()
+  public boolean loginButtonPressed()
+  {
+    if (validateLogin(username.get(), password.get()))
+    {
+      try
+      {
+        model.login(username.get(), password.get());
+      }
+      catch (Exception e)
+      {
+        errorLabel.setValue(e.getMessage());
+      }
+      return true;
+    }
+    else
+    {
+      return false;
+    }
+  }
+
+  private boolean validateLogin(String user, String password)
   {
     try
     {
-//      System.out.println(username.get() + "-------------" + password.get());//get is correct to get values <<<
-      model.login(username.get(), password.get());
+      if (user == null || user.isEmpty())
+      {
+        errorLabel.setValue("Username cannot be empty");
+        throw new IllegalArgumentException("Username cannot be empty");
+      }
+      if (password == null || password.length() < 6)
+      {
+        errorLabel.setValue("Password must contain at least 6 characters");
+        throw new IllegalArgumentException("Password must contain at least 6 characters");
+      }
+//      if(not in database)
+//      {
+//        throw error
+//      }
+      return true;
     }
     catch (Exception e)
     {
-      error.setValue(e.getMessage());
+      e.printStackTrace();
     }
+    return false;
   }
 }

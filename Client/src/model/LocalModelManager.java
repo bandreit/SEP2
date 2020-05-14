@@ -53,27 +53,26 @@ public class LocalModelManager implements LocalModel, LocalListener<Recipe, Reci
     //hz
   }
 
-  @Override public void login(String user, String password)
+  @Override public boolean login(String user, String password)
   {
     validateLogin(user, password);
     loggedIn = true;
+    return true;
   }
 
-  private void validateLogin(String user, String password)
-  {
-    if (user == null || user.isEmpty())
-    {
-      throw new IllegalArgumentException("Username cannot be empty");
-    }
-    if (password == null || password.length() < 6)
-    {
-      throw new IllegalArgumentException("Password must contain at least 6 characters");
-    }
-  }
 
   @Override public boolean isLoggedIn()
   {
     return loggedIn;
+  }
+
+  @Override public boolean register(String user, String password, String email,
+      String confirmPassword)
+  {
+    validateRegister(user, password,email,confirmPassword);
+//    loggedIn = true;
+//    return true;
+    return clientModel.register(user, password,email,confirmPassword);
   }
 
   @Override public void propertyChange(ObserverEvent<Recipe, Recipe> event)
@@ -94,6 +93,56 @@ public class LocalModelManager implements LocalModel, LocalListener<Recipe, Reci
     return property.removeListener(listener, propertyNames);
   }
 
+  private boolean validateLogin(String user, String password)
+  {
+    try
+    {
+      if (user == null || user.isEmpty())
+      {
+        throw new IllegalArgumentException("Username cannot be empty");
+      }
+      if (password == null || password.length() < 6)
+      {
+        throw new IllegalArgumentException(
+            "Password must contain at least 6 characters");
+      }
+      return true;
+    }
+    catch (Exception e)
+    {
+      e.printStackTrace();
+    }
+    return false;
+  }
 
+  private boolean validateRegister(String user, String password,String email,String confirmPassword)
+  {
+    try
+    {
+      if (user == null || user.isEmpty())
+      {
+        throw new IllegalArgumentException("Username cannot be empty");
+      }
+      if (password == null || password.length() < 6)
+      {
+        throw new IllegalArgumentException(
+            "Password must contain at least 6 characters");
+      }
+      else if(confirmPassword != password)
+      {
+        throw new IllegalArgumentException("Passwords does not match");
+      }
+      else if(!email.contains("@"))
+      {
+        throw new IllegalArgumentException("Email does not contain @");
+      }
+      return true;
+    }
+    catch (Exception e)
+    {
+      e.printStackTrace();
+    }
+    return false;
+  }
 
 }

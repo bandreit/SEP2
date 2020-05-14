@@ -8,8 +8,9 @@ public interface LocalModel extends LocalSubject<String, String>
   Recipe getStudentByName(String name) throws Exception;
   void addStudent(Recipe recipe) throws Exception;
   void close(Recipe recipe);
-  public void login(String user, String password);
-  public boolean isLoggedIn();
+  boolean login(String user, String password);
+  boolean isLoggedIn();
+  boolean register(String user, String password,String email,String confirmPassword);
 
 
 }
