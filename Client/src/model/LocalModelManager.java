@@ -70,8 +70,9 @@ public class LocalModelManager implements LocalModel, LocalListener<Recipe, Reci
       String confirmPassword)
   {
     validateRegister(user, password,email,confirmPassword);
-    loggedIn = true;
-    return true;
+//    loggedIn = true;
+//    return true;
+    return clientModel.register(user, password,email,confirmPassword);
   }
 
   @Override public void propertyChange(ObserverEvent<Recipe, Recipe> event)

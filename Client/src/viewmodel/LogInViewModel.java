@@ -36,7 +36,7 @@ public class LogInViewModel
 
   public boolean loginButtonPressed()
   {
-    if (validateLogin(username.get(), password.get()) == true)
+    if (validateLogin(username.get(), password.get()))
     {
       try
       {
