@@ -1,12 +1,14 @@
 package mediator;
 
-import model.Recipe;
+import model.ListOfIngredients;
+import model.Student;
 import utility.observer.subject.LocalSubject;
 
-public interface ClientModel extends LocalSubject<Recipe, Recipe>
+public interface ClientModel extends LocalSubject<Student, Student>
 {
-  Recipe getStudentByStudentNumber(String studyNumber) throws Exception;
-  Recipe getStudentByName(String name) throws Exception;
-  void addStudent(Recipe recipe) throws Exception;
+  Student getStudentByStudentNumber(String studyNumber) throws Exception;
+  Student getStudentByName(String name) throws Exception;
+  void addStudent(Student student) throws Exception;
   void close() throws Exception;
+  void createRecipe(String recipeName, ListOfIngredients ingredients, String description);
 }

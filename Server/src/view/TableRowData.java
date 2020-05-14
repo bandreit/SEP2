@@ -2,17 +2,17 @@ package view;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import model.Recipe;
+import model.Student;
 
 public class TableRowData
 {
   private StringProperty nameProperty;
   private StringProperty numberProperty;
 
-  public TableRowData(Recipe recipe)
+  public TableRowData(Student student)
   {
-    this.nameProperty = new SimpleStringProperty(recipe.getName());
-    this.numberProperty = new SimpleStringProperty(recipe.getStudyNumber());
+    this.nameProperty = new SimpleStringProperty(student.getName());
+    this.numberProperty = new SimpleStringProperty(student.getStudyNumber());
   }
 
   public StringProperty getNameProperty()

@@ -1,7 +1,7 @@
 package mediator;
 
 import model.Model;
-import model.Recipe;
+import model.Student;
 import utility.observer.event.ObserverEvent;
 import utility.observer.listener.GeneralListener;
 import utility.observer.listener.LocalListener;
@@ -16,9 +16,9 @@ import java.rmi.registry.Registry;
 import java.rmi.server.ExportException;
 import java.rmi.server.UnicastRemoteObject;
 
-public class RemoteModelManager implements RemoteModel, LocalListener<Recipe, Recipe>
+public class RemoteModelManager implements RemoteModel, LocalListener<Student, Student>
 {
-  private PropertyChangeAction<Recipe, Recipe> property;
+  private PropertyChangeAction<Student, Student> property;
   private Model model;
 
   public RemoteModelManager(Model model)
@@ -51,38 +51,38 @@ public class RemoteModelManager implements RemoteModel, LocalListener<Recipe, Re
     System.out.println("Server started...");
   }
 
-  @Override public Recipe getStudentByStudentNumber(String studyNumber)
+  @Override public Student getStudentByStudentNumber(String studyNumber)
       throws Exception, RemoteException
   {
     return model.getStudentByStudyNumber(studyNumber);
   }
 
-  @Override public Recipe getStudentByName(String name) throws Exception, RemoteException
+  @Override public Student getStudentByName(String name) throws Exception, RemoteException
   {
     return model.getStudentByName(name);
   }
 
-  @Override public void addStudent(Recipe recipe) throws Exception, RemoteException
+  @Override public void addStudent(Student student) throws Exception, RemoteException
   {
-    model.addStudent(recipe);
+    model.addStudent(student);
 //    property.firePropertyChange("add", null, student);
   }
 
   @Override public boolean addListener(
-      GeneralListener<Recipe, Recipe> listener, String... propertyNames)
+      GeneralListener<Student, Student> listener, String... propertyNames)
       throws RemoteException
   {
     return property.addListener(listener, propertyNames);
   }
 
   @Override public boolean removeListener(
-      GeneralListener<Recipe, Recipe> listener, String... propertyNames)
+      GeneralListener<Student, Student> listener, String... propertyNames)
       throws RemoteException
   {
     return property.addListener(listener, propertyNames);
   }
 
-  @Override public void propertyChange(ObserverEvent<Recipe, Recipe> event)
+  @Override public void propertyChange(ObserverEvent<Student, Student> event)
   {
     property.firePropertyChange(event.getPropertyName(), null, event.getValue2());
   }

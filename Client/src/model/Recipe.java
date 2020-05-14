@@ -1,44 +1,55 @@
 package model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Recipe implements Serializable
 {
-  private String name;
-  private String studyNumber;
+  private String recipeName;
+  private ListOfIngredients ingredients;
+  private String description;
 
-  public Recipe(String name, String studyNumber)
+  public Recipe(String recipeName, ListOfIngredients ingredients,
+      String description)
   {
-    if (studyNumber == null)
-    {
-      throw new IllegalArgumentException(
-          "A null study number: " + studyNumber);
-    }
-    setName(name);
-    this.studyNumber = studyNumber;
+    this.recipeName = recipeName;
+    this.ingredients = ingredients;
+    this.description = description;
   }
 
-  public void setName(String name)
+  public String getRecipeName()
   {
-    if (name == null)
-    {
-      throw new IllegalArgumentException("A null Name");
-    }
-    this.name = name;
+    return recipeName;
   }
 
-  public String getName()
+  public void setRecipeName(String recipeName)
   {
-    return name;
+    this.recipeName = recipeName;
   }
 
-  public String getStudyNumber()
+  public ListOfIngredients getIngredients()
   {
-    return studyNumber;
+    return ingredients;
+  }
+
+  public void setIngredients(ListOfIngredients ingredients)
+  {
+    this.ingredients = ingredients;
+  }
+
+  public String getDescription()
+  {
+    return description;
+  }
+
+  public void setDescription(String description)
+  {
+    this.description = description;
   }
 
   @Override public String toString()
   {
-    return name + " (" + studyNumber + ')';
+    return "Recipe{" + "recipeName='" + recipeName + '\'' + ", ingredients="
+        + ingredients + ", description='" + description + '\'' + '}';
   }
 }

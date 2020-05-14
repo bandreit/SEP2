@@ -37,4 +37,9 @@ public abstract class ViewController
   {
     return viewHandler;
   }
+
+  public ViewModelFactory getViewModels()
+  {
+    return viewModels;
+  }
 }

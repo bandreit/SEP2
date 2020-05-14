@@ -1,14 +1,14 @@
 package mediator;
 
-import model.Recipe;
+import model.Student;
 import utility.observer.subject.RemoteSubject;
 
 import java.rmi.Remote;
 
-public interface RemoteModel extends RemoteSubject<Recipe, Recipe>, Remote
+public interface RemoteModel extends RemoteSubject<Student, Student>, Remote
 {
-  Recipe getStudentByStudentNumber(String studyNumber) throws Exception;
-  Recipe getStudentByName(String name) throws Exception;
-  void addStudent(Recipe recipe) throws Exception;
+  Student getStudentByStudentNumber(String studyNumber) throws Exception;
+  Student getStudentByName(String name) throws Exception;
+  void addStudent(Student student) throws Exception;
 
 }

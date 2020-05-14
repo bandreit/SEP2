@@ -26,5 +26,6 @@ public class LogInViewController extends ViewController
 
   public void logInWithCredentials(ActionEvent event)
   {
+    super.getHandler().openView("CreateRecipeView");
   }
 }

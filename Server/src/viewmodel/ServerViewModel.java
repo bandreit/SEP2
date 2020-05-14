@@ -6,14 +6,14 @@ import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.Model;
-import model.Recipe;
+import model.Student;
 import utility.observer.event.ObserverEvent;
 import utility.observer.listener.LocalListener;
 import view.TableRowData;
 
 import java.util.ArrayList;
 
-public class ServerViewModel implements LocalListener<Recipe, Recipe>
+public class ServerViewModel implements LocalListener<Student, Student>
 {
   private Model model;
   private StringProperty nameField;
@@ -49,14 +49,14 @@ public class ServerViewModel implements LocalListener<Recipe, Recipe>
   {
     ObservableList<TableRowData> obsList = FXCollections.observableArrayList();
 
-    ArrayList<Recipe> recipes = new ArrayList<>();
+    ArrayList<Student> students = new ArrayList<>();
     for (int i = 0; i < model.getStudentListSize(); i++)
     {
-      recipes.add(model.getStudent(i));
+      students.add(model.getStudent(i));
     }
-    for (int i = 0; i < recipes.size(); i++)
+    for (int i = 0; i < students.size(); i++)
     {
-      obsList.add(new TableRowData(recipes.get(i)));
+      obsList.add(new TableRowData(students.get(i)));
     }
     return obsList;
   }
@@ -67,16 +67,16 @@ public class ServerViewModel implements LocalListener<Recipe, Recipe>
   }
 
 
-  private void addToTheList(Recipe recipe)
+  private void addToTheList(Student student)
   {
-    list.add(new TableRowData(recipe));
+    list.add(new TableRowData(student));
   }
 
   public void addStudent()
   {
     try
     {
-      model.addStudent(new Recipe(nameField.get(), numberField.get()));
+      model.addStudent(new Student(nameField.get(), numberField.get()));
     }
     catch (Exception e)
     {
@@ -85,7 +85,7 @@ public class ServerViewModel implements LocalListener<Recipe, Recipe>
     }
   }
 
-  @Override public void propertyChange(ObserverEvent<Recipe, Recipe> event)
+  @Override public void propertyChange(ObserverEvent<Student, Student> event)
   {
     Platform.runLater(() -> {
       addToTheList(event.getValue2());

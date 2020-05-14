@@ -8,42 +8,42 @@ import java.rmi.RemoteException;
 
 public class ModelManager implements Model
 {
-  private RecipeList recipeList;
-  private PropertyChangeAction<Recipe, Recipe> property;
+  private StudentList studentList;
+  private PropertyChangeAction<Student, Student> property;
 
   public ModelManager()
   {
-    this.recipeList = new RecipeList();
+    this.studentList = new StudentList();
     this.property = new PropertyChangeProxy<>(this);
   }
 
   @Override
-  public Recipe getStudentByStudyNumber(String studyNumber) throws IllegalArgumentException,
+  public Student getStudentByStudyNumber(String studyNumber) throws IllegalArgumentException,
       RemoteException
   {
-    return recipeList.getStudentByNumber(studyNumber);
+    return studentList.getStudentByNumber(studyNumber);
   }
 
   @Override
-  public Recipe getStudentByName(String name) throws IllegalArgumentException, RemoteException
+  public Student getStudentByName(String name) throws IllegalArgumentException, RemoteException
   {
-    return recipeList.getStudentByName(name);
+    return studentList.getStudentByName(name);
   }
 
-  @Override public void addStudent(Recipe recipe) throws IllegalArgumentException, RemoteException
+  @Override public void addStudent(Student student) throws IllegalArgumentException, RemoteException
   {
-    recipeList.addStudent(recipe);
-    property.firePropertyChange("add", null, recipe);
+    studentList.addStudent(student);
+    property.firePropertyChange("add", null, student);
   }
 
   @Override public int getStudentListSize() throws Exception, RemoteException
   {
-    return recipeList.getSize();
+    return studentList.getSize();
   }
 
-  @Override public Recipe getStudent(int index) throws Exception, RemoteException
+  @Override public Student getStudent(int index) throws Exception, RemoteException
   {
-    return recipeList.getStudent(index);
+    return studentList.getStudent(index);
   }
 
   @Override public void close()
@@ -52,13 +52,13 @@ public class ModelManager implements Model
   }
 
   @Override public boolean addListener(
-      GeneralListener<Recipe, Recipe> listener, String... propertyNames)
+      GeneralListener<Student, Student> listener, String... propertyNames)
   {
     return property.addListener(listener, propertyNames);
   }
 
   @Override public boolean removeListener(
-      GeneralListener<Recipe, Recipe> listener, String... propertyNames)
+      GeneralListener<Student, Student> listener, String... propertyNames)
   {
     return property.removeListener(listener, propertyNames);
   }
