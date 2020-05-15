@@ -20,16 +20,24 @@ public class RegisterViewController extends ViewController
   {
     super();
   }
+
   @Override public void init(ViewHandler viewHandler,
       ViewModelFactory viewModels, Region root)
   {
     super.init(viewHandler, viewModels, root);
-    username.textProperty().bindBidirectional(super.getViewModels().getRegisterViewModel().getUsernameProperty());
-    password.textProperty().bindBidirectional(super.getViewModels().getRegisterViewModel().getPasswordProperty());
-    errorLabel.textProperty().bind(super.getViewModels().getRegisterViewModel().getErrorProperty());
-    confirmPassword.textProperty().bindBidirectional(super.getViewModels().getRegisterViewModel().getConfirmPasswordProperty());
-    email.textProperty().bindBidirectional(super.getViewModels().getRegisterViewModel().getEmailProperty());
+    username.textProperty().bindBidirectional(
+        super.getViewModels().getRegisterViewModel().getUsernameProperty());
+    password.textProperty().bindBidirectional(
+        super.getViewModels().getRegisterViewModel().getPasswordProperty());
+    errorLabel.textProperty()
+        .bind(super.getViewModels().getRegisterViewModel().getErrorProperty());
+    confirmPassword.textProperty().bindBidirectional(
+        super.getViewModels().getRegisterViewModel()
+            .getConfirmPasswordProperty());
+    email.textProperty().bindBidirectional(
+        super.getViewModels().getRegisterViewModel().getEmailProperty());
   }
+
   public void backToLogIn(MouseEvent mouseEvent)
   {
     super.getHandler().openView("LogInView");
@@ -37,9 +45,11 @@ public class RegisterViewController extends ViewController
 
   public void RegisterButtonPressed()
   {
-    if(super.getViewModels().getRegisterViewModel().registerAccount())
+    if (super.getViewModels().getRegisterViewModel().registerAccount())
     {
       super.getHandler().openView("LogInView");//move on if correct
+      super.getViewModels().getRegisterViewModel().clear();
     }
   }
+
 }

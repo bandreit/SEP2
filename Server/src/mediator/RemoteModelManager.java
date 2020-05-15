@@ -52,21 +52,17 @@ public class RemoteModelManager implements RemoteModel, LocalListener<Recipe, Re
     System.out.println("Server started...");
   }
 
-  @Override public Recipe getStudentByStudentNumber(String studyNumber)
-      throws Exception, RemoteException
+
+  @Override public boolean login(String username, String password)
+      throws SQLException
   {
-    return model.getStudentByStudyNumber(studyNumber);
+    return model.login(username,password);
   }
 
-  @Override public Recipe getStudentByName(String name) throws Exception, RemoteException
+  @Override public void register(String user, String password, String email,
+      String confirmPassword) throws SQLException, RemoteException
   {
-    return model.getStudentByName(name);
-  }
-
-  @Override public void addStudent(Recipe recipe) throws Exception, RemoteException
-  {
-    model.addStudent(recipe);
-//    property.firePropertyChange("add", null, student);
+    model.register(user, password, email, confirmPassword);
   }
 
   @Override public boolean addListener(
@@ -98,18 +94,5 @@ public class RemoteModelManager implements RemoteModel, LocalListener<Recipe, Re
     catch (Exception e)
     {
     }
-  }
-
-  @Override public boolean login(String username, String password)
-  {
-    model.login(username,password);
-    return true;
-  }
-
-  @Override public boolean register(String user, String password, String email,
-      String confirmPassword) throws SQLException
-  {
-    model.register(user, password, email, confirmPassword);
-    return true;
   }
 }

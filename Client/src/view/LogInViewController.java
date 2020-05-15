@@ -45,10 +45,11 @@ public class LogInViewController extends ViewController
 
   public void loginButtonPressed()
   {
-    if( super.getViewModels().getLogInViewModel().loginButtonPressed() == true)
+    if(super.getViewModels().getLogInViewModel().loginButtonPressed())
     {
-      super.getViewModels().getLogInViewModel().loginButtonPressed();
-      super.getHandler().openView(""); //add further view
+//      super.getHandler().openView(""); //add further view
+      super.getViewModels().getLogInViewModel().clear();
+      super.getViewModels().getLogInViewModel().getErrorProperty().set("URAAA - LOGIN");
     }
   }
 }

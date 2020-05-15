@@ -4,7 +4,6 @@ import java.sql.*;
 
 public class UserDAOImpl implements UserDAO
 {
-
   private static UserDAOImpl instance;
 
   private UserDAOImpl() throws SQLException
@@ -58,7 +57,7 @@ public class UserDAOImpl implements UserDAO
     try (Connection connection = getConnection())
     {
       PreparedStatement statement = connection
-          .prepareStatement("SELECT * FROM user WHERE id = ?");
+          .prepareStatement("SELECT * FROM USERS WHERE id = ?");
       statement.setInt(1, id);
       ResultSet resultSet = statement.executeQuery();
       if (resultSet.next())
@@ -72,6 +71,49 @@ public class UserDAOImpl implements UserDAO
 
     }
     return null;
+  }
+
+  @Override public boolean doesUserExist(String searchString) throws SQLException
+  {
+    try (Connection connection = getConnection())
+    {
+      PreparedStatement statement = connection
+          .prepareStatement("SELECT * FROM USERS WHERE username = ?;");
+      statement.setString(1, searchString);
+      ResultSet resultSet = statement.executeQuery();
+      if (resultSet.next())
+      {
+//        System.out.println(resultSet.getInt(1));
+        return true;
+      }
+    }
+    return false;
+  }
+
+  @Override public boolean logInUser(String username, String password)
+      throws SQLException
+  {
+    try (Connection connection = getConnection())
+    {
+      PreparedStatement statement = connection.prepareStatement(
+          "SELECT * FROM USERS WHERE username = ? AND password = crypt(?, password);");
+      statement.setString(1, username);
+      statement.setString(2, password);
+      ResultSet resultSet = statement.executeQuery();
+      if (resultSet.next())
+      {
+        return true;
+      }
+//      while (resultSet.next())
+//      {
+//        int id = resultSet.getInt("id");
+//        String username = resultSet.getString("username");
+//        String email = resultSet.getString("email");
+//        String password = resultSet.getString("password");
+//        return new User(id, username, email, password);
+//      }
+    }
+    return false;
   }
 
   @Override public void update(User user) throws SQLException

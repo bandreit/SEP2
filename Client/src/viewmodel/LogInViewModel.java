@@ -40,44 +40,40 @@ public class LogInViewModel
     {
       try
       {
-        model.login(username.get(), password.get());
+        if (model.login(username.get(), password.get()))
+        {
+          return true;
+        };
+          errorLabel.set("Wrong password!");
       }
       catch (Exception e)
       {
+//        e.printStackTrace();
         errorLabel.setValue(e.getMessage());
       }
-      return true;
     }
-    else
-    {
-      return false;
-    }
+    return false;
   }
 
   private boolean validateLogin(String user, String password)
   {
-    try
+    if (user == null || user.isEmpty())
     {
-      if (user == null || user.isEmpty())
-      {
-        errorLabel.setValue("Username cannot be empty");
-        throw new IllegalArgumentException("Username cannot be empty");
-      }
-      if (password == null || password.length() < 6)
-      {
-        errorLabel.setValue("Password must contain at least 6 characters");
-        throw new IllegalArgumentException("Password must contain at least 6 characters");
-      }
-//      if(not in database)
-//      {
-//        throw error
-//      }
-      return true;
+      errorLabel.setValue("Username cannot be empty");
+      return false;
     }
-    catch (Exception e)
+    if (password == null || password.length() < 6)
     {
-      e.printStackTrace();
+      errorLabel.setValue("Password must contain at least 6 characters");
+      return false;
     }
-    return false;
+    return true;
+  }
+
+  public void clear()
+  {
+    username.set("");
+    password.set("");
+    errorLabel.set("");
   }
 }

@@ -1,7 +1,7 @@
 package model;
 
 import mediator.ClientModel;
-import mediator.StudentListClient;
+import mediator.Client;
 import utility.observer.event.ObserverEvent;
 import utility.observer.listener.GeneralListener;
 import utility.observer.listener.LocalListener;
@@ -9,6 +9,8 @@ import utility.observer.subject.PropertyChangeAction;
 import utility.observer.subject.PropertyChangeProxy;
 
 import java.io.IOException;
+import java.rmi.RemoteException;
+import java.sql.SQLException;
 
 public class LocalModelManager
     implements LocalModel, LocalListener<Recipe, Recipe>
@@ -22,7 +24,7 @@ public class LocalModelManager
     try
     {
       this.loggedIn = false;
-      clientModel = new StudentListClient(this);
+      clientModel = new Client(this);
       clientModel.addListener(this);
     }
     catch (Exception e)
@@ -33,32 +35,9 @@ public class LocalModelManager
     property = new PropertyChangeProxy<>(this, true);
   }
 
-  @Override public Recipe getStudentByStudyNumber(String studyNumber)
-      throws Exception
+  @Override public boolean login(String user, String password) throws Exception
   {
-    return clientModel.getStudentByStudentNumber(studyNumber);
-  }
-
-  @Override public Recipe getStudentByName(String name) throws Exception
-  {
-    return clientModel.getStudentByName(name);
-  }
-
-  @Override public void addStudent(Recipe recipe) throws Exception
-  {
-    clientModel.addStudent(recipe);
-  }
-
-  @Override public void close(Recipe recipe)
-  {
-    //hz
-  }
-
-  @Override public boolean login(String user, String password)
-  {
-    validateLogin(user, password);
-    loggedIn = true;
-    return true;
+    return clientModel.login(user, password);
   }
 
   @Override public boolean isLoggedIn()
@@ -66,13 +45,10 @@ public class LocalModelManager
     return loggedIn;
   }
 
-  @Override public boolean register(String user, String password, String email,
-      String confirmPassword)
+  @Override public void register(String user, String password, String email,
+      String confirmPassword) throws RemoteException, SQLException
   {
-    validateRegister(user, password, email, confirmPassword);
     clientModel.register(user, password, email, confirmPassword);
-        loggedIn = true;
-        return true;
   }
 
   @Override public void propertyChange(ObserverEvent<Recipe, Recipe> event)
@@ -93,57 +69,8 @@ public class LocalModelManager
     return property.removeListener(listener, propertyNames);
   }
 
-  private boolean validateLogin(String user, String password)
+  @Override public void close(Recipe recipe)
   {
-    try
-    {
-      if (user == null || user.isEmpty())
-      {
-        throw new IllegalArgumentException("Username cannot be empty");
-      }
-      if (password == null || password.length() < 6)
-      {
-        throw new IllegalArgumentException(
-            "Password must contain at least 6 characters");
-      }
-      return true;
-    }
-    catch (Exception e)
-    {
-      e.printStackTrace();
-    }
-    return false;
+    //hz
   }
-
-  private boolean validateRegister(String user, String password, String email,
-      String confirmPassword)
-  {
-    try
-    {
-      if (user == null || user.isEmpty())
-      {
-        throw new IllegalArgumentException("Username cannot be empty");
-      }
-      if (password == null || password.length() < 6)
-      {
-        throw new IllegalArgumentException(
-            "Password must contain at least 6 characters");
-      }
-      else if (!confirmPassword.equals(password))
-      {
-        throw new IllegalArgumentException("Passwords does not match");
-      }
-      else if (!email.contains("@"))
-      {
-        throw new IllegalArgumentException("Email does not contain @");
-      }
-      return true;
-    }
-    catch (Exception e)
-    {
-      e.printStackTrace();
-    }
-    return false;
-  }
-
 }

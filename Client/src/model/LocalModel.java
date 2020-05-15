@@ -2,15 +2,16 @@ package model;
 
 import utility.observer.subject.LocalSubject;
 
+import java.rmi.RemoteException;
+import java.sql.SQLException;
+
 public interface LocalModel extends LocalSubject<String, String>
 {
-  Recipe getStudentByStudyNumber(String studyNumber) throws Exception;
-  Recipe getStudentByName(String name) throws Exception;
-  void addStudent(Recipe recipe) throws Exception;
+  boolean login(String user, String password) throws Exception;
+  void register(String user, String password,String email,String confirmPassword)
+      throws RemoteException, SQLException;
   void close(Recipe recipe);
-  boolean login(String user, String password);
   boolean isLoggedIn();
-  boolean register(String user, String password,String email,String confirmPassword);
 
 
 }
