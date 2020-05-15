@@ -5,6 +5,7 @@ import utility.observer.subject.RemoteSubject;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.sql.SQLException;
 
 public interface RemoteModel extends RemoteSubject<Recipe, Recipe>, Remote
 {
@@ -13,6 +14,6 @@ public interface RemoteModel extends RemoteSubject<Recipe, Recipe>, Remote
   void addStudent(Recipe recipe) throws RemoteException;
   boolean login(String username, String password) throws RemoteException;
   boolean register(String user, String password, String email,
-      String confirmPassword) throws RemoteException;
+      String confirmPassword) throws RemoteException, SQLException;
 
 }

@@ -44,7 +44,6 @@ public class StudentListClient
   @Override public Recipe getStudentByStudentNumber(String studyNumber)
       throws Exception
   {
-
     try
     {
       return remoteModel.getStudentByStudentNumber(studyNumber);

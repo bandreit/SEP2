@@ -10,7 +10,8 @@ import utility.observer.subject.PropertyChangeProxy;
 
 import java.io.IOException;
 
-public class LocalModelManager implements LocalModel, LocalListener<Recipe, Recipe>
+public class LocalModelManager
+    implements LocalModel, LocalListener<Recipe, Recipe>
 {
   private ClientModel clientModel;
   private PropertyChangeAction<String, String> property;
@@ -60,7 +61,6 @@ public class LocalModelManager implements LocalModel, LocalListener<Recipe, Reci
     return true;
   }
 
-
   @Override public boolean isLoggedIn()
   {
     return loggedIn;
@@ -69,10 +69,10 @@ public class LocalModelManager implements LocalModel, LocalListener<Recipe, Reci
   @Override public boolean register(String user, String password, String email,
       String confirmPassword)
   {
-    validateRegister(user, password,email,confirmPassword);
-//    loggedIn = true;
-//    return true;
-    return clientModel.register(user, password,email,confirmPassword);
+    validateRegister(user, password, email, confirmPassword);
+    clientModel.register(user, password, email, confirmPassword);
+        loggedIn = true;
+        return true;
   }
 
   @Override public void propertyChange(ObserverEvent<Recipe, Recipe> event)
@@ -115,7 +115,8 @@ public class LocalModelManager implements LocalModel, LocalListener<Recipe, Reci
     return false;
   }
 
-  private boolean validateRegister(String user, String password,String email,String confirmPassword)
+  private boolean validateRegister(String user, String password, String email,
+      String confirmPassword)
   {
     try
     {
@@ -128,11 +129,11 @@ public class LocalModelManager implements LocalModel, LocalListener<Recipe, Reci
         throw new IllegalArgumentException(
             "Password must contain at least 6 characters");
       }
-      else if(confirmPassword != password)
+      else if (!confirmPassword.equals(password))
       {
         throw new IllegalArgumentException("Passwords does not match");
       }
-      else if(!email.contains("@"))
+      else if (!email.contains("@"))
       {
         throw new IllegalArgumentException("Email does not contain @");
       }

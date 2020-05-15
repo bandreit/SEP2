@@ -39,7 +39,6 @@ public class RegisterViewController extends ViewController
   {
     if(super.getViewModels().getRegisterViewModel().registerAccount())
     {
-      super.getViewModels().getRegisterViewModel().registerAccount();
       super.getHandler().openView("LogInView");//move on if correct
     }
   }

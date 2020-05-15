@@ -28,13 +28,13 @@ public class UserDAOImpl implements UserDAO
         "postgres", "1234");
   }
 
-  @Override public User create(String username, String email, String password)
+  @Override public User create(String username, String password, String email)
       throws SQLException
   {
     try (Connection connection = getConnection())
     {
       PreparedStatement statement = connection.prepareStatement(
-          "INSERT INTO user(username, email, password) VALUES (?, ?, ?);",
+          "INSERT INTO USERS(username, email, password) VALUES (?, ?, crypt(?, gen_salt('bf', 8)));",
           PreparedStatement.RETURN_GENERATED_KEYS);
       statement.setString(1, username);
       statement.setString(2, email);

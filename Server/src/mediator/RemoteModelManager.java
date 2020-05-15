@@ -15,6 +15,7 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.ExportException;
 import java.rmi.server.UnicastRemoteObject;
+import java.sql.SQLException;
 
 public class RemoteModelManager implements RemoteModel, LocalListener<Recipe, Recipe>
 {
@@ -106,8 +107,9 @@ public class RemoteModelManager implements RemoteModel, LocalListener<Recipe, Re
   }
 
   @Override public boolean register(String user, String password, String email,
-      String confirmPassword)
+      String confirmPassword) throws SQLException
   {
-    return model.register(user, password, email, confirmPassword);
+    model.register(user, password, email, confirmPassword);
+    return true;
   }
 }

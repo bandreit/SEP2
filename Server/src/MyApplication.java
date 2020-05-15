@@ -12,7 +12,6 @@ import java.rmi.RemoteException;
 
 public class MyApplication extends Application
 {
-
   private Model model;
   private RemoteModel server;
 

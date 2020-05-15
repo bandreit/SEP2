@@ -5,6 +5,7 @@ import utility.observer.subject.PropertyChangeAction;
 import utility.observer.subject.PropertyChangeProxy;
 
 import java.rmi.RemoteException;
+import java.sql.SQLException;
 
 public class ModelManager implements Model
 {
@@ -58,9 +59,9 @@ public class ModelManager implements Model
   }
 
   @Override public boolean register(String user, String password, String email,
-      String confirmPassword)
+      String confirmPassword) throws SQLException
   {
-    //adding to database
+    UserDAOImpl.getInstance().create(user, password, email);
     return true;
   }
 
