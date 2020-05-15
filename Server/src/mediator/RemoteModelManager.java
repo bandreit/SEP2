@@ -48,7 +48,7 @@ public class RemoteModelManager implements RemoteModel, LocalListener<Recipe, Re
   public void startServer() throws RemoteException, MalformedURLException
   {
     UnicastRemoteObject.exportObject(this, 0);
-    Naming.rebind("StudentList", this);
+    Naming.rebind("Recipes", this);
     System.out.println("Server started...");
   }
 
