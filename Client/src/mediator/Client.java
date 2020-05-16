@@ -1,5 +1,6 @@
 package mediator;
 
+import model.ListOfIngredients;
 import model.LocalModel;
 import model.Recipe;
 import utility.observer.event.ObserverEvent;
@@ -65,6 +66,12 @@ public class Client implements ClientModel, RemoteListener<Recipe, Recipe>
     {
       throw new IllegalStateException(getExceptionMessage(e), e);
     }
+  }
+
+  @Override public void createRecipe(String recipeName,
+      ListOfIngredients ingredients, String description)
+  {
+    Recipe newRecipe = new Recipe(recipeName, ingredients, description);
   }
 
   @Override public void close() throws Exception

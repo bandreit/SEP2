@@ -17,6 +17,8 @@ public class LocalModelManager
 {
   private ClientModel clientModel;
   private PropertyChangeAction<String, String> property;
+  private String amount;
+  private String ingredient;
   private boolean loggedIn;
 
   public LocalModelManager() throws IOException
@@ -49,6 +51,32 @@ public class LocalModelManager
       String confirmPassword) throws RemoteException, SQLException
   {
     clientModel.register(user, password, email, confirmPassword);
+  }
+
+
+  @Override public void createRecipe(String recipeName,
+      ListOfIngredients ingredients, String description)
+  {
+
+  }
+
+  @Override public void addAmount(String s)
+  {
+    this.amount=s;
+  }
+
+  @Override public void addIngredient(String s)
+  {
+    this.ingredient=s;
+  }
+
+
+  @Override public ListOfIngredients getListOfIngredients()
+  {
+    ListOfIngredients ingredients=new ListOfIngredients();
+    Ingredient ing=new Ingredient(ingredient,amount);
+    ingredients.addIngredient(ing);
+    return ingredients;
   }
 
   @Override public void propertyChange(ObserverEvent<Recipe, Recipe> event)

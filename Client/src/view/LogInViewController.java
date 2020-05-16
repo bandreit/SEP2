@@ -49,7 +49,7 @@ public class LogInViewController extends ViewController
     {
 //      super.getHandler().openView(""); //add further view
       super.getViewModels().getLogInViewModel().clear();
-      super.getViewModels().getLogInViewModel().getErrorProperty().set("URAAA - LOGIN");
+      super.getHandler().openView("CreateRecipeView");
     }
   }
 }
