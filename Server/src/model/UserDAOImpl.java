@@ -81,13 +81,8 @@ public class UserDAOImpl implements UserDAO
           .prepareStatement("SELECT * FROM USERS WHERE username = ?;");
       statement.setString(1, searchString);
       ResultSet resultSet = statement.executeQuery();
-      if (resultSet.next())
-      {
-//        System.out.println(resultSet.getInt(1));
-        return true;
-      }
+      return resultSet.next();
     }
-    return false;
   }
 
   @Override public boolean logInUser(String username, String password)
