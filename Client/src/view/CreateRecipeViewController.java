@@ -12,7 +12,7 @@ public class CreateRecipeViewController extends ViewController
 {
   @FXML private TextField measurementField;
   @FXML private TextField quantityField;
-  @FXML private TextField IngredientField;
+  @FXML private TextField ingredientField;
   @FXML private TextField recipeName;
   @FXML private TextArea description;
   @FXML private TextArea instructions;
@@ -42,7 +42,7 @@ public class CreateRecipeViewController extends ViewController
         super.getViewModels().getCreateRecipeViewModel().getInstructions());
     //    category.textProperty().bindBidirectional(
     //        super.getViewModels().getCreateRecipeViewModel().getCategory());
-    measurementField.textProperty().bindBidirectional(
+    ingredientField.textProperty().bindBidirectional(
         super.getViewModels().getCreateRecipeViewModel().getIngredients());
     quantityField.textProperty().bindBidirectional(
         super.getViewModels().getCreateRecipeViewModel().getQuantity());

@@ -42,6 +42,7 @@ public class CreateRecipeViewModel
     this.recipeName = new SimpleStringProperty();
     this.instructions = new SimpleStringProperty();
     updateIngredients();
+    this.model.addListener(this, "addIngredient");
   }
 
   public StringProperty getIngredients()
@@ -69,7 +70,10 @@ public class CreateRecipeViewModel
     return description;
   }
 
-  public StringProperty getCategory() { return category; }
+  public StringProperty getCategory()
+  {
+    return category;
+  }
 
   public StringProperty getRecipeName()
   {
@@ -90,7 +94,8 @@ public class CreateRecipeViewModel
   {
     try
     {
-      Ingredient ingredient = new Ingredient(ingredients.get(), quantity.get(), measurement.get());
+      Ingredient ingredient = new Ingredient(ingredients.get(), quantity.get(),
+          measurement.get());
       clear();
       model.addFullIngredientWithQtyAndAMeasurement(ingredient);
       //      result.set("Added: " + student);
@@ -112,9 +117,10 @@ public class CreateRecipeViewModel
   @Override public void propertyChange(
       ObserverEvent<Ingredient, Ingredient> event)
   {
-    Platform.runLater(() ->
-        listOfIngredients.add(new CreateRecipeTableRowData(event.getValue2()))
-    );
+    Platform.runLater(() -> {
+      listOfIngredients.add(new CreateRecipeTableRowData(event.getValue2()));
+//      System.out.println(event.getValue2().toString());
+    });
   }
 
   public void createRecipe()
@@ -122,13 +128,15 @@ public class CreateRecipeViewModel
     model.createRecipe(recipeName.get(), model.getListOfIngredients(),
         description.get());
   }
+
   private void updateIngredients()
   {
     listOfIngredients = FXCollections.observableArrayList();
     ListOfIngredients list = model.getListOfIngredients();
     for (int i = 0; i < list.getSize(); i++)
     {
-      listOfIngredients.add(new CreateRecipeTableRowData(list.getIngredient(i)));
+      listOfIngredients
+          .add(new CreateRecipeTableRowData(list.getIngredient(i)));
     }
   }
 }
