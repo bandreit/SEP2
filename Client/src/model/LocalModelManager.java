@@ -17,8 +17,10 @@ public class LocalModelManager
 {
   private ClientModel clientModel;
   private PropertyChangeAction<String, String> property;
+  private ListOfIngredients ingredientList;
   private String amount;
   private String ingredient;
+  private String measurement;
   private boolean loggedIn;
 
   public LocalModelManager() throws IOException
@@ -28,6 +30,7 @@ public class LocalModelManager
       this.loggedIn = false;
       clientModel = new Client(this);
       clientModel.addListener(this);
+      ingredientList = new ListOfIngredients();
     }
     catch (Exception e)
     {
@@ -70,11 +73,22 @@ public class LocalModelManager
     this.ingredient=s;
   }
 
+  @Override public void addMeasurement(String s)
+  {
+    this.measurement=s;
+  }
+
+  @Override public void addFullIngredientWithQtyAndAMeasurement(
+      Ingredient ingredient)
+  {
+    ingredientList.addIngredient(ingredient);
+    property.firePropertyChange("addIngredient",null,ingredient.toString());// ??????? WHAT TO DO IN HERE?
+  }
 
   @Override public ListOfIngredients getListOfIngredients()
   {
     ListOfIngredients ingredients=new ListOfIngredients();
-    Ingredient ing=new Ingredient(ingredient,amount);
+    Ingredient ing=new Ingredient(ingredient,amount,measurement);
     ingredients.addIngredient(ing);
     return ingredients;
   }

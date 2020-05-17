@@ -29,4 +29,8 @@ public class AmountViewModel
   {
     model.addIngredient(s);
   }
+  public void addMeasurement(String s)
+  {
+    model.addMeasurement(s);
+  }
 }

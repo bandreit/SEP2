@@ -4,26 +4,41 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import model.Ingredient;
 
-public class IngredientTableRowData
+public class CreateRecipeTableRowData
 {
   private StringProperty ingredient;
   private StringProperty quantity;
-  public IngredientTableRowData(Ingredient Theingredient)
+  private StringProperty measurment;
+
+  public CreateRecipeTableRowData(Ingredient Theingredient)
   {
     String IngredientName = null;
     String AmountOfQuantity = null;
+    String Measurement = null;
     if (Theingredient != null)
     {
       IngredientName = Theingredient.getIngredient();
       AmountOfQuantity = Theingredient.getAmount();
+      Measurement = Theingredient.getMeasurement();
     }
     ingredient = new SimpleStringProperty(IngredientName);
     quantity = new SimpleStringProperty(AmountOfQuantity);
+    measurment=new SimpleStringProperty(Measurement);
 
   }
   public StringProperty getIngredient()
   {
     return ingredient;
+  }
+
+  public StringProperty getMeasurement()
+  {
+    return measurment;
+  }
+
+  public StringProperty getQuantity()
+  {
+    return quantity;
   }
 }
 

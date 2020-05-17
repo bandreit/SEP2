@@ -28,4 +28,8 @@ public class ListOfIngredients
   {
     return "ListOfIngredients{" + "ingredients=" + ingredients + '}';
   }
+  public int getSize()
+  {
+    return ingredients.size();
+  }
 }

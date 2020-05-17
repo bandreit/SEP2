@@ -7,7 +7,6 @@ public class ViewModelFactory
   private LogInViewModel logInViewModel;
   private RegisterViewModel registerViewModel;
   private CreateRecipeViewModel createRecipeViewModel;
-  private IngredientsViewModel ingredientsViewModel;
   private AmountViewModel amountViewModel;
 
   public ViewModelFactory(LocalModel model)
@@ -15,7 +14,6 @@ public class ViewModelFactory
     this.logInViewModel = new LogInViewModel(model);
     this.registerViewModel = new RegisterViewModel(model);
     this.createRecipeViewModel = new CreateRecipeViewModel(model);
-    this.ingredientsViewModel=new IngredientsViewModel(model);
     this.amountViewModel=new AmountViewModel(model);
   }
 
@@ -38,8 +36,4 @@ public class ViewModelFactory
     return registerViewModel;
   }
 
-  public IngredientsViewModel getIngredientsViewModel()
-  {
-    return ingredientsViewModel;
-  }
 }

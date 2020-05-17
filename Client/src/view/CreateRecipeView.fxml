@@ -24,24 +24,24 @@
       <Label layoutX="24.0" layoutY="356.0" text="Instructions for recipe:" />
       <TextArea fx:id="instructions" layoutX="142.0" layoutY="342.0" prefHeight="50.0" prefWidth="230.0" />
       <Label layoutX="414.0" layoutY="345.0" text="Preparation time:" />
-      <TextField fx:id="preparationTime" layoutX="525.0" layoutY="340.0" prefHeight="26.0" prefWidth="60.0" />
+      <TextField fx:id="time" layoutX="525.0" layoutY="340.0" prefHeight="26.0" prefWidth="60.0" />
       <Button layoutX="316.0" layoutY="404.0" mnemonicParsing="false" onAction="#onCreate" text="Add recipe" />
       <Button layoutX="231.0" layoutY="404.0" mnemonicParsing="false" onAction="#onCancel" text="Cancel" />
-      <TextField fx:id="ingredientName" layoutX="135.0" layoutY="125.0" />
+      <TextField fx:id="IngredientField" layoutX="135.0" layoutY="125.0" />
       <Label layoutX="20.0" layoutY="129.0" text="Name of ingredient:" />
       <Label layoutX="285.0" layoutY="130.0" text="Qty:" />
-      <TextField fx:id="quantity" layoutX="309.0" layoutY="125.0" prefHeight="26.0" prefWidth="22.0" />
+      <TextField fx:id="quantityField" layoutX="309.0" layoutY="125.0" prefHeight="26.0" prefWidth="22.0" />
       <Label layoutX="343.0" layoutY="129.0" text="Measurement:" />
-      <ChoiceBox fx:id="measurements" layoutX="431.0" layoutY="125.0" prefWidth="150.0" />
       <Button fx:id="addIngredientButton" layoutX="590.0" layoutY="126.0" mnemonicParsing="false" onAction="#onAddIngredient" text="+" />
-      <TableView fx:id="tableOfIngredients" layoutX="135.0" layoutY="168.0" prefHeight="158.0" prefWidth="329.0">
+      <TableView fx:id="ingredientsList" layoutX="135.0" layoutY="168.0" prefHeight="158.0" prefWidth="329.0">
         <columns>
-          <TableColumn prefWidth="149.60003662109375" text="Ingredient" />
-          <TableColumn prefWidth="80.79998779296875" text="Qty" />
-            <TableColumn prefWidth="96.79998779296875" text="Measurement" />
+          <TableColumn fx:id="ingredientColumn" prefWidth="149.60003662109375" text="Ingredient" />
+          <TableColumn fx:id="quantityColumn" prefWidth="80.79998779296875" text="Qty" />
+            <TableColumn fx:id="measurementColumn" prefWidth="96.79998779296875" text="Measurement" />
         </columns>
       </TableView>
       <Label layoutX="455.0" layoutY="374.0" text="Category:" />
       <ChoiceBox fx:id="category" layoutX="525.0" layoutY="369.0" prefHeight="26.0" prefWidth="60.0" />
+      <TextField fx:id="measurementField" layoutX="425.0" layoutY="126.0" />
    </children>
 </AnchorPane>
