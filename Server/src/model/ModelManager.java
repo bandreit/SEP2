@@ -39,6 +39,11 @@ public class ModelManager implements Model
   @Override public void register(String user, String password, String email,
       String confirmPassword) throws SQLException, RemoteException
   {
+    if (UserDAOImpl.getInstance().doesUserExist(user))
+    {
+      throw new IllegalAccessError("Username is already taken");
+    }
+    else
     userList.addUser(UserDAOImpl.getInstance().create(user, password, email));
   }
 

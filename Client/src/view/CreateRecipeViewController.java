@@ -35,6 +35,11 @@ public class CreateRecipeViewController extends ViewController
     super.getHandler().openView("IngredientsView");
   }
 
+  public void onAddIngredient(ActionEvent actionEvent)
+  {
+
+  }
+
   public void onCreate(ActionEvent actionEvent)
   {
     super.getViewModels().getCreateRecipeViewModel().createRecipe();
