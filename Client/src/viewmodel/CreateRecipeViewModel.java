@@ -5,10 +5,6 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import model.Ingredient;
 import model.ListOfIngredients;
 import model.LocalModel;
@@ -119,7 +115,8 @@ public class CreateRecipeViewModel
   {
     Platform.runLater(() -> {
       listOfIngredients.add(new CreateRecipeTableRowData(event.getValue2()));
-//      System.out.println(event.getValue2().toString());
+//     System.out.println(listOfIngredients);
+//      System.out.println(listOfIngredients.size());
     });
   }
 
@@ -135,8 +132,7 @@ public class CreateRecipeViewModel
     ListOfIngredients list = model.getListOfIngredients();
     for (int i = 0; i < list.getSize(); i++)
     {
-      listOfIngredients
-          .add(new CreateRecipeTableRowData(list.getIngredient(i)));
+      listOfIngredients.add(new CreateRecipeTableRowData(list.getIngredient(i)));
     }
   }
 }

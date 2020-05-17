@@ -84,16 +84,12 @@ public class LocalModelManager
     System.out.println(ingredient.getIngredient());
     System.out.println(ingredient.getAmount());
     System.out.println(ingredient.getMeasurement());
-    property.firePropertyChange("addIngredient", null,
-        ingredient);// ??????? WHAT TO DO IN HERE?
+    property.firePropertyChange("addIngredient", null, ingredient);
   }
 
   @Override public ListOfIngredients getListOfIngredients()
   {
-    ListOfIngredients ingredients = new ListOfIngredients();
-    Ingredient ing = new Ingredient(ingredient, amount, measurement);
-    ingredients.addIngredient(ing);
-    return ingredients;
+    return ingredientList;
   }
 
   @Override public void propertyChange(ObserverEvent<Recipe, Recipe> event)

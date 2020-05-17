@@ -10,9 +10,10 @@ import viewmodel.ViewModelFactory;
 
 public class CreateRecipeViewController extends ViewController
 {
+  @FXML private TextField Ingredientfield;
   @FXML private TextField measurementField;
   @FXML private TextField quantityField;
-  @FXML private TextField ingredientField;
+//  @FXML private TextField ingredientField;
   @FXML private TextField recipeName;
   @FXML private TextArea description;
   @FXML private TextArea instructions;
@@ -42,7 +43,7 @@ public class CreateRecipeViewController extends ViewController
         super.getViewModels().getCreateRecipeViewModel().getInstructions());
     //    category.textProperty().bindBidirectional(
     //        super.getViewModels().getCreateRecipeViewModel().getCategory());
-    ingredientField.textProperty().bindBidirectional(
+    Ingredientfield.textProperty().bindBidirectional(
         super.getViewModels().getCreateRecipeViewModel().getIngredients());
     quantityField.textProperty().bindBidirectional(
         super.getViewModels().getCreateRecipeViewModel().getQuantity());
