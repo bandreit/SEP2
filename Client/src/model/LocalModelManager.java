@@ -50,40 +50,24 @@ public class LocalModelManager
     return loggedIn;
   }
 
+  @Override public void createRecipe(String recipeName, String description,
+      ListOfIngredients ingredients, String instructions, int preparationTime,
+      String category) throws RemoteException
+  {
+    clientModel.createRecipe(recipeName, description, ingredients, instructions, preparationTime, category);
+  }
+
   @Override public void register(String user, String password, String email,
       String confirmPassword) throws RemoteException, SQLException
   {
     clientModel.register(user, password, email, confirmPassword);
   }
 
-  @Override public void createRecipe(String recipeName,
-      ListOfIngredients ingredients, String description)
-  {
-
-  }
-
-  @Override public void addAmount(String s)
-  {
-    this.amount = s;
-  }
-
-  @Override public void addIngredient(String s)
-  {
-    this.ingredient = s;
-  }
-
-  @Override public void addMeasurement(String s)
-  {
-    this.measurement = s;
-  }
 
   @Override public void addFullIngredientWithQtyAndAMeasurement(
       Ingredient ingredient)
   {
     ingredientList.addIngredient(ingredient);
-    System.out.println(ingredient.getIngredient());
-    System.out.println(ingredient.getAmount());
-    System.out.println(ingredient.getMeasurement());
     property.firePropertyChange("addIngredient", null, ingredient);
   }
 

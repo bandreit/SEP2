@@ -10,22 +10,25 @@ public class CreateRecipeTableRowData
   private StringProperty quantity;
   private StringProperty measurment;
 
-  public CreateRecipeTableRowData(Ingredient Theingredient)
+  public CreateRecipeTableRowData(Ingredient theIngredient)
   {
     String IngredientName = null;
     String AmountOfQuantity = null;
     String Measurement = null;
-    if (Theingredient != null)
+
+    if (theIngredient != null)
     {
-      IngredientName = Theingredient.getIngredient();
-      AmountOfQuantity = Theingredient.getAmount();
-      Measurement = Theingredient.getMeasurement();
+      IngredientName = theIngredient.getIngredient();
+      AmountOfQuantity = theIngredient.getAmount();
+      Measurement = theIngredient.getMeasurement();
     }
+
     ingredient = new SimpleStringProperty(IngredientName);
     quantity = new SimpleStringProperty(AmountOfQuantity);
-    measurment=new SimpleStringProperty(Measurement);
+    measurment = new SimpleStringProperty(Measurement);
 
   }
+
   public StringProperty getIngredient()
   {
     return ingredient;

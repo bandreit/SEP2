@@ -11,8 +11,8 @@ public class TableRowData
 
   public TableRowData(Recipe recipe)
   {
-    this.nameProperty = new SimpleStringProperty(recipe.getName());
-    this.numberProperty = new SimpleStringProperty(recipe.getStudyNumber());
+    this.nameProperty = new SimpleStringProperty("");
+    this.numberProperty = new SimpleStringProperty("");
   }
 
   public StringProperty getNameProperty()

@@ -1,5 +1,6 @@
 package mediator;
 
+import model.ListOfIngredients;
 import model.Model;
 import model.Recipe;
 import utility.observer.event.ObserverEvent;
@@ -63,6 +64,14 @@ public class RemoteModelManager implements RemoteModel, LocalListener<Recipe, Re
       String confirmPassword) throws SQLException, RemoteException
   {
     model.register(user, password, email, confirmPassword);
+  }
+
+  @Override public void createRecipe(String recipeName, String description,
+      ListOfIngredients ingredients, String instructions, int preparationTime,
+      String category)
+      throws RemoteException, SQLException
+  {
+    model.createRecipe(recipeName, description, ingredients, instructions, preparationTime, category);
   }
 
   @Override public boolean addListener(

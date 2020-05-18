@@ -1,5 +1,7 @@
 package view;
 
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -8,17 +10,20 @@ import javafx.scene.text.Text;
 import viewmodel.CreateRecipeViewModel;
 import viewmodel.ViewModelFactory;
 
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import java.rmi.RemoteException;
+
 public class CreateRecipeViewController extends ViewController
 {
-  @FXML private TextField Ingredientfield;
-  @FXML private TextField measurementField;
+  @FXML private TextField ingredientNameField;
+  @FXML private ChoiceBox measurementField;
   @FXML private TextField quantityField;
-//  @FXML private TextField ingredientField;
   @FXML private TextField recipeName;
   @FXML private TextArea description;
   @FXML private TextArea instructions;
   @FXML private TextField time;
-  //  @FXML private ChoiceBox category;
+  @FXML private ChoiceBox category;
   @FXML private TableColumn<CreateRecipeTableRowData, String> ingredientColumn;
   @FXML private TableColumn<CreateRecipeTableRowData, String> quantityColumn;
   @FXML private TableColumn<CreateRecipeTableRowData, String> measurementColumn;
@@ -41,20 +46,24 @@ public class CreateRecipeViewController extends ViewController
         super.getViewModels().getCreateRecipeViewModel().getTime());
     instructions.textProperty().bindBidirectional(
         super.getViewModels().getCreateRecipeViewModel().getInstructions());
-    //    category.textProperty().bindBidirectional(
-    //        super.getViewModels().getCreateRecipeViewModel().getCategory());
-    Ingredientfield.textProperty().bindBidirectional(
-        super.getViewModels().getCreateRecipeViewModel().getIngredients());
+    ingredientNameField.textProperty().bindBidirectional(
+        super.getViewModels().getCreateRecipeViewModel().getIngredientName());
     quantityField.textProperty().bindBidirectional(
         super.getViewModels().getCreateRecipeViewModel().getQuantity());
-    measurementField.textProperty().bindBidirectional(
-        super.getViewModels().getCreateRecipeViewModel().getMeasurement());
 
-    ingredientColumn.setCellValueFactory(cellData -> cellData.getValue().getIngredient());
-    quantityColumn.setCellValueFactory(cellData -> cellData.getValue().getQuantity());
-    measurementColumn.setCellValueFactory(cellData -> cellData.getValue().getMeasurement());
+    measurementField.valueProperty().bindBidirectional(super.getViewModels().getCreateRecipeViewModel().getMeasurement());
+    category.valueProperty().bindBidirectional(
+        super.getViewModels().getCreateRecipeViewModel().getCategory());
 
-    ingredientsList.setItems(super.getViewModels().getCreateRecipeViewModel().getAllIngredients());
+    ingredientColumn
+        .setCellValueFactory(cellData -> cellData.getValue().getIngredient());
+    quantityColumn
+        .setCellValueFactory(cellData -> cellData.getValue().getQuantity());
+    measurementColumn
+        .setCellValueFactory(cellData -> cellData.getValue().getMeasurement());
+
+    ingredientsList.setItems(
+        super.getViewModels().getCreateRecipeViewModel().getAllIngredients());
   }
 
   public void onAddIngredient(ActionEvent actionEvent)
@@ -62,7 +71,7 @@ public class CreateRecipeViewController extends ViewController
     super.getViewModels().getCreateRecipeViewModel().createIngredient();
   }
 
-  public void onCreate(ActionEvent actionEvent)
+  public void onCreate(ActionEvent actionEvent) throws RemoteException
   {
     super.getViewModels().getCreateRecipeViewModel().createRecipe();
   }

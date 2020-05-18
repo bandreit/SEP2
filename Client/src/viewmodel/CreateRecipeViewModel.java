@@ -12,10 +12,13 @@ import utility.observer.event.ObserverEvent;
 import utility.observer.listener.LocalListener;
 import view.CreateRecipeTableRowData;
 
+import java.rmi.RemoteException;
+import java.util.Arrays;
+
 public class CreateRecipeViewModel
     implements LocalListener<Ingredient, Ingredient>
 {
-  private StringProperty ingredients;
+  private StringProperty ingredientName;
   private LocalModel model;
   private StringProperty quantity;
   private StringProperty measurement;
@@ -29,21 +32,21 @@ public class CreateRecipeViewModel
   public CreateRecipeViewModel(LocalModel model)
   {
     this.model = model;
-    this.ingredients = new SimpleStringProperty();
+    this.ingredientName = new SimpleStringProperty();
     this.quantity = new SimpleStringProperty();
     this.measurement = new SimpleStringProperty();
     this.time = new SimpleStringProperty();
     this.description = new SimpleStringProperty();
-    this.category = new SimpleStringProperty();
     this.recipeName = new SimpleStringProperty();
     this.instructions = new SimpleStringProperty();
+    this.category = new SimpleStringProperty();
     updateIngredients();
     this.model.addListener(this, "addIngredient");
   }
 
-  public StringProperty getIngredients()
+  public StringProperty getIngredientName()
   {
-    return ingredients;
+    return ingredientName;
   }
 
   public StringProperty getMeasurement()
@@ -66,11 +69,6 @@ public class CreateRecipeViewModel
     return description;
   }
 
-  public StringProperty getCategory()
-  {
-    return category;
-  }
-
   public StringProperty getRecipeName()
   {
     return recipeName;
@@ -81,31 +79,36 @@ public class CreateRecipeViewModel
     return instructions;
   }
 
+  public StringProperty getCategory()
+  {
+    return category;
+  }
+
   public ObservableList<CreateRecipeTableRowData> getAllIngredients()
   {
     return listOfIngredients;
   }
 
+
+
   public void createIngredient()
   {
     try
     {
-      Ingredient ingredient = new Ingredient(ingredients.get(), quantity.get(),
+      Ingredient ingredient = new Ingredient(ingredientName.get(), quantity.get(),
           measurement.get());
       clear();
       model.addFullIngredientWithQtyAndAMeasurement(ingredient);
-      //      result.set("Added: " + student);
     }
     catch (Exception e)
     {
       e.printStackTrace();
-      //      result.set(e.getMessage());
     }
   }
 
   public void clear()
   {
-    ingredients.set(null);
+    ingredientName.set(null);
     quantity.set(null);
     measurement.set(null);
   }
@@ -115,16 +118,15 @@ public class CreateRecipeViewModel
   {
     Platform.runLater(() -> {
       listOfIngredients.add(new CreateRecipeTableRowData(event.getValue2()));
-//     System.out.println(listOfIngredients);
-//      System.out.println(listOfIngredients.size());
     });
   }
 
-  public void createRecipe()
+  public void createRecipe() throws RemoteException
   {
-    model.createRecipe(recipeName.get(), model.getListOfIngredients(),
-        description.get());
+    model.createRecipe(recipeName.get(), description.get(),  model.getListOfIngredients(), instructions.get(), Integer.parseInt(time.get()), category.get());
   }
+
+  /// GET THE CATEGORY FROM THE VIEW
 
   private void updateIngredients()
   {
@@ -136,4 +138,5 @@ public class CreateRecipeViewModel
     }
   }
 }
+
 

@@ -9,13 +9,13 @@ import java.sql.SQLException;
 
 public class ModelManager implements Model
 {
-  private RecipeList recipeList;
+//  private RecipeList recipeList;
   private UserList userList;
   private PropertyChangeAction<Recipe, Recipe> property;
 
   public ModelManager()
   {
-    this.recipeList = new RecipeList();
+//    this.recipeList = new RecipeList();
     this.userList = new UserList();
     this.property = new PropertyChangeProxy<>(this);
   }
@@ -45,6 +45,17 @@ public class ModelManager implements Model
     }
     else
     userList.addUser(UserDAOImpl.getInstance().create(user, password, email));
+  }
+
+  @Override public void createRecipe(String recipeName, String description,
+      ListOfIngredients ingredients, String instructions, int preparationTime,
+      String category) throws SQLException
+  {
+//    RecipeDAOImpl.
+//        String recipeName, String description,
+//      ListOfIngredients ingredients, String instructions, int preparationTime,
+//    String category
+//    System.out.println(recipe.toString() + "in server");
   }
 
   @Override public boolean addListener(GeneralListener<Recipe, Recipe> listener,
