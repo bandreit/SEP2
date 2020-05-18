@@ -2,6 +2,8 @@ package view;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Region;
+import model.LocalModel;
+import viewmodel.LogInViewModel;
 import viewmodel.ViewModelFactory;
 
 import java.util.HashMap;
@@ -42,9 +44,8 @@ public class ViewControllerFactory
       case "LogInView": return new LogInViewController();
       case "RegisterView": return new RegisterViewController();
       case "CreateRecipeView": return new CreateRecipeViewController();
-      case "IngredientsView": return new IngredientsViewController();
-      case "AmountView": return new AmountViewController();
-      default: throw new IllegalArgumentException("No such id for viw controller");
+      case "AllRecipes": return new AllRecipesViewController();
+      default: throw new IllegalArgumentException("No such id for view controller");
     }
   }
 }

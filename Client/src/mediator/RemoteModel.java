@@ -1,14 +1,15 @@
 package mediator;
 
-import model.Student;
+import model.Recipe;
 import utility.observer.subject.RemoteSubject;
 
 import java.rmi.Remote;
+import java.rmi.RemoteException;
+import java.sql.SQLException;
 
-public interface RemoteModel extends RemoteSubject<Student, Student>, Remote
+public interface RemoteModel extends RemoteSubject<Recipe, Recipe>, Remote
 {
-  Student getStudentByStudentNumber(String studyNumber) throws Exception;
-  Student getStudentByName(String name) throws Exception;
-  void addStudent(Student student) throws Exception;
-
+  boolean login(String username, String password) throws RemoteException, SQLException;
+  void register(String user, String password, String email,
+      String confirmPassword) throws RemoteException, SQLException;
 }

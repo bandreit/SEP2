@@ -3,14 +3,12 @@ package model;
 import utility.observer.subject.LocalSubject;
 
 import java.rmi.RemoteException;
+import java.sql.SQLException;
 
-public interface Model extends LocalSubject<Student, Student>
+public interface Model extends LocalSubject<Recipe, Recipe>
 {
-  public Student getStudentByStudyNumber(String studyNumber) throws Exception,
-      RemoteException;
-  public Student getStudentByName(String name) throws Exception, RemoteException;
-  public void addStudent(Student student) throws Exception, RemoteException;
-  int getStudentListSize() throws Exception, RemoteException;
-  Student getStudent(int index) throws Exception, RemoteException;
+  boolean login(String username,String password) throws SQLException;
+  void register(String user, String password,String email,String confirmPassword)
+      throws SQLException, RemoteException;
   public void close();
 }

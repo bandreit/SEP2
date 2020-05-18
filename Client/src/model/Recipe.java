@@ -52,4 +52,9 @@ public class Recipe implements Serializable
     return "Recipe{" + "recipeName='" + recipeName + '\'' + ", ingredients="
         + ingredients + ", description='" + description + '\'' + '}';
   }
+
+  public String getCategory()
+  {
+    return "Food";
+  }
 }

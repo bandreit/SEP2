@@ -2,12 +2,12 @@ package model;
 
 import java.io.Serializable;
 
-public class Student implements Serializable
+public class Recipe implements Serializable
 {
   private String name;
   private String studyNumber;
 
-  public Student(String name, String studyNumber)
+  public Recipe(String name, String studyNumber)
   {
     if (studyNumber == null)
     {

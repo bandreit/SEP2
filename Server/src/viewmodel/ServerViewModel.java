@@ -6,14 +6,14 @@ import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.Model;
-import model.Student;
+import model.Recipe;
 import utility.observer.event.ObserverEvent;
 import utility.observer.listener.LocalListener;
 import view.TableRowData;
 
 import java.util.ArrayList;
 
-public class ServerViewModel implements LocalListener<Student, Student>
+public class ServerViewModel implements LocalListener<Recipe, Recipe>
 {
   private Model model;
   private StringProperty nameField;
@@ -24,7 +24,6 @@ public class ServerViewModel implements LocalListener<Student, Student>
   {
     this.model = model;
     this.model.addListener(this, "add");
-    this.list = createList();
     this.nameField = new SimpleStringProperty();
     this.numberField = new SimpleStringProperty();
   }
@@ -44,22 +43,6 @@ public class ServerViewModel implements LocalListener<Student, Student>
     return list;
   }
 
-  private synchronized ObservableList<TableRowData> createList()
-      throws Exception
-  {
-    ObservableList<TableRowData> obsList = FXCollections.observableArrayList();
-
-    ArrayList<Student> students = new ArrayList<>();
-    for (int i = 0; i < model.getStudentListSize(); i++)
-    {
-      students.add(model.getStudent(i));
-    }
-    for (int i = 0; i < students.size(); i++)
-    {
-      obsList.add(new TableRowData(students.get(i)));
-    }
-    return obsList;
-  }
 
   public void setMessage(String inputField)
   {
@@ -67,25 +50,12 @@ public class ServerViewModel implements LocalListener<Student, Student>
   }
 
 
-  private void addToTheList(Student student)
+  private void addToTheList(Recipe recipe)
   {
-    list.add(new TableRowData(student));
+    list.add(new TableRowData(recipe));
   }
 
-  public void addStudent()
-  {
-    try
-    {
-      model.addStudent(new Student(nameField.get(), numberField.get()));
-    }
-    catch (Exception e)
-    {
-      System.out.println(e.getMessage());
-      e.printStackTrace();
-    }
-  }
-
-  @Override public void propertyChange(ObserverEvent<Student, Student> event)
+  @Override public void propertyChange(ObserverEvent<Recipe, Recipe> event)
   {
     Platform.runLater(() -> {
       addToTheList(event.getValue2());

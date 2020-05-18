@@ -30,7 +30,6 @@ public abstract class ViewController
 
   public void reset()
   {
-
   }
 
   public ViewHandler getHandler()

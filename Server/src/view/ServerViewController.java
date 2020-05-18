@@ -48,10 +48,10 @@ public class ServerViewController
   {
   }
 
-  public void addStudent()
-  {
-    viewModel.addStudent();
-  }
+//  public void addStudent()
+//  {
+//    viewModel.addStudent();
+//  }
 
   //  public void onEnter()
   //  {

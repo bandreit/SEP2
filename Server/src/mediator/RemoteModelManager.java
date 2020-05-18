@@ -1,7 +1,7 @@
 package mediator;
 
 import model.Model;
-import model.Student;
+import model.Recipe;
 import utility.observer.event.ObserverEvent;
 import utility.observer.listener.GeneralListener;
 import utility.observer.listener.LocalListener;
@@ -15,10 +15,11 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.ExportException;
 import java.rmi.server.UnicastRemoteObject;
+import java.sql.SQLException;
 
-public class RemoteModelManager implements RemoteModel, LocalListener<Student, Student>
+public class RemoteModelManager implements RemoteModel, LocalListener<Recipe, Recipe>
 {
-  private PropertyChangeAction<Student, Student> property;
+  private PropertyChangeAction<Recipe, Recipe> property;
   private Model model;
 
   public RemoteModelManager(Model model)
@@ -47,42 +48,38 @@ public class RemoteModelManager implements RemoteModel, LocalListener<Student, S
   public void startServer() throws RemoteException, MalformedURLException
   {
     UnicastRemoteObject.exportObject(this, 0);
-    Naming.rebind("StudentList", this);
+    Naming.rebind("Recipes", this);
     System.out.println("Server started...");
   }
 
-  @Override public Student getStudentByStudentNumber(String studyNumber)
-      throws Exception, RemoteException
+
+  @Override public boolean login(String username, String password)
+      throws SQLException
   {
-    return model.getStudentByStudyNumber(studyNumber);
+    return model.login(username,password);
   }
 
-  @Override public Student getStudentByName(String name) throws Exception, RemoteException
+  @Override public void register(String user, String password, String email,
+      String confirmPassword) throws SQLException, RemoteException
   {
-    return model.getStudentByName(name);
-  }
-
-  @Override public void addStudent(Student student) throws Exception, RemoteException
-  {
-    model.addStudent(student);
-//    property.firePropertyChange("add", null, student);
+    model.register(user, password, email, confirmPassword);
   }
 
   @Override public boolean addListener(
-      GeneralListener<Student, Student> listener, String... propertyNames)
+      GeneralListener<Recipe, Recipe> listener, String... propertyNames)
       throws RemoteException
   {
     return property.addListener(listener, propertyNames);
   }
 
   @Override public boolean removeListener(
-      GeneralListener<Student, Student> listener, String... propertyNames)
+      GeneralListener<Recipe, Recipe> listener, String... propertyNames)
       throws RemoteException
   {
     return property.addListener(listener, propertyNames);
   }
 
-  @Override public void propertyChange(ObserverEvent<Student, Student> event)
+  @Override public void propertyChange(ObserverEvent<Recipe, Recipe> event)
   {
     property.firePropertyChange(event.getPropertyName(), null, event.getValue2());
   }

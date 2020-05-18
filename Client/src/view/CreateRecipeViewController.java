@@ -7,6 +7,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Region;
+import model.ListOfIngredients;
+import model.Recipe;
 import viewmodel.ViewModelFactory;
 
 public class CreateRecipeViewController extends ViewController
@@ -29,15 +31,19 @@ public class CreateRecipeViewController extends ViewController
     recipeName.textProperty().bindBidirectional(viewModels.getCreateRecipeViewModel().getRecipeName());
     description.textProperty().bindBidirectional(viewModels.getCreateRecipeViewModel().getDescription());
   }
-
-  public void onIngredients(ActionEvent actionEvent)
+  public void onAddIngredient(ActionEvent actionEvent)
   {
-    super.getHandler().openView("IngredientsView");
+
   }
 
   public void onCreate(ActionEvent actionEvent)
   {
     super.getViewModels().getCreateRecipeViewModel().createRecipe();
+    super.getHandler().openView("AllRecipes");
+    ListOfIngredients ingredient=new ListOfIngredients();
+    Recipe recipe=new Recipe(super.getViewModels().getCreateRecipeViewModel().getRecipeName().get(),ingredient,
+        super.getViewModels().getCreateRecipeViewModel().getDescription().get());
+    super.getViewModels().getAllRecipesViewModel().addToTheList(recipe);
   }
 
   public void onCancel(ActionEvent actionEvent)
