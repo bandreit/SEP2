@@ -30,11 +30,15 @@ public abstract class ViewController
 
   public void reset()
   {
-
   }
 
   public ViewHandler getHandler()
   {
     return viewHandler;
+  }
+
+  public ViewModelFactory getViewModels()
+  {
+    return viewModels;
   }
 }

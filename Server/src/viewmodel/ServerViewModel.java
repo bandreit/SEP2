@@ -24,7 +24,6 @@ public class ServerViewModel implements LocalListener<Recipe, Recipe>
   {
     this.model = model;
     this.model.addListener(this, "add");
-    this.list = createList();
     this.nameField = new SimpleStringProperty();
     this.numberField = new SimpleStringProperty();
   }
@@ -44,22 +43,6 @@ public class ServerViewModel implements LocalListener<Recipe, Recipe>
     return list;
   }
 
-  private synchronized ObservableList<TableRowData> createList()
-      throws Exception
-  {
-    ObservableList<TableRowData> obsList = FXCollections.observableArrayList();
-
-    ArrayList<Recipe> recipes = new ArrayList<>();
-    for (int i = 0; i < model.getStudentListSize(); i++)
-    {
-      recipes.add(model.getStudent(i));
-    }
-    for (int i = 0; i < recipes.size(); i++)
-    {
-      obsList.add(new TableRowData(recipes.get(i)));
-    }
-    return obsList;
-  }
 
   public void setMessage(String inputField)
   {
@@ -70,19 +53,6 @@ public class ServerViewModel implements LocalListener<Recipe, Recipe>
   private void addToTheList(Recipe recipe)
   {
     list.add(new TableRowData(recipe));
-  }
-
-  public void addStudent()
-  {
-    try
-    {
-      model.addStudent(new Recipe(nameField.get(), numberField.get()));
-    }
-    catch (Exception e)
-    {
-      System.out.println(e.getMessage());
-      e.printStackTrace();
-    }
   }
 
   @Override public void propertyChange(ObserverEvent<Recipe, Recipe> event)

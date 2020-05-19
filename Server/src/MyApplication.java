@@ -12,7 +12,6 @@ import java.rmi.RemoteException;
 
 public class MyApplication extends Application
 {
-
   private Model model;
   private RemoteModel server;
 
@@ -36,6 +35,5 @@ public class MyApplication extends Application
   @Override public void stop() throws Exception
   {
     model.close();
-    server.close();
   }
 }

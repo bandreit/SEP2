@@ -5,45 +5,20 @@ import utility.observer.subject.PropertyChangeAction;
 import utility.observer.subject.PropertyChangeProxy;
 
 import java.rmi.RemoteException;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class ModelManager implements Model
 {
-  private RecipeList recipeList;
+//  private RecipeList recipeList;
+  private UserList userList;
   private PropertyChangeAction<Recipe, Recipe> property;
 
   public ModelManager()
   {
-    this.recipeList = new RecipeList();
+//    this.recipeList = new RecipeList();
+    this.userList = new UserList();
     this.property = new PropertyChangeProxy<>(this);
-  }
-
-  @Override
-  public Recipe getStudentByStudyNumber(String studyNumber) throws IllegalArgumentException,
-      RemoteException
-  {
-    return recipeList.getStudentByNumber(studyNumber);
-  }
-
-  @Override
-  public Recipe getStudentByName(String name) throws IllegalArgumentException, RemoteException
-  {
-    return recipeList.getStudentByName(name);
-  }
-
-  @Override public void addStudent(Recipe recipe) throws IllegalArgumentException, RemoteException
-  {
-    recipeList.addStudent(recipe);
-    property.firePropertyChange("add", null, recipe);
-  }
-
-  @Override public int getStudentListSize() throws Exception, RemoteException
-  {
-    return recipeList.getSize();
-  }
-
-  @Override public Recipe getStudent(int index) throws Exception, RemoteException
-  {
-    return recipeList.getStudent(index);
   }
 
   @Override public void close()
@@ -51,8 +26,54 @@ public class ModelManager implements Model
     property.close();
   }
 
-  @Override public boolean addListener(
-      GeneralListener<Recipe, Recipe> listener, String... propertyNames)
+  @Override public boolean login(String username, String password)
+      throws SQLException
+  {
+    if (!UserDAOImpl.getInstance().doesUserExist(username))
+    {
+      throw new IllegalAccessError("Username does not exist");
+    }
+    else
+      return UserDAOImpl.getInstance().logInUser(username, password);
+  }
+
+  @Override public void register(String user, String password, String email,
+      String confirmPassword) throws SQLException, RemoteException
+  {
+    if (UserDAOImpl.getInstance().doesUserExist(user))
+    {
+      throw new IllegalAccessError("Username is already taken");
+    }
+    else
+    userList.addUser(UserDAOImpl.getInstance().create(user, password, email));
+  }
+
+  @Override public void createRecipe(String recipeName, String description,
+      ListOfIngredients ingredients, String instructions, int preparationTime,
+      String category) throws SQLException
+  {
+
+    ArrayList<Integer> ingredientIds = new ArrayList<>();
+
+    //store the ids of the ingredients from the recipe to later add in the relation table
+    for (int i = 0; i < ingredients.getSize(); i++)
+    {
+      ingredientIds.add(IngredientDAOImpl.getInstance().create(ingredients.getIngredient(i).getIngredient(), ingredients.getIngredient(i).getAmount(), ingredients.getIngredient(i).getMeasurement()).getId());
+    }
+
+    Recipe recipe = RecipeDAOImpl.getInstance()
+        .createRecipe(recipeName, description, ingredients, instructions,
+            preparationTime, category);
+
+    for (Integer ingredientId : ingredientIds)
+    {
+      RecipeDAOImpl.getInstance()
+          .addIngredientsToRecipe(recipe.getId(), ingredientId);
+    }
+  }
+
+  @Override public boolean addListener(GeneralListener<Recipe, Recipe> listener,
+      String... propertyNames)
   {
     return property.addListener(listener, propertyNames);
   }

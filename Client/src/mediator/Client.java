@@ -1,5 +1,6 @@
 package mediator;
 
+import model.ListOfIngredients;
 import model.LocalModel;
 import model.Recipe;
 import utility.observer.event.ObserverEvent;
@@ -13,9 +14,9 @@ import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.sql.SQLException;
 
-public class StudentListClient
-    implements ClientModel, RemoteListener<Recipe, Recipe>
+public class Client implements ClientModel, RemoteListener<Recipe, Recipe>
 {
   public static final String HOST = "localhost";
   private String host;
@@ -23,31 +24,30 @@ public class StudentListClient
   private LocalModel model;
   private RemoteModel remoteModel;
 
-  public StudentListClient(LocalModel model)
+  public Client(LocalModel model)
       throws RemoteException, NotBoundException, MalformedURLException
   {
-    this (model, HOST);
+    this(model, HOST);
   }
 
-  public StudentListClient(LocalModel model, String host)
+  public Client(LocalModel model, String host)
       throws RemoteException, NotBoundException, MalformedURLException
   {
     this.model = model;
     this.host = host;
     this.remoteModel = (RemoteModel) Naming
-        .lookup("rmi://" + host + ":1099/StudentList");
+        .lookup("rmi://" + host + ":1099/Recipes");
     UnicastRemoteObject.exportObject(this, 0);
     this.remoteModel.addListener(this);
     this.property = new PropertyChangeProxy<>(this, true);
   }
 
-  @Override public Recipe getStudentByStudentNumber(String studyNumber)
-      throws Exception
+  @Override public boolean login(String username, String password)
+      throws RemoteException, SQLException, Exception
   {
-
     try
     {
-      return remoteModel.getStudentByStudentNumber(studyNumber);
+      return remoteModel.login(username, password);
     }
     catch (Exception e)
     {
@@ -55,11 +55,12 @@ public class StudentListClient
     }
   }
 
-  @Override public Recipe getStudentByName(String name) throws Exception
+  @Override public void register(String user, String password, String email,
+      String confirmPassword) throws RemoteException
   {
     try
     {
-      return remoteModel.getStudentByName(name);
+      remoteModel.register(user, password, email, confirmPassword);
     }
     catch (Exception e)
     {
@@ -67,16 +68,11 @@ public class StudentListClient
     }
   }
 
-  @Override public void addStudent(Recipe recipe) throws Exception
+  @Override public void createRecipe(String recipeName, String description,
+      ListOfIngredients ingredients, String instructions, int preparationTime,
+      String category) throws RemoteException
   {
-    try
-    {
-      remoteModel.addStudent(recipe);
-    }
-    catch (Exception e)
-    {
-      throw new IllegalStateException(getExceptionMessage(e), e);
-    }
+    remoteModel.createRecipe(recipeName, description, ingredients, instructions, preparationTime, category);
   }
 
   @Override public void close() throws Exception
@@ -87,11 +83,12 @@ public class StudentListClient
   @Override public void propertyChange(ObserverEvent<Recipe, Recipe> event)
       throws RemoteException
   {
-    property.firePropertyChange(event.getPropertyName(), null, event.getValue2());
+    property
+        .firePropertyChange(event.getPropertyName(), null, event.getValue2());
   }
 
-  @Override public boolean addListener(
-      GeneralListener<Recipe, Recipe> listener, String... propertyNames)
+  @Override public boolean addListener(GeneralListener<Recipe, Recipe> listener,
+      String... propertyNames)
   {
     return property.addListener(listener, propertyNames);
   }
@@ -107,7 +104,7 @@ public class StudentListClient
     String message = e.getMessage();
     if (message != null)
     {
-      message = message.split(";")[0];
+      message = message.split(":")[2];
     }
     return message;
   }

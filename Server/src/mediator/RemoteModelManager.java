@@ -1,5 +1,6 @@
 package mediator;
 
+import model.ListOfIngredients;
 import model.Model;
 import model.Recipe;
 import utility.observer.event.ObserverEvent;
@@ -15,6 +16,7 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.ExportException;
 import java.rmi.server.UnicastRemoteObject;
+import java.sql.SQLException;
 
 public class RemoteModelManager implements RemoteModel, LocalListener<Recipe, Recipe>
 {
@@ -47,25 +49,29 @@ public class RemoteModelManager implements RemoteModel, LocalListener<Recipe, Re
   public void startServer() throws RemoteException, MalformedURLException
   {
     UnicastRemoteObject.exportObject(this, 0);
-    Naming.rebind("StudentList", this);
+    Naming.rebind("Recipes", this);
     System.out.println("Server started...");
   }
 
-  @Override public Recipe getStudentByStudentNumber(String studyNumber)
-      throws Exception, RemoteException
+
+  @Override public boolean login(String username, String password)
+      throws SQLException
   {
-    return model.getStudentByStudyNumber(studyNumber);
+    return model.login(username,password);
   }
 
-  @Override public Recipe getStudentByName(String name) throws Exception, RemoteException
+  @Override public void register(String user, String password, String email,
+      String confirmPassword) throws SQLException, RemoteException
   {
-    return model.getStudentByName(name);
+    model.register(user, password, email, confirmPassword);
   }
 
-  @Override public void addStudent(Recipe recipe) throws Exception, RemoteException
+  @Override public void createRecipe(String recipeName, String description,
+      ListOfIngredients ingredients, String instructions, int preparationTime,
+      String category)
+      throws RemoteException, SQLException
   {
-    model.addStudent(recipe);
-//    property.firePropertyChange("add", null, student);
+    model.createRecipe(recipeName, description, ingredients, instructions, preparationTime, category);
   }
 
   @Override public boolean addListener(
