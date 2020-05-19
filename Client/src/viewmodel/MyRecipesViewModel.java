@@ -9,12 +9,12 @@ import utility.observer.event.ObserverEvent;
 import utility.observer.listener.LocalListener;
 import view.RecipeTable;
 
-public class AllRecipesViewModel implements LocalListener<Recipe, Recipe>
+public class MyRecipesViewModel implements LocalListener<Recipe, Recipe>
 {
-  private ObservableList<RecipeTable> list;
   private LocalModel model;
+  private ObservableList<RecipeTable> list;
 
-  public AllRecipesViewModel(LocalModel model)
+  public MyRecipesViewModel(LocalModel model)
   {
     this.model=model;
     list= FXCollections.observableArrayList();

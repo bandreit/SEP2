@@ -7,14 +7,12 @@ import javafx.scene.control.TableView;
 import javafx.scene.layout.Region;
 import viewmodel.ViewModelFactory;
 
-public class AllRecipesViewController extends ViewController
+public class MyRecipesViewController extends ViewController
 {
-  @FXML private TableView<RecipeTable> recipeList;
+  @FXML private TableView<RecipeTable> myRecipeList;
   @FXML private TableColumn<RecipeTable, String> categoryColumn;
   @FXML private TableColumn<RecipeTable, String> recipeColumn;
-  @FXML private TableColumn<RecipeTable, String> descriptionColumn;
-
-  public AllRecipesViewController()
+  public MyRecipesViewController()
   {
     super();
   }
@@ -24,12 +22,15 @@ public class AllRecipesViewController extends ViewController
     super.init(viewHandler, viewModels, root);
     categoryColumn.setCellValueFactory(cellData->cellData.getValue().getCategoryProperty());
     recipeColumn.setCellValueFactory(cellData->cellData.getValue().getRecipeProperty());
-    descriptionColumn.setCellValueFactory(cellData->cellData.getValue().getDescriptionProperty());
-    recipeList.setItems(viewModels.getAllRecipesViewModel().getList());
+    myRecipeList.setItems(viewModels.getMyRecipesViewModel().getList());
+  }
+  public void onAddRecipe(ActionEvent actionEvent)
+  {
+    super.getHandler().openView("CreateRecipeView");
   }
 
-  public void onMyRecipes(ActionEvent actionEvent)
+  public void backToAllRecipes(ActionEvent actionEvent)
   {
-    super.getHandler().openView("MyRecipesView");
+    super.getHandler().openView("AllRecipesView");
   }
 }

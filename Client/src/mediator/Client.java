@@ -68,10 +68,11 @@ public class Client implements ClientModel, RemoteListener<Recipe, Recipe>
     }
   }
 
-  @Override public void createRecipe(String recipeName,
-      ListOfIngredients ingredients, String description)
+  @Override public void createRecipe(String recipeName, String description,
+      ListOfIngredients ingredients, String instructions, int preparationTime,
+      String category) throws RemoteException
   {
-    Recipe newRecipe = new Recipe(recipeName, ingredients, description);
+    remoteModel.createRecipe(recipeName, description, ingredients, instructions, preparationTime, category);
   }
 
   @Override public void close() throws Exception

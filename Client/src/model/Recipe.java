@@ -6,15 +6,35 @@ import java.util.ArrayList;
 public class Recipe implements Serializable
 {
   private String recipeName;
-  private ListOfIngredients ingredients;
   private String description;
+  private ListOfIngredients ingredients;
+  private String instructions;
+  private int preparationTime;
+  private String category;
 
-  public Recipe(String recipeName, ListOfIngredients ingredients,
-      String description)
+  public Recipe(String recipeName, String description,
+      ListOfIngredients ingredients, String instructions, int preparationTime,
+      String category)
   {
     this.recipeName = recipeName;
-    this.ingredients = ingredients;
     this.description = description;
+    this.ingredients = ingredients;
+    this.instructions = instructions;
+    this.preparationTime = preparationTime;
+    this.category = category;
+  }
+
+  @Override public String toString()
+  {
+    return "Recipe{" + "recipeName='" + recipeName + '\'' + ", description='"
+        + description + '\'' + ", ingredients=" + ingredients
+        + ", instructions='" + instructions + '\'' + ", preparationTime="
+        + preparationTime + ", category='" + category + '\'' + '}';
+  }
+
+  public String getCategory()
+  {
+    return category;
   }
 
   public String getRecipeName()
@@ -22,39 +42,8 @@ public class Recipe implements Serializable
     return recipeName;
   }
 
-  public void setRecipeName(String recipeName)
-  {
-    this.recipeName = recipeName;
-  }
-
-  public ListOfIngredients getIngredients()
-  {
-    return ingredients;
-  }
-
-  public void setIngredients(ListOfIngredients ingredients)
-  {
-    this.ingredients = ingredients;
-  }
-
   public String getDescription()
   {
     return description;
-  }
-
-  public void setDescription(String description)
-  {
-    this.description = description;
-  }
-
-  @Override public String toString()
-  {
-    return "Recipe{" + "recipeName='" + recipeName + '\'' + ", ingredients="
-        + ingredients + ", description='" + description + '\'' + '}';
-  }
-
-  public String getCategory()
-  {
-    return "Food";
   }
 }

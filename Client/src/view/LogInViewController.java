@@ -45,11 +45,11 @@ public class LogInViewController extends ViewController
 
   public void loginButtonPressed()
   {
-    //if(super.getViewModels().getLogInViewModel().loginButtonPressed())
-    //{
+    if(super.getViewModels().getLogInViewModel().loginButtonPressed())
+    {
 //      super.getHandler().openView(""); //add further view
-      //super.getViewModels().getLogInViewModel().clear();
+      super.getViewModels().getLogInViewModel().clear();
       super.getHandler().openView("CreateRecipeView");
-  //}
+    }
   }
 }

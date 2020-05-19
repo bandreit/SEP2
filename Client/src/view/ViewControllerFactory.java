@@ -44,7 +44,8 @@ public class ViewControllerFactory
       case "LogInView": return new LogInViewController();
       case "RegisterView": return new RegisterViewController();
       case "CreateRecipeView": return new CreateRecipeViewController();
-      case "AllRecipes": return new AllRecipesViewController();
+      case "MyRecipesView": return new MyRecipesViewController();
+      case "AllRecipesView": return new AllRecipesViewController();
       default: throw new IllegalArgumentException("No such id for view controller");
     }
   }

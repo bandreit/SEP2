@@ -16,9 +16,8 @@ public class LocalModelManager
     implements LocalModel, LocalListener<Recipe, Recipe>
 {
   private ClientModel clientModel;
-  private PropertyChangeAction<String, String> property;
-  private String amount;
-  private String ingredient;
+  private PropertyChangeAction<Ingredient, Ingredient> property;
+  private ListOfIngredients ingredientList;
   private boolean loggedIn;
 
   public LocalModelManager() throws IOException
@@ -28,6 +27,7 @@ public class LocalModelManager
       this.loggedIn = false;
       clientModel = new Client(this);
       clientModel.addListener(this);
+      ingredientList = new ListOfIngredients();
     }
     catch (Exception e)
     {
@@ -47,6 +47,13 @@ public class LocalModelManager
     return loggedIn;
   }
 
+  @Override public void createRecipe(String recipeName, String description,
+      ListOfIngredients ingredients, String instructions, int preparationTime,
+      String category) throws RemoteException
+  {
+    clientModel.createRecipe(recipeName, description, ingredients, instructions, preparationTime, category);
+  }
+
   @Override public void register(String user, String password, String email,
       String confirmPassword) throws RemoteException, SQLException
   {
@@ -54,45 +61,32 @@ public class LocalModelManager
   }
 
 
-  @Override public void createRecipe(String recipeName,
-      ListOfIngredients ingredients, String description)
+  @Override public void addFullIngredientWithQtyAndAMeasurement(
+      Ingredient ingredient)
   {
-
+    ingredientList.addIngredient(ingredient);
+    property.firePropertyChange("addIngredient", null, ingredient);
   }
-
-  @Override public void addAmount(String s)
-  {
-    this.amount=s;
-  }
-
-  @Override public void addIngredient(String s)
-  {
-    this.ingredient=s;
-  }
-
 
   @Override public ListOfIngredients getListOfIngredients()
   {
-    ListOfIngredients ingredients=new ListOfIngredients();
-    Ingredient ing=new Ingredient(ingredient,amount);
-    ingredients.addIngredient(ing);
-    return ingredients;
+    return ingredientList;
   }
 
   @Override public void propertyChange(ObserverEvent<Recipe, Recipe> event)
   {
-    String message = "Message: Added " + event.getValue2();
-    property.firePropertyChange("broadcast", null, message);
+//    String message = "Message: Added " + event.getValue2();
+//        property.firePropertyChange("broadcast", null, ingredient);
   }
 
-  @Override public boolean addListener(GeneralListener<String, String> listener,
-      String... propertyNames)
+  @Override public boolean addListener(
+      GeneralListener<Ingredient, Ingredient> listener, String... propertyNames)
   {
     return property.addListener(listener, propertyNames);
   }
 
   @Override public boolean removeListener(
-      GeneralListener<String, String> listener, String... propertyNames)
+      GeneralListener<Ingredient, Ingredient> listener, String... propertyNames)
   {
     return property.removeListener(listener, propertyNames);
   }
