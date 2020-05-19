@@ -17,14 +17,19 @@ public class ListOfIngredients implements Serializable
     ingredients.add(ingredient);
   }
 
-  public void removeIngredient(Ingredient ingredient)
+  public void removeIngredient(String ingredientName)
   {
-    ingredients.remove(ingredient);
+    ingredients.remove(ingredientName);
   }
 
   public Ingredient getIngredient(int index)
   {
     return ingredients.get(index);
+  }
+
+  public ArrayList<Ingredient> AccessingIngredientName()
+  {
+    return ingredients;
   }
 
   @Override public String toString()

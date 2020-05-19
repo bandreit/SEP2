@@ -87,5 +87,7 @@
                 </FXCollections>
             </items>
         </ChoiceBox>
+      <Button layoutX="509.0" layoutY="216.0" mnemonicParsing="false" onAction="#removeIngredientButtonPressed" prefHeight="38.0" prefWidth="43.0" text="-" />
+      <Label fx:id="deleteErrorLabel" layoutX="478.0" layoutY="268.0" prefHeight="18.0" prefWidth="144.0" />
     </children>
 </AnchorPane>

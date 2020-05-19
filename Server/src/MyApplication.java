@@ -32,9 +32,9 @@ public class MyApplication extends Application
     }
   }
 
-  @Override public void stop() throws Exception
-  {
-    model.close();
-    server.close();
-  }
+//  @Override public void stop() throws Exception
+//  {
+//    model.close();
+//    server.close();
+//  }
 }
