@@ -1,5 +1,7 @@
 package view;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import model.Ingredient;
@@ -7,13 +9,13 @@ import model.Ingredient;
 public class CreateRecipeTableRowData
 {
   private StringProperty ingredient;
-  private StringProperty quantity;
+  private IntegerProperty quantity;
   private StringProperty measurment;
 
   public CreateRecipeTableRowData(Ingredient theIngredient)
   {
     String IngredientName = null;
-    String AmountOfQuantity = null;
+    int AmountOfQuantity = 0;
     String Measurement = null;
 
     if (theIngredient != null)
@@ -24,7 +26,7 @@ public class CreateRecipeTableRowData
     }
 
     ingredient = new SimpleStringProperty(IngredientName);
-    quantity = new SimpleStringProperty(AmountOfQuantity);
+    quantity = new SimpleIntegerProperty(AmountOfQuantity);
     measurment = new SimpleStringProperty(Measurement);
 
   }
@@ -39,7 +41,7 @@ public class CreateRecipeTableRowData
     return measurment;
   }
 
-  public StringProperty getQuantity()
+  public IntegerProperty getQuantity()
   {
     return quantity;
   }

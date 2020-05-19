@@ -1,6 +1,8 @@
 package viewmodel;
 
 import javafx.application.Platform;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
@@ -20,7 +22,7 @@ public class CreateRecipeViewModel
 {
   private StringProperty ingredientName;
   private LocalModel model;
-  private StringProperty quantity;
+  private IntegerProperty quantity;
   private StringProperty measurement;
   private StringProperty description;
   private StringProperty recipeName;
@@ -33,7 +35,7 @@ public class CreateRecipeViewModel
   {
     this.model = model;
     this.ingredientName = new SimpleStringProperty();
-    this.quantity = new SimpleStringProperty();
+    this.quantity = new SimpleIntegerProperty();
     this.measurement = new SimpleStringProperty();
     this.time = new SimpleStringProperty();
     this.description = new SimpleStringProperty();
@@ -54,7 +56,7 @@ public class CreateRecipeViewModel
     return measurement;
   }
 
-  public StringProperty getQuantity()
+  public IntegerProperty getQuantity()
   {
     return quantity;
   }
@@ -95,7 +97,7 @@ public class CreateRecipeViewModel
   {
     try
     {
-      Ingredient ingredient = new Ingredient(ingredientName.get(), quantity.get(),
+      Ingredient ingredient = new Ingredient( listOfIngredients.size(), ingredientName.get(), quantity.get(),
           measurement.get());
       clear();
       model.addFullIngredientWithQtyAndAMeasurement(ingredient);
@@ -109,7 +111,7 @@ public class CreateRecipeViewModel
   public void clear()
   {
     ingredientName.set(null);
-    quantity.set(null);
+    quantity.set(0);
     measurement.set(null);
   }
 

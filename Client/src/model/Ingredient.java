@@ -4,23 +4,25 @@ import java.io.Serializable;
 
 public class Ingredient implements Serializable
 {
+  private int id;
   private String ingredient;
-  private String amount;
+  private int amount;
   private String measurement;
 
-  public Ingredient(String ingredient, String amount, String measurement)
+  public Ingredient(int id, String ingredient, int amount, String measurement)
   {
+    this.id = id;
     this.ingredient = ingredient;
     this.amount = amount;
     this.measurement = measurement;
   }
 
-  public String getAmount()
+  public int getAmount()
   {
     return amount;
   }
 
-  public void setAmount(String amount)
+  public void setAmount(int amount)
   {
     this.amount = amount;
   }
@@ -38,6 +40,16 @@ public class Ingredient implements Serializable
   public void setMeasurement(String measurement)
   {
     this.measurement = measurement;
+  }
+
+  public void setId(int id)
+  {
+    this.id = id;
+  }
+
+  public int getId()
+  {
+    return id;
   }
 
   public String getMeasurement()

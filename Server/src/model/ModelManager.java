@@ -6,6 +6,7 @@ import utility.observer.subject.PropertyChangeProxy;
 
 import java.rmi.RemoteException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class ModelManager implements Model
 {
@@ -51,11 +52,24 @@ public class ModelManager implements Model
       ListOfIngredients ingredients, String instructions, int preparationTime,
       String category) throws SQLException
   {
-//    RecipeDAOImpl.
-//        String recipeName, String description,
-//      ListOfIngredients ingredients, String instructions, int preparationTime,
-//    String category
-//    System.out.println(recipe.toString() + "in server");
+
+    ArrayList<Integer> ingredientIds = new ArrayList<>();
+
+    //store the ids of the ingredients from the recipe to later add in the relation table
+    for (int i = 0; i < ingredients.getSize(); i++)
+    {
+      ingredientIds.add(IngredientDAOImpl.getInstance().create(ingredients.getIngredient(i).getIngredient(), ingredients.getIngredient(i).getAmount(), ingredients.getIngredient(i).getMeasurement()).getId());
+    }
+
+    Recipe recipe = RecipeDAOImpl.getInstance()
+        .createRecipe(recipeName, description, ingredients, instructions,
+            preparationTime, category);
+
+    for (Integer ingredientId : ingredientIds)
+    {
+      RecipeDAOImpl.getInstance()
+          .addIngredientsToRecipe(recipe.getId(), ingredientId);
+    }
   }
 
   @Override public boolean addListener(GeneralListener<Recipe, Recipe> listener,
