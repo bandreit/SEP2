@@ -104,7 +104,12 @@ public class Client implements ClientModel, RemoteListener<Recipe, Recipe>
     String message = e.getMessage();
     if (message != null)
     {
-      message = message.split(":")[2];
+      String [] messageArray = message.split(":");
+      if (messageArray.length >= 1) {
+        return messageArray[1];
+      } else {
+        return messageArray[0];
+      }
     }
     return message;
   }
