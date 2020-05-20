@@ -29,6 +29,7 @@ public class CreateRecipeViewModel
   private StringProperty instructions;
   private StringProperty time;
   private StringProperty category;
+  private StringProperty deleteErrorLabel;
   private ObservableList<CreateRecipeTableRowData> listOfIngredients;
 
   public CreateRecipeViewModel(LocalModel model)
@@ -42,8 +43,14 @@ public class CreateRecipeViewModel
     this.recipeName = new SimpleStringProperty();
     this.instructions = new SimpleStringProperty();
     this.category = new SimpleStringProperty();
+    this.deleteErrorLabel = new SimpleStringProperty();
     updateIngredients();
     this.model.addListener(this, "addIngredient");
+  }
+
+  public StringProperty getDeleteErrorLabel()
+  {
+    return deleteErrorLabel;
   }
 
   public StringProperty getIngredientName()
@@ -137,6 +144,17 @@ public class CreateRecipeViewModel
     for (int i = 0; i < list.getSize(); i++)
     {
       listOfIngredients.add(new CreateRecipeTableRowData(list.getIngredient(i)));
+    }
+  }
+  public void remove(String ingredientName)
+  {
+    for (int i = 0; i < listOfIngredients.size(); i++)
+    {
+      if (listOfIngredients.get(i).getIngredient().get().equals(ingredientName))
+      {
+        listOfIngredients.remove(i);
+        break;
+      }
     }
   }
 }

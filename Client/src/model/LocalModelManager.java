@@ -76,6 +76,11 @@ public class LocalModelManager
     return ingredientList;
   }
 
+  @Override public void removeIngredient(String ingredientName)
+  {
+    ingredientList.removeIngredient(ingredientName);
+  }
+
   @Override public void propertyChange(ObserverEvent<Recipe, Recipe> event)
   {
 //    String message = "Message: Added " + event.getValue2();

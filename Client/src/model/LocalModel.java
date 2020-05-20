@@ -18,5 +18,6 @@ public interface LocalModel extends LocalSubject<Ingredient, Ingredient>
       String category) throws RemoteException;
   void addFullIngredientWithQtyAndAMeasurement(Ingredient ingredient);
   ListOfIngredients getListOfIngredients();
+  void removeIngredient(String ingredientName);
 
 }
