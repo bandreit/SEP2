@@ -15,7 +15,6 @@ import utility.observer.listener.LocalListener;
 import view.CreateRecipeTableRowData;
 
 import java.rmi.RemoteException;
-import java.util.Arrays;
 
 public class CreateRecipeViewModel
     implements LocalListener<Ingredient, Ingredient>

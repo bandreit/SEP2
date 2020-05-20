@@ -16,5 +16,4 @@ public interface RemoteModel extends RemoteSubject<Recipe, Recipe>, Remote
   void createRecipe(String recipeName, String description,
       ListOfIngredients ingredients, String instructions, int preparationTime,
       String category) throws RemoteException, SQLException;
-  void close();
 }

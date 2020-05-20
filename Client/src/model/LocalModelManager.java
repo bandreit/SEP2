@@ -75,8 +75,8 @@ public class LocalModelManager
 
   @Override public void propertyChange(ObserverEvent<Recipe, Recipe> event)
   {
-//    String message = "Message: Added " + event.getValue2();
-//        property.firePropertyChange("broadcast", null, ingredient);
+
+     //property.firePropertyChange("broadcast", null, ingredient);
   }
 
   @Override public boolean addListener(
@@ -90,7 +90,6 @@ public class LocalModelManager
   {
     return property.removeListener(listener, propertyNames);
   }
-
   @Override public void close(Recipe recipe)
   {
     //hz

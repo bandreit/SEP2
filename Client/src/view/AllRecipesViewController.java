@@ -30,6 +30,6 @@ public class AllRecipesViewController extends ViewController
 
   public void onMyRecipes(ActionEvent actionEvent)
   {
-    super.getHandler().openView("MyRecipesView");
+    super.getHandler().openView("MyRecipes");
   }
 }

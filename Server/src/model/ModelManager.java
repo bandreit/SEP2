@@ -64,7 +64,6 @@ public class ModelManager implements Model
     Recipe recipe = RecipeDAOImpl.getInstance()
         .createRecipe(recipeName, description, ingredients, instructions,
             preparationTime, category);
-
     for (Integer ingredientId : ingredientIds)
     {
       RecipeDAOImpl.getInstance()

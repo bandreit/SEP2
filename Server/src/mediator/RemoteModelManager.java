@@ -93,7 +93,7 @@ public class RemoteModelManager implements RemoteModel, LocalListener<Recipe, Re
     property.firePropertyChange(event.getPropertyName(), null, event.getValue2());
   }
 
-  @Override public void close()
+  public void close()
   {
     property.close();
     try

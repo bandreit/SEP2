@@ -24,15 +24,11 @@ public class AllRecipesViewModel implements LocalListener<Recipe, Recipe>
   {
     return list;
   }
-  private void addToTheList(Recipe recipe)
-  {
-    list.add(new RecipeTable(recipe));
-  }
 
   @Override public void propertyChange(ObserverEvent<Recipe, Recipe> event)
   {
     Platform.runLater(() -> {
-      addToTheList(event.getValue2());
+      list.add(new RecipeTable(event.getValue2()));
     });
   }
 }
