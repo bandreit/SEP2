@@ -9,6 +9,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.Region;
 import javafx.scene.text.Text;
 import javafx.util.StringConverter;
+import model.Recipe;
 import viewmodel.CreateRecipeViewModel;
 import viewmodel.ViewModelFactory;
 
@@ -101,7 +102,8 @@ public class CreateRecipeViewController extends ViewController
   {
     super.getHandler().openView("AllRecipes");
     super.getViewModels().getCreateRecipeViewModel().createRecipe();
-
+    super.getViewModels().getAllRecipesViewModel().addRecipe(super.getViewModels().getCreateRecipeViewModel().recipe());
+    super.getViewModels().getMyRecipesViewModel().addRecipe(super.getViewModels().getCreateRecipeViewModel().recipe());
   }
 
   public void onCancel(ActionEvent actionEvent)

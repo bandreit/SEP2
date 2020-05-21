@@ -9,7 +9,7 @@ import utility.observer.event.ObserverEvent;
 import utility.observer.listener.LocalListener;
 import view.RecipeTable;
 
-public class MyRecipesViewModel implements LocalListener<Recipe, Recipe>
+public class MyRecipesViewModel
 {
   private LocalModel model;
   private ObservableList<RecipeTable> list;
@@ -24,15 +24,8 @@ public class MyRecipesViewModel implements LocalListener<Recipe, Recipe>
   {
     return list;
   }
-  private void addToTheList(Recipe recipe)
+  public void addRecipe(Recipe recipe)
   {
     list.add(new RecipeTable(recipe));
-  }
-
-  @Override public void propertyChange(ObserverEvent<Recipe, Recipe> event)
-  {
-    Platform.runLater(() -> {
-      addToTheList(event.getValue2());
-    });
   }
 }

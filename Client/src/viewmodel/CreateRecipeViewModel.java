@@ -10,6 +10,7 @@ import javafx.collections.ObservableList;
 import model.Ingredient;
 import model.ListOfIngredients;
 import model.LocalModel;
+import model.Recipe;
 import utility.observer.event.ObserverEvent;
 import utility.observer.listener.LocalListener;
 import view.CreateRecipeTableRowData;
@@ -125,6 +126,7 @@ public class CreateRecipeViewModel
   public void createRecipe() throws RemoteException
   {
     model.createRecipe(recipeName.get(), description.get(),  model.getListOfIngredients(), instructions.get(), Integer.parseInt(time.get()), category.get());
+
   }
 
   /// GET THE CATEGORY FROM THE VIEW
@@ -137,6 +139,10 @@ public class CreateRecipeViewModel
     {
       listOfIngredients.add(new CreateRecipeTableRowData(list.getIngredient(i)));
     }
+  }
+  public Recipe recipe()
+  {
+    return new Recipe(recipeName.get(), description.get(),  model.getListOfIngredients(), instructions.get(), Integer.parseInt(time.get()), category.get());
   }
 }
 

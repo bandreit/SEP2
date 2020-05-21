@@ -5,11 +5,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.LocalModel;
 import model.Recipe;
-import utility.observer.event.ObserverEvent;
-import utility.observer.listener.LocalListener;
 import view.RecipeTable;
 
-public class AllRecipesViewModel implements LocalListener<Recipe, Recipe>
+public class AllRecipesViewModel
 {
   private ObservableList<RecipeTable> list;
   private LocalModel model;
@@ -24,11 +22,8 @@ public class AllRecipesViewModel implements LocalListener<Recipe, Recipe>
   {
     return list;
   }
-
-  @Override public void propertyChange(ObserverEvent<Recipe, Recipe> event)
-  {
-    Platform.runLater(() -> {
-      list.add(new RecipeTable(event.getValue2()));
-    });
-  }
+ public void addRecipe(Recipe recipe)
+ {
+    list.add(new RecipeTable(recipe));
+ }
 }
