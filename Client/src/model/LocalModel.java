@@ -7,7 +7,7 @@ import java.sql.SQLException;
 
 public interface LocalModel extends LocalSubject<Ingredient, Ingredient>
 {
-  boolean login(String user, String password) throws Exception;
+  int login(String user, String password) throws Exception;
   void register(String user, String password, String email,
       String confirmPassword) throws RemoteException, SQLException;
   void close(Recipe recipe);
@@ -18,5 +18,6 @@ public interface LocalModel extends LocalSubject<Ingredient, Ingredient>
       String category) throws RemoteException;
   void addFullIngredientWithQtyAndAMeasurement(Ingredient ingredient);
   ListOfIngredients getListOfIngredients();
-
+  void removeIngredient(String ingredientName);
+  void setUser(int userId);
 }

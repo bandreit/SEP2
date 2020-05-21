@@ -54,7 +54,7 @@ public class RemoteModelManager implements RemoteModel, LocalListener<Recipe, Re
   }
 
 
-  @Override public boolean login(String username, String password)
+  @Override public int login(String username, String password)
       throws SQLException
   {
     return model.login(username,password);

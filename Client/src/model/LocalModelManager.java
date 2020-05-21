@@ -18,6 +18,9 @@ public class LocalModelManager
   private ClientModel clientModel;
   private PropertyChangeAction<Ingredient, Ingredient> property;
   private ListOfIngredients ingredientList;
+  private String amount;
+  private String ingredient;
+  private String measurement;
   private boolean loggedIn;
 
   public LocalModelManager() throws IOException
@@ -37,7 +40,7 @@ public class LocalModelManager
     property = new PropertyChangeProxy<>(this, true);
   }
 
-  @Override public boolean login(String user, String password) throws Exception
+  @Override public int login(String user, String password) throws Exception
   {
     return clientModel.login(user, password);
   }
@@ -73,10 +76,20 @@ public class LocalModelManager
     return ingredientList;
   }
 
-  @Override public void propertyChange(ObserverEvent<Recipe, Recipe> event)
+  @Override public void removeIngredient(String ingredientName)
+  {
+    ingredientList.removeIngredient(ingredientName);
+  }
+
+  @Override public void setUser(int userId)
   {
 
-     //property.firePropertyChange("broadcast", null, ingredient);
+  }
+
+  @Override public void propertyChange(ObserverEvent<Recipe, Recipe> event)
+  {
+//    String message = "Message: Added " + event.getValue2();
+//        property.firePropertyChange("broadcast", null, ingredient);
   }
 
   @Override public boolean addListener(
@@ -90,6 +103,7 @@ public class LocalModelManager
   {
     return property.removeListener(listener, propertyNames);
   }
+
   @Override public void close(Recipe recipe)
   {
     //hz

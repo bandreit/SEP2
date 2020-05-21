@@ -10,12 +10,12 @@ import javafx.collections.ObservableList;
 import model.Ingredient;
 import model.ListOfIngredients;
 import model.LocalModel;
-import model.Recipe;
 import utility.observer.event.ObserverEvent;
 import utility.observer.listener.LocalListener;
 import view.CreateRecipeTableRowData;
 
 import java.rmi.RemoteException;
+import java.util.Arrays;
 
 public class CreateRecipeViewModel
     implements LocalListener<Ingredient, Ingredient>
@@ -29,6 +29,7 @@ public class CreateRecipeViewModel
   private StringProperty instructions;
   private StringProperty time;
   private StringProperty category;
+  private StringProperty deleteErrorLabel;
   private ObservableList<CreateRecipeTableRowData> listOfIngredients;
 
   public CreateRecipeViewModel(LocalModel model)
@@ -42,8 +43,14 @@ public class CreateRecipeViewModel
     this.recipeName = new SimpleStringProperty();
     this.instructions = new SimpleStringProperty();
     this.category = new SimpleStringProperty();
+    this.deleteErrorLabel = new SimpleStringProperty();
     updateIngredients();
     this.model.addListener(this, "addIngredient");
+  }
+
+  public StringProperty getDeleteErrorLabel()
+  {
+    return deleteErrorLabel;
   }
 
   public StringProperty getIngredientName()
@@ -126,7 +133,6 @@ public class CreateRecipeViewModel
   public void createRecipe() throws RemoteException
   {
     model.createRecipe(recipeName.get(), description.get(),  model.getListOfIngredients(), instructions.get(), Integer.parseInt(time.get()), category.get());
-
   }
 
   /// GET THE CATEGORY FROM THE VIEW
@@ -140,9 +146,16 @@ public class CreateRecipeViewModel
       listOfIngredients.add(new CreateRecipeTableRowData(list.getIngredient(i)));
     }
   }
-  public Recipe recipe()
+  public void remove(String ingredientName)
   {
-    return new Recipe(recipeName.get(), description.get(),  model.getListOfIngredients(), instructions.get(), Integer.parseInt(time.get()), category.get());
+    for (int i = 0; i < listOfIngredients.size(); i++)
+    {
+      if (listOfIngredients.get(i).getIngredient().get().equals(ingredientName))
+      {
+        listOfIngredients.remove(i);
+        break;
+      }
+    }
   }
 }
 

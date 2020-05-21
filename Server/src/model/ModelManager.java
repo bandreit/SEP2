@@ -26,12 +26,12 @@ public class ModelManager implements Model
     property.close();
   }
 
-  @Override public boolean login(String username, String password)
+  @Override public int login(String username, String password)
       throws SQLException
   {
     if (!UserDAOImpl.getInstance().doesUserExist(username))
     {
-      throw new IllegalAccessError("Username does not exist");
+      throw new IllegalAccessError("User does not exist");
     }
     else
       return UserDAOImpl.getInstance().logInUser(username, password);
@@ -64,6 +64,7 @@ public class ModelManager implements Model
     Recipe recipe = RecipeDAOImpl.getInstance()
         .createRecipe(recipeName, description, ingredients, instructions,
             preparationTime, category);
+
     for (Integer ingredientId : ingredientIds)
     {
       RecipeDAOImpl.getInstance()
