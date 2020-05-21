@@ -26,7 +26,7 @@ public class RecipeDAOImpl implements RecipeDAO
   {
     return DriverManager.getConnection(
         "jdbc:postgresql://localhost:5432/postgres?currentSchema=recipenetwork",
-        "postgres", "1234");
+        "postgres", "1");
   }
 
   @Override public Recipe createRecipe(String recipeName, String description,
@@ -83,7 +83,7 @@ public class RecipeDAOImpl implements RecipeDAO
     }
   }
 
-  @Override public List<Recipe> getRecipes() throws SQLException
+  @Override public RecipeList getRecipes() throws SQLException
   {
     try (Connection connection = getConnection())
     {
@@ -91,7 +91,7 @@ public class RecipeDAOImpl implements RecipeDAO
           "SELECT * FROM RECIPES");
       statement.setString(1, "%" + "%");
       ResultSet resultSet = statement.executeQuery();
-      ArrayList<Recipe> result = new ArrayList<>();
+      RecipeList result = new RecipeList();
       while (resultSet.next())
       {
         String name = resultSet.getString("name");
@@ -101,7 +101,7 @@ public class RecipeDAOImpl implements RecipeDAO
         String instructions = resultSet.getString("instructions");
         int preparation_time = resultSet.getInt("preparation_time");
         Recipe recipe = new Recipe(id,name,description,instructions,preparation_time,category);
-        result.add(recipe);
+        result.addRecipe(recipe);
       }
       return result;
      }

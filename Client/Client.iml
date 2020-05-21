@@ -10,5 +10,6 @@
     <orderEntry type="library" name="JavaFX12" level="application" />
     <orderEntry type="library" name="MyObserver-1.2" level="application" />
     <orderEntry type="library" name="postgresql-42.2.11" level="application" />
+    <orderEntry type="module" module-name="Server" />
   </component>
 </module>

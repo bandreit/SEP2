@@ -20,4 +20,5 @@ public interface LocalModel extends LocalSubject<Ingredient, Ingredient>
   ListOfIngredients getListOfIngredients();
   void removeIngredient(String ingredientName);
 
+
 }

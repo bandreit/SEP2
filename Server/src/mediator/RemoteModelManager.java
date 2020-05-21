@@ -1,9 +1,6 @@
 package mediator;
 
-import model.ListOfIngredients;
-import model.Model;
-import model.Recipe;
-import model.RecipeDAOImpl;
+import model.*;
 import utility.observer.event.ObserverEvent;
 import utility.observer.listener.GeneralListener;
 import utility.observer.listener.LocalListener;
@@ -76,9 +73,9 @@ public class RemoteModelManager implements RemoteModel, LocalListener<Recipe, Re
     model.createRecipe(recipeName, description, ingredients, instructions, preparationTime, category);
   }
 
-  @Override public List<Recipe> getRecipes() throws SQLException
+  @Override public RecipeList getRecipes() throws SQLException
   {
-    return RecipeDAOImpl.getInstance().getRecipes();
+    return model.getRecipes();
   }
 
   @Override public boolean addListener(

@@ -27,7 +27,7 @@ public class ModelManager implements Model
     property.close();
   }
 
-  @Override public List<Recipe> getRecipes() throws SQLException
+  @Override public RecipeList getRecipes() throws SQLException
   {
     return RecipeDAOImpl.getInstance().getRecipes();
   }

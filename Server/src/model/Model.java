@@ -15,5 +15,5 @@ public interface Model extends LocalSubject<Recipe, Recipe>
       ListOfIngredients ingredients, String instructions, int preparationTime,
       String category) throws SQLException;
   public void close();
-  List<Recipe> getRecipes() throws SQLException;
+  RecipeList getRecipes() throws SQLException;
 }
