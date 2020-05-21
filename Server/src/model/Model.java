@@ -4,6 +4,7 @@ import utility.observer.subject.LocalSubject;
 
 import java.rmi.RemoteException;
 import java.sql.SQLException;
+import java.util.List;
 
 public interface Model extends LocalSubject<Recipe, Recipe>
 {
@@ -14,4 +15,5 @@ public interface Model extends LocalSubject<Recipe, Recipe>
       ListOfIngredients ingredients, String instructions, int preparationTime,
       String category) throws SQLException;
   public void close();
+  List<Recipe> getRecipes() throws SQLException;
 }

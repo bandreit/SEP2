@@ -7,6 +7,7 @@ import utility.observer.subject.PropertyChangeProxy;
 import java.rmi.RemoteException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ModelManager implements Model
 {
@@ -24,6 +25,11 @@ public class ModelManager implements Model
   @Override public void close()
   {
     property.close();
+  }
+
+  @Override public List<Recipe> getRecipes() throws SQLException
+  {
+    return RecipeDAOImpl.getInstance().getRecipes();
   }
 
   @Override public boolean login(String username, String password)

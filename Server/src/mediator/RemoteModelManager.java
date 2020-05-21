@@ -3,6 +3,7 @@ package mediator;
 import model.ListOfIngredients;
 import model.Model;
 import model.Recipe;
+import model.RecipeDAOImpl;
 import utility.observer.event.ObserverEvent;
 import utility.observer.listener.GeneralListener;
 import utility.observer.listener.LocalListener;
@@ -17,6 +18,7 @@ import java.rmi.registry.Registry;
 import java.rmi.server.ExportException;
 import java.rmi.server.UnicastRemoteObject;
 import java.sql.SQLException;
+import java.util.List;
 
 public class RemoteModelManager implements RemoteModel, LocalListener<Recipe, Recipe>
 {
@@ -72,6 +74,11 @@ public class RemoteModelManager implements RemoteModel, LocalListener<Recipe, Re
       throws RemoteException, SQLException
   {
     model.createRecipe(recipeName, description, ingredients, instructions, preparationTime, category);
+  }
+
+  @Override public List<Recipe> getRecipes() throws SQLException
+  {
+    return RecipeDAOImpl.getInstance().getRecipes();
   }
 
   @Override public boolean addListener(

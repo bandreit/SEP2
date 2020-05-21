@@ -1,6 +1,8 @@
 package model;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class RecipeDAOImpl implements RecipeDAO
 {
@@ -79,5 +81,29 @@ public class RecipeDAOImpl implements RecipeDAO
         throw new SQLException("No keys generated");
       }
     }
+  }
+
+  @Override public List<Recipe> getRecipes() throws SQLException
+  {
+    try (Connection connection = getConnection())
+    {
+      PreparedStatement statement = connection.prepareStatement(
+          "SELECT * FROM RECIPES");
+      statement.setString(1, "%" + "%");
+      ResultSet resultSet = statement.executeQuery();
+      ArrayList<Recipe> result = new ArrayList<>();
+      while (resultSet.next())
+      {
+        String name = resultSet.getString("name");
+        String description = resultSet.getString("description");
+        String category = resultSet.getString("category");
+        int id = resultSet.getInt("id");
+        String instructions = resultSet.getString("instructions");
+        int preparation_time = resultSet.getInt("preparation_time");
+        Recipe recipe = new Recipe(id,name,description,instructions,preparation_time,category);
+        result.add(recipe);
+      }
+      return result;
+     }
   }
 }
