@@ -7,6 +7,8 @@ public class ViewModelFactory
   private LogInViewModel logInViewModel;
   private RegisterViewModel registerViewModel;
   private CreateRecipeViewModel createRecipeViewModel;
+  private MyRecipesViewModel myRecipesViewModel;
+  private AllRecipesViewModel allRecipesViewModel;
 
   public ViewModelFactory(LocalModel model)
   {
@@ -29,4 +31,13 @@ public class ViewModelFactory
     return registerViewModel;
   }
 
+  public MyRecipesViewModel getMyRecipesViewModel()
+  {
+    return myRecipesViewModel;
+  }
+
+  public AllRecipesViewModel getAllRecipesViewModel()
+  {
+    return allRecipesViewModel;
+  }
 }

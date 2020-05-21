@@ -24,6 +24,36 @@ public class Recipe implements Serializable
     this.category = category;
   }
 
+  public String getRecipeName()
+  {
+    return recipeName;
+  }
+
+  public String getDescription()
+  {
+    return description;
+  }
+
+  public ListOfIngredients getIngredients()
+  {
+    return ingredients;
+  }
+
+  public String getInstructions()
+  {
+    return instructions;
+  }
+
+  public int getPreparationTime()
+  {
+    return preparationTime;
+  }
+
+  public String getCategory()
+  {
+    return category;
+  }
+
   @Override public String toString()
   {
     return "Recipe{" + "recipeName='" + recipeName + '\'' + ", description='"
