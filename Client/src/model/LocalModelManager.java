@@ -40,7 +40,7 @@ public class LocalModelManager
     property = new PropertyChangeProxy<>(this, true);
   }
 
-  @Override public boolean login(String user, String password) throws Exception
+  @Override public int login(String user, String password) throws Exception
   {
     return clientModel.login(user, password);
   }
@@ -79,6 +79,11 @@ public class LocalModelManager
   @Override public void removeIngredient(String ingredientName)
   {
     ingredientList.removeIngredient(ingredientName);
+  }
+
+  @Override public void setUser(int userId)
+  {
+
   }
 
   @Override public void propertyChange(ObserverEvent<Recipe, Recipe> event)

@@ -9,7 +9,7 @@ public interface UserDAO
       throws SQLException;
   User readById(int id) throws SQLException;
   boolean doesUserExist(String username) throws SQLException;
-  boolean logInUser(String username, String password) throws SQLException;
+  int logInUser(String username, String password) throws SQLException;
   void update(User user) throws SQLException;
   void delete(User user) throws SQLException;
 }

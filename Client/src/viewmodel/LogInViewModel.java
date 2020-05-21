@@ -40,15 +40,16 @@ public class LogInViewModel
     {
       try
       {
-        if (model.login(username.get(), password.get()))
+        int userId = model.login(username.get(), password.get());
+        if (userId != -1)
         {
+          model.setUser(userId);
           return true;
         };
           errorLabel.set("Wrong password!");
       }
       catch (Exception e)
       {
-//        e.printStackTrace();
         errorLabel.setValue(e.getMessage());
       }
     }

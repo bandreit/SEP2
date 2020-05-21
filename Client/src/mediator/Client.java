@@ -42,7 +42,7 @@ public class Client implements ClientModel, RemoteListener<Recipe, Recipe>
     this.property = new PropertyChangeProxy<>(this, true);
   }
 
-  @Override public boolean login(String username, String password)
+  @Override public int login(String username, String password)
       throws RemoteException, SQLException, Exception
   {
     try

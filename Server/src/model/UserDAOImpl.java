@@ -85,7 +85,7 @@ public class UserDAOImpl implements UserDAO
     }
   }
 
-  @Override public boolean logInUser(String username, String password)
+  @Override public int logInUser(String username, String password)
       throws SQLException
   {
     try (Connection connection = getConnection())
@@ -97,18 +97,10 @@ public class UserDAOImpl implements UserDAO
       ResultSet resultSet = statement.executeQuery();
       if (resultSet.next())
       {
-        return true;
+        return resultSet.getInt("id");
       }
-//      while (resultSet.next())
-//      {
-//        int id = resultSet.getInt("id");
-//        String username = resultSet.getString("username");
-//        String email = resultSet.getString("email");
-//        String password = resultSet.getString("password");
-//        return new User(id, username, email, password);
-//      }
     }
-    return false;
+    return -1;
   }
 
   @Override public void update(User user) throws SQLException

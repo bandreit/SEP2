@@ -26,7 +26,7 @@ public class ModelManager implements Model
     property.close();
   }
 
-  @Override public boolean login(String username, String password)
+  @Override public int login(String username, String password)
       throws SQLException
   {
     if (!UserDAOImpl.getInstance().doesUserExist(username))

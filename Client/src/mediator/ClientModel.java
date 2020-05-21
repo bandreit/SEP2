@@ -9,7 +9,7 @@ import java.sql.SQLException;
 
 public interface ClientModel extends LocalSubject<Recipe, Recipe>
 {
-  boolean login(String username,String password) throws RemoteException,
+  int login(String username,String password) throws RemoteException,
       SQLException, Exception;
   void register(String user, String password,String email,String confirmPassword)
       throws RemoteException, SQLException;
