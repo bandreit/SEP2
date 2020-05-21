@@ -50,7 +50,7 @@ public class ModelManager implements Model
 
   @Override public void createRecipe(String recipeName, String description,
       ListOfIngredients ingredients, String instructions, int preparationTime,
-      String category) throws SQLException
+      String category, int userId) throws SQLException
   {
 
     ArrayList<Integer> ingredientIds = new ArrayList<>();
@@ -63,7 +63,7 @@ public class ModelManager implements Model
 
     Recipe recipe = RecipeDAOImpl.getInstance()
         .createRecipe(recipeName, description, ingredients, instructions,
-            preparationTime, category);
+            preparationTime, category, userId);
 
     for (Integer ingredientId : ingredientIds)
     {

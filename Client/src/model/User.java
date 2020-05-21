@@ -34,4 +34,8 @@ public class User
     return instance;
   }
 
+  public int getUserID()
+  {
+    return ID;
+  }
 }

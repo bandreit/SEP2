@@ -18,16 +18,11 @@ public class LocalModelManager
   private ClientModel clientModel;
   private PropertyChangeAction<Ingredient, Ingredient> property;
   private ListOfIngredients ingredientList;
-  private String amount;
-  private String ingredient;
-  private String measurement;
-  private boolean loggedIn;
 
   public LocalModelManager() throws IOException
   {
     try
     {
-      this.loggedIn = false;
       clientModel = new Client(this);
       clientModel.addListener(this);
       ingredientList = new ListOfIngredients();
@@ -45,16 +40,11 @@ public class LocalModelManager
     return clientModel.login(user, password);
   }
 
-  @Override public boolean isLoggedIn()
-  {
-    return loggedIn;
-  }
-
   @Override public void createRecipe(String recipeName, String description,
       ListOfIngredients ingredients, String instructions, int preparationTime,
       String category) throws RemoteException
   {
-    clientModel.createRecipe(recipeName, description, ingredients, instructions, preparationTime, category);
+    clientModel.createRecipe(recipeName, description, ingredients, instructions, preparationTime, category, User.getInstance().getUserID());
   }
 
   @Override public void register(String user, String password, String email,
@@ -83,7 +73,7 @@ public class LocalModelManager
 
   @Override public void setUser(int userId)
   {
-
+    User.getInstance(userId);
   }
 
   @Override public void propertyChange(ObserverEvent<Recipe, Recipe> event)
