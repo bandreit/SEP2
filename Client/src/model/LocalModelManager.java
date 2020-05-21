@@ -44,7 +44,7 @@ public class LocalModelManager
       ListOfIngredients ingredients, String instructions, int preparationTime,
       String category) throws RemoteException
   {
-    clientModel.createRecipe(recipeName, description, ingredients, instructions, preparationTime, category);
+    clientModel.createRecipe(recipeName, description, ingredients, instructions, preparationTime, category, User.getInstance().getUserID());
   }
 
   @Override public void register(String user, String password, String email,
