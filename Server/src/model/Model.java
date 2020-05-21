@@ -8,12 +8,12 @@ import java.util.List;
 
 public interface Model extends LocalSubject<Recipe, Recipe>
 {
-  boolean login(String username,String password) throws SQLException;
+  int login(String username,String password) throws SQLException;
   void register(String user, String password,String email,String confirmPassword)
       throws SQLException, RemoteException;
   void createRecipe(String recipeName, String description,
       ListOfIngredients ingredients, String instructions, int preparationTime,
-      String category) throws SQLException;
+      String category, int userId) throws SQLException;
   public void close();
   RecipeList getRecipes() throws SQLException;
 }

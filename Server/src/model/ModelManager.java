@@ -7,7 +7,6 @@ import utility.observer.subject.PropertyChangeProxy;
 import java.rmi.RemoteException;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 public class ModelManager implements Model
 {
@@ -32,7 +31,7 @@ public class ModelManager implements Model
     return RecipeDAOImpl.getInstance().getRecipes();
   }
 
-  @Override public boolean login(String username, String password)
+  @Override public int login(String username, String password)
       throws SQLException
   {
     if (!UserDAOImpl.getInstance().doesUserExist(username))
@@ -56,7 +55,7 @@ public class ModelManager implements Model
 
   @Override public void createRecipe(String recipeName, String description,
       ListOfIngredients ingredients, String instructions, int preparationTime,
-      String category) throws SQLException
+      String category, int userId) throws SQLException
   {
 
     ArrayList<Integer> ingredientIds = new ArrayList<>();
@@ -69,7 +68,7 @@ public class ModelManager implements Model
 
     Recipe recipe = RecipeDAOImpl.getInstance()
         .createRecipe(recipeName, description, ingredients, instructions,
-            preparationTime, category);
+            preparationTime, category, userId);
 
     for (Integer ingredientId : ingredientIds)
     {

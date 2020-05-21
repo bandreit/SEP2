@@ -31,7 +31,7 @@ public class RecipeDAOImpl implements RecipeDAO
 
   @Override public Recipe createRecipe(String recipeName, String description,
       ListOfIngredients ingredients, String instructions, int preparationTime,
-      String category) throws SQLException
+      String category, int userId) throws SQLException
   {
     try (Connection connection = getConnection())
     {
@@ -43,7 +43,7 @@ public class RecipeDAOImpl implements RecipeDAO
       statement.setString(3, instructions);
       statement.setInt(4, preparationTime);
       statement.setString(5, category);
-      statement.setInt(6, 2);
+      statement.setInt(6, userId);
 
       statement.executeUpdate();
       ResultSet keys = statement.getGeneratedKeys();

@@ -53,7 +53,7 @@ public class RemoteModelManager implements RemoteModel, LocalListener<Recipe, Re
   }
 
 
-  @Override public boolean login(String username, String password)
+  @Override public int login(String username, String password)
       throws SQLException
   {
     return model.login(username,password);
@@ -67,10 +67,10 @@ public class RemoteModelManager implements RemoteModel, LocalListener<Recipe, Re
 
   @Override public void createRecipe(String recipeName, String description,
       ListOfIngredients ingredients, String instructions, int preparationTime,
-      String category)
+      String category, int userId)
       throws RemoteException, SQLException
   {
-    model.createRecipe(recipeName, description, ingredients, instructions, preparationTime, category);
+    model.createRecipe(recipeName, description, ingredients, instructions, preparationTime, category, userId);
   }
 
   @Override public RecipeList getRecipes() throws SQLException
