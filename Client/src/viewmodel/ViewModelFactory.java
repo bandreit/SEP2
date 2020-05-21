@@ -15,6 +15,8 @@ public class ViewModelFactory
     this.logInViewModel = new LogInViewModel(model);
     this.registerViewModel = new RegisterViewModel(model);
     this.createRecipeViewModel = new CreateRecipeViewModel(model);
+    this.allRecipesViewModel=new AllRecipesViewModel(model);
+    this.myRecipesViewModel=new MyRecipesViewModel(model);
   }
 
   public CreateRecipeViewModel getCreateRecipeViewModel()

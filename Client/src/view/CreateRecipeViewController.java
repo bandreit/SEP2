@@ -102,6 +102,9 @@ public class CreateRecipeViewController extends ViewController
   public void onCreate(ActionEvent actionEvent) throws RemoteException
   {
     super.getViewModels().getCreateRecipeViewModel().createRecipe();
+    super.getHandler().openView("AllRecipes");
+    super.getViewModels().getAllRecipesViewModel().addRecipe(super.getViewModels().getCreateRecipeViewModel().recipe());
+    super.getViewModels().getMyRecipesViewModel().addRecipe(super.getViewModels().getCreateRecipeViewModel().recipe());
   }
 
   public void onCancel(ActionEvent actionEvent)
