@@ -31,7 +31,7 @@ public class ModelManager implements Model
   {
     if (!UserDAOImpl.getInstance().doesUserExist(username))
     {
-      throw new IllegalAccessError("Username does not exist");
+      throw new IllegalAccessError("User does not exist");
     }
     else
       return UserDAOImpl.getInstance().logInUser(username, password);
