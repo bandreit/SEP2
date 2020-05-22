@@ -3,6 +3,7 @@ package mediator;
 import model.ListOfIngredients;
 import model.LocalModel;
 import model.Recipe;
+import model.RecipeList;
 import utility.observer.event.ObserverEvent;
 import utility.observer.listener.GeneralListener;
 import utility.observer.listener.RemoteListener;
@@ -73,6 +74,11 @@ public class Client implements ClientModel, RemoteListener<Recipe, Recipe>
       String category, int userId) throws RemoteException
   {
     remoteModel.createRecipe(recipeName, description, ingredients, instructions, preparationTime, category, userId);
+  }
+
+  @Override public RecipeList getRecipes() throws RemoteException, SQLException
+  {
+    return remoteModel.getRecipes();
   }
 
   @Override public void close() throws Exception

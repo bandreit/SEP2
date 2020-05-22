@@ -76,6 +76,11 @@ public class LocalModelManager
     User.getInstance(userId);
   }
 
+  @Override public RecipeList getRecipes() throws RemoteException, SQLException
+  {
+    return clientModel.getRecipes();
+  }
+
   @Override public void propertyChange(ObserverEvent<Recipe, Recipe> event)
   {
 //    String message = "Message: Added " + event.getValue2();

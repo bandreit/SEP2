@@ -3,6 +3,7 @@ package view;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import model.Recipe;
+import model.RecipeList;
 
 public class RecipeTable
 {

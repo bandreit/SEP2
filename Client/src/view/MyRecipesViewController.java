@@ -7,6 +7,9 @@ import javafx.scene.control.TableView;
 import javafx.scene.layout.Region;
 import viewmodel.ViewModelFactory;
 
+import java.rmi.RemoteException;
+import java.sql.SQLException;
+
 public class MyRecipesViewController extends ViewController
 {
   @FXML private TableView<RecipeTable> myRecipeList;
@@ -18,6 +21,7 @@ public class MyRecipesViewController extends ViewController
   }
   @Override public void init(ViewHandler viewHandler,
       ViewModelFactory viewModels, Region root)
+      throws RemoteException, SQLException
   {
     super.init(viewHandler, viewModels, root);
     categoryColumn.setCellValueFactory(cellData->cellData.getValue().getCategoryProperty());

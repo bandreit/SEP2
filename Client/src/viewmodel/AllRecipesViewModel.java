@@ -7,6 +7,9 @@ import model.LocalModel;
 import model.Recipe;
 import view.RecipeTable;
 
+import java.rmi.RemoteException;
+import java.sql.SQLException;
+
 public class AllRecipesViewModel
 {
   private ObservableList<RecipeTable> list;
@@ -19,11 +22,12 @@ public class AllRecipesViewModel
   }
 
   public ObservableList<RecipeTable> getList()
+      throws RemoteException, SQLException
   {
+    for(int i=0;i<model.getRecipes().getSize();i++)
+    {
+      list.add(new RecipeTable(model.getRecipes().getRecipe(i)));
+    }
     return list;
   }
- public void addRecipe(Recipe recipe)
- {
-    list.add(new RecipeTable(recipe));
- }
 }

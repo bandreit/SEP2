@@ -10,6 +10,8 @@ import javafx.scene.layout.Region;
 import viewmodel.ViewModelFactory;
 
 import java.awt.*;
+import java.rmi.RemoteException;
+import java.sql.SQLException;
 
 public class LogInViewController extends ViewController
 {
@@ -27,6 +29,7 @@ public class LogInViewController extends ViewController
 
   @Override public void init(ViewHandler viewHandler,
       ViewModelFactory viewModels, Region root)
+      throws RemoteException, SQLException
   {
     super.init(viewHandler, viewModels, root);
     username.textProperty().bindBidirectional(super.getViewModels().getLogInViewModel().getUsernameProperty());
@@ -49,7 +52,7 @@ public class LogInViewController extends ViewController
     {
 //      super.getHandler().openView(""); //add further view
       super.getViewModels().getLogInViewModel().clear();
-      super.getHandler().openView("CreateRecipeView");
+      super.getHandler().openView("AllRecipes");
     }
   }
 }
