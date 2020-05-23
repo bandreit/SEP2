@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 public class Recipe implements Serializable
 {
+  private int id;
   private String recipeName;
   private String description;
   private ListOfIngredients ingredients;
@@ -12,8 +13,28 @@ public class Recipe implements Serializable
   private int preparationTime;
   private String category;
 
-  public Recipe(String recipeName, String description,
-      ListOfIngredients ingredients, String instructions, int preparationTime,
+  public Recipe(int id, String recipeName, String description, String instructions, int preparationTime,
+      String category)
+  {
+    this.id = id;
+    this.recipeName = recipeName;
+    this.description = description;
+    this.instructions = instructions;
+    this.preparationTime = preparationTime;
+    this.category = category;
+  }
+
+  public Recipe(String recipeName, String description, String instructions, int preparationTime,
+      String category)
+  {
+    this.recipeName = recipeName;
+    this.description = description;
+    this.instructions = instructions;
+    this.preparationTime = preparationTime;
+    this.category = category;
+  }
+
+  public Recipe(String recipeName, String description, ListOfIngredients ingredients,String instructions, int preparationTime,
       String category)
   {
     this.recipeName = recipeName;
@@ -22,6 +43,11 @@ public class Recipe implements Serializable
     this.instructions = instructions;
     this.preparationTime = preparationTime;
     this.category = category;
+  }
+
+  public int getId()
+  {
+    return id;
   }
 
   public String getRecipeName()
@@ -56,9 +82,9 @@ public class Recipe implements Serializable
 
   @Override public String toString()
   {
-    return "Recipe{" + "recipeName='" + recipeName + '\'' + ", description='"
-        + description + '\'' + ", ingredients=" + ingredients
-        + ", instructions='" + instructions + '\'' + ", preparationTime="
-        + preparationTime + ", category='" + category + '\'' + '}';
+    return "Recipe{" + "id=" + id + ", recipeName='" + recipeName + '\''
+        + ", description='" + description + '\'' + ", instructions='"
+        + instructions + '\'' + ", preparationTime=" + preparationTime
+        + ", category='" + category + '\'' + '}';
   }
 }

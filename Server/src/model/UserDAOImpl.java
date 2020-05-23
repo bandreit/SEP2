@@ -24,8 +24,9 @@ public class UserDAOImpl implements UserDAO
   {
     return DriverManager.getConnection(
         "jdbc:postgresql://localhost:5432/postgres?currentSchema=recipenetwork",
-        "postgres", "reksis1999");
+        "postgres", "1234");
   }
+//  reksis1999
 
   @Override public User create(String username, String password, String email)
       throws SQLException

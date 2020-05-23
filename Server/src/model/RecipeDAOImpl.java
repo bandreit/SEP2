@@ -26,7 +26,7 @@ public class RecipeDAOImpl implements RecipeDAO
   {
     return DriverManager.getConnection(
         "jdbc:postgresql://localhost:5432/postgres?currentSchema=recipenetwork",
-        "postgres", "reksis1999");
+        "postgres", "1234");
   }
 
   @Override public Recipe createRecipe(String recipeName, String description,
