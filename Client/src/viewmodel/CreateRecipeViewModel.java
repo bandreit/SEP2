@@ -101,17 +101,40 @@ public class CreateRecipeViewModel
 
   public void createIngredient()
   {
-    try
+    if (validateIngredientFields())
     {
-      Ingredient ingredient = new Ingredient(listOfIngredients.size(),
-          ingredientName.get(), quantity.get(), measurement.get());
-      clear();
-      model.addFullIngredientWithQtyAndAMeasurement(ingredient);
-    }
-    catch (Exception e)
+      try
+      {
+        Ingredient ingredient = new Ingredient(listOfIngredients.size(),
+            ingredientName.get(), quantity.get(), measurement.get());
+        clear();
+        model.addFullIngredientWithQtyAndAMeasurement(ingredient);
+      }
+      catch (Exception e)
+      {
+        e.printStackTrace();
+      }
+    } else
     {
-      e.printStackTrace();
+      deleteErrorLabel.setValue("Invalid data in the ingredient fields");
     }
+  }
+
+  private boolean validateIngredientFields()
+  {
+    if ((ingredientName.get() == null) || ingredientName.get().isEmpty())
+    {
+      return false;
+    }
+    if (quantity.get() == 0)
+    {
+      return false;
+    }
+    if (measurement.get() == null)
+    {
+      return false;
+    }
+    return true;
   }
 
   public void clear()

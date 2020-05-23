@@ -54,6 +54,7 @@ public class CreateRecipeViewController extends ViewController
         super.getViewModels().getCreateRecipeViewModel().getInstructions());
     ingredientNameField.textProperty().bindBidirectional(
         super.getViewModels().getCreateRecipeViewModel().getIngredientName());
+    deleteErrorLabel.textProperty().bindBidirectional(super.getViewModels().getCreateRecipeViewModel().getDeleteErrorLabel());
     Bindings.bindBidirectional(quantityField.textProperty(),
         super.getViewModels().getCreateRecipeViewModel().getQuantity(),
         new StringConverter<Number>()
@@ -91,6 +92,7 @@ public class CreateRecipeViewController extends ViewController
         .setCellValueFactory(cellData -> cellData.getValue().getQuantity().asObject());
     measurementColumn
         .setCellValueFactory(cellData -> cellData.getValue().getMeasurement());
+
 
     ingredientsList.setItems(
         super.getViewModels().getCreateRecipeViewModel().getAllIngredients());
