@@ -99,21 +99,42 @@ public class CreateRecipeViewModel
     return listOfIngredients;
   }
 
-
-
   public void createIngredient()
   {
-    try
+    if (validateIngredientFields())
     {
-      Ingredient ingredient = new Ingredient( listOfIngredients.size(), ingredientName.get(), quantity.get(),
-          measurement.get());
-      clear();
-      model.addFullIngredientWithQtyAndAMeasurement(ingredient);
-    }
-    catch (Exception e)
+      try
+      {
+        Ingredient ingredient = new Ingredient(listOfIngredients.size(),
+            ingredientName.get(), quantity.get(), measurement.get());
+        clear();
+        model.addFullIngredientWithQtyAndAMeasurement(ingredient);
+      }
+      catch (Exception e)
+      {
+        e.printStackTrace();
+      }
+    } else
     {
-      e.printStackTrace();
+      deleteErrorLabel.setValue("Invalid data in the ingredient fields");
     }
+  }
+
+  private boolean validateIngredientFields()
+  {
+    if ((ingredientName.get() == null) || ingredientName.get().isEmpty())
+    {
+      return false;
+    }
+    if (quantity.get() == 0)
+    {
+      return false;
+    }
+    if (measurement.get() == null)
+    {
+      return false;
+    }
+    return true;
   }
 
   public void clear()
@@ -130,13 +151,19 @@ public class CreateRecipeViewModel
       listOfIngredients.add(new CreateRecipeTableRowData(event.getValue2()));
     });
   }
- public Recipe recipe()
- {
-   return new Recipe(recipeName.get(), description.get(),  model.getListOfIngredients(), instructions.get(), Integer.parseInt(time.get()), category.get());
- }
+
+  public Recipe recipe()
+  {
+    return new Recipe(recipeName.get(), description.get(),
+        model.getListOfIngredients(), instructions.get(),
+        Integer.parseInt(time.get()), category.get());
+  }
+
   public void createRecipe() throws RemoteException
   {
-    model.createRecipe(recipeName.get(), description.get(),  model.getListOfIngredients(), instructions.get(), Integer.parseInt(time.get()), category.get());
+    model.createRecipe(recipeName.get(), description.get(),
+        model.getListOfIngredients(), instructions.get(),
+        Integer.parseInt(time.get()), category.get());
   }
 
   /// GET THE CATEGORY FROM THE VIEW
@@ -147,9 +174,11 @@ public class CreateRecipeViewModel
     ListOfIngredients list = model.getListOfIngredients();
     for (int i = 0; i < list.getSize(); i++)
     {
-      listOfIngredients.add(new CreateRecipeTableRowData(list.getIngredient(i)));
+      listOfIngredients
+          .add(new CreateRecipeTableRowData(list.getIngredient(i)));
     }
   }
+
   public void remove(String ingredientName)
   {
     for (int i = 0; i < listOfIngredients.size(); i++)
