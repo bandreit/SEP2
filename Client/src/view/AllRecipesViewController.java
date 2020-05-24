@@ -2,10 +2,12 @@ package view;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.layout.Region;
 import viewmodel.ViewModelFactory;
+
+import java.rmi.RemoteException;
+import java.util.Optional;
 
 public class AllRecipesViewController extends ViewController
 {
@@ -26,10 +28,12 @@ public class AllRecipesViewController extends ViewController
     recipeColumn.setCellValueFactory(cellData->cellData.getValue().getRecipeProperty());
     descriptionColumn.setCellValueFactory(cellData->cellData.getValue().getDescriptionProperty());
     recipeList.setItems(viewModels.getAllRecipesViewModel().getList());
+
   }
 
   public void onMyRecipes(ActionEvent actionEvent)
   {
     super.getHandler().openView("MyRecipes");
   }
+
 }

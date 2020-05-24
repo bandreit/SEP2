@@ -75,6 +75,12 @@ public class Client implements ClientModel, RemoteListener<Recipe, Recipe>
     remoteModel.createRecipe(recipeName, description, ingredients, instructions, preparationTime, category, userId);
   }
 
+  @Override public void deleteRecipe(String recipe, String category)
+      throws SQLException, RemoteException
+  {
+    remoteModel.deleteRecipe(recipe,category);
+  }
+
   @Override public void close() throws Exception
   {
     //idk

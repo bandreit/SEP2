@@ -17,6 +17,6 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <Button layoutX="252.0" layoutY="313.0" mnemonicParsing="false" text="My Recipes" onAction="#onMyRecipes"/>
+      <Button layoutX="252.0" layoutY="313.0" mnemonicParsing="false" onAction="#onMyRecipes" text="My Recipes" />
    </children>
 </AnchorPane>

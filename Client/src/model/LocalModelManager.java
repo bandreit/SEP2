@@ -47,6 +47,12 @@ public class LocalModelManager
     clientModel.createRecipe(recipeName, description, ingredients, instructions, preparationTime, category, User.getInstance().getUserID());
   }
 
+  @Override public void deleteRecipe(String recipe, String category)
+      throws SQLException, RemoteException
+  {
+    clientModel.deleteRecipe(recipe,category);
+  }
+
   @Override public void register(String user, String password, String email,
       String confirmPassword) throws RemoteException, SQLException
   {

@@ -9,5 +9,6 @@ public interface RecipeDAO
       ListOfIngredients ingredients, String instructions, int preparationTime,
       String category, int userId) throws SQLException;
   void addIngredientsToRecipe(int recipeId, int ingredientID) throws SQLException;
+  void deleteRecipe(String recipe, String category) throws SQLException;
   RecipeList getRecipes() throws SQLException;
 }

@@ -36,4 +36,29 @@ public class Recipe implements Serializable
         + instructions + '\'' + ", preparationTime=" + preparationTime
         + ", category='" + category + '\'' + '}';
   }
+
+  public String getDescription()
+  {
+    return description;
+  }
+
+  public int getPreparationTime()
+  {
+    return preparationTime;
+  }
+
+  public String getCategory()
+  {
+    return category;
+  }
+
+  public String getInstructions()
+  {
+    return instructions;
+  }
+
+  public String getRecipeName()
+  {
+    return recipeName;
+  }
 }

@@ -123,11 +123,9 @@ public class CreateRecipeViewController extends ViewController
       boolean remove = confirmation();
       if (remove)
       {
-        super.getViewModels().getCreateRecipeViewModel()
-            .remove(selectedItem.getIngredient().get());
+        super.getViewModels().getCreateRecipeViewModel().remove(selectedItem.getIngredient().get());
         ingredientsList.getSelectionModel().clearSelection();
-        getViewModels().getCreateRecipeViewModel()
-            .remove(selectedItem.getIngredient().get());
+        getViewModels().getCreateRecipeViewModel().remove(selectedItem.getIngredient().get());
       }
     }
     catch (Exception e)
@@ -139,8 +137,7 @@ public class CreateRecipeViewController extends ViewController
   private boolean confirmation()
   {
     int index = ingredientsList.getSelectionModel().getSelectedIndex();
-    CreateRecipeTableRowData selectedItem = ingredientsList.getItems()
-        .get(index);
+    CreateRecipeTableRowData selectedItem = ingredientsList.getItems().get(index);
     if (index < 0 || index >= ingredientsList.getItems().size())
     {
       return false;

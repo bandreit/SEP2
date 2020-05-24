@@ -77,6 +77,11 @@ public class ModelManager implements Model
     }
   }
 
+  @Override public void deleteRecipe(String recipe, String category) throws SQLException
+  {
+    RecipeDAOImpl.getInstance().deleteRecipe(recipe,category);
+  }
+
   @Override public boolean addListener(GeneralListener<Recipe, Recipe> listener,
       String... propertyNames)
   {
