@@ -107,16 +107,13 @@ public class CreateRecipeViewModel
       {
         Ingredient ingredient = new Ingredient(listOfIngredients.size(),
             ingredientName.get(), quantity.get(), measurement.get());
-        clear();
+        clearIngredientField();
         model.addFullIngredientWithQtyAndAMeasurement(ingredient);
       }
       catch (Exception e)
       {
         e.printStackTrace();
       }
-    } else
-    {
-      deleteErrorLabel.setValue("Invalid data in the ingredient fields");
     }
   }
 
@@ -124,24 +121,73 @@ public class CreateRecipeViewModel
   {
     if ((ingredientName.get() == null) || ingredientName.get().isEmpty())
     {
+      deleteErrorLabel.setValue("Name for ingredient not provided");
       return false;
     }
     if (quantity.get() == 0)
     {
+      deleteErrorLabel.setValue("The quantity cannot be 0");
       return false;
     }
     if (measurement.get() == null)
     {
+      deleteErrorLabel.setValue("Measurement type not indicated");
       return false;
     }
     return true;
   }
 
-  public void clear()
+  public boolean validateRecipeFields()
+  {
+    if ((recipeName.get() == null) || recipeName.get().isEmpty())
+    {
+      deleteErrorLabel.setValue("Name for recipe not provided");
+      return false;
+    }
+    if (description.get() == null)
+    {
+      deleteErrorLabel.setValue("Description not provided");
+      return false;
+    }
+    if (time.get() == null)
+    {
+      deleteErrorLabel.setValue("Please indicate preparation time");
+      return false;
+    }
+    if (category.get() == null)
+    {
+      deleteErrorLabel.setValue("Please indicate a category");
+      return false;
+    }
+    if (instructions.get() == null)
+    {
+      deleteErrorLabel.setValue("Please indicate instructions");
+      return false;
+    }
+    if (listOfIngredients.isEmpty())
+    {
+      deleteErrorLabel.setValue("No ingredients provided");
+      return false;
+    }
+    return true;
+  }
+
+  public void clearIngredientField()
   {
     ingredientName.set(null);
     quantity.set(0);
     measurement.set(null);
+  }
+
+  public void clear()
+  {
+    deleteErrorLabel.setValue(null);
+    recipeName.setValue(null);
+    description.setValue(null);
+    category.setValue(null);
+    instructions.setValue(null);
+    time.setValue(null);
+    listOfIngredients.removeAll();
   }
 
   @Override public void propertyChange(
@@ -164,6 +210,7 @@ public class CreateRecipeViewModel
     model.createRecipe(recipeName.get(), description.get(),
         model.getListOfIngredients(), instructions.get(),
         Integer.parseInt(time.get()), category.get());
+    clear();
   }
 
   /// GET THE CATEGORY FROM THE VIEW
