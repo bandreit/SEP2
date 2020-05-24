@@ -54,13 +54,10 @@ public class MyRecipesViewController extends ViewController
       boolean remove = confirmation();
       if (remove)
       {
-        super.getViewModels().getMyRecipesViewModel()
-            .removeRecipe(selectedItem.getIdProperty().get());
+        super.getViewModels().getMyRecipesViewModel().removeRecipe(selectedItem.getIdProperty().get());
         myRecipeList.getSelectionModel().clearSelection();
-        super.getViewModels().getAllRecipesViewModel()
-            .removeRecipe(selectedItem.getIdProperty().get());
-//database delete
-        super.getViewModels().getMyRecipesViewModel().deleteRecipe();
+        super.getViewModels().getAllRecipesViewModel().removeRecipe(selectedItem.getIdProperty().get());
+        super.getViewModels().getMyRecipesViewModel().deleteRecipe(selectedItem.getIdProperty().get());
       }
     }
     catch (Exception e)

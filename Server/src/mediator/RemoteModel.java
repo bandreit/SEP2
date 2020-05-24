@@ -19,7 +19,7 @@ public interface RemoteModel extends RemoteSubject<Recipe, Recipe>, Remote
   Recipe createRecipe(String recipeName, String description,
       ListOfIngredients ingredients, String instructions, int preparationTime,
       String category, int userId) throws RemoteException, SQLException;
-  void deleteRecipe(String recipe, String category) throws RemoteException,SQLException;
+  void deleteRecipe(int id) throws RemoteException,SQLException;
   RecipeList getRecipes() throws RemoteException, SQLException;
 
 }

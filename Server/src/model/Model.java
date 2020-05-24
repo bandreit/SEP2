@@ -13,7 +13,7 @@ public interface Model extends LocalSubject<Recipe, Recipe>
   Recipe createRecipe(String recipeName, String description,
       ListOfIngredients ingredients, String instructions, int preparationTime,
       String category, int userId) throws SQLException;
-  void deleteRecipe(String recipe, String category) throws SQLException;
+  void deleteRecipe(int id) throws SQLException;
   public void close();
   RecipeList getRecipes() throws SQLException;
 }

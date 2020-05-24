@@ -15,10 +15,10 @@ public interface LocalModel extends LocalSubject<Ingredient, Ingredient>
   Recipe createRecipe(String recipeName, String description,
       ListOfIngredients ingredients, String instructions, int preparationTime,
       String category) throws RemoteException;
-  void deleteRecipe(String recipe, String category) throws SQLException, RemoteException;
   void addFullIngredientWithQtyAndAMeasurement(Ingredient ingredient);
   ListOfIngredients getListOfIngredients();
   void removeIngredient(String ingredientName);
   void setUser(int userId);
   RecipeList getRecipes() throws RemoteException, SQLException;
+  void deleteRecipe(int id) throws RemoteException, SQLException;
 }

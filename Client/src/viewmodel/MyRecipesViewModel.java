@@ -57,9 +57,9 @@ public class MyRecipesViewModel
       }
     }
   }
-  public void deleteRecipe()
+  public void deleteRecipe(int id)
       throws SQLException, RemoteException
   {
-      model.deleteRecipe(list.get(1).getRecipeProperty().get(),list.get(0).getCategoryProperty().get());//ggwp naxui you won
+    model.deleteRecipe(id);
   }
 }

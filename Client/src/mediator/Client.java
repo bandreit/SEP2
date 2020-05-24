@@ -81,10 +81,10 @@ public class Client implements ClientModel, RemoteListener<Recipe, Recipe>
     return remoteModel.getRecipes();
   }
 
-  @Override public void deleteRecipe(String recipe, String category)
+  @Override public void deleteRecipe(int id)
       throws SQLException, RemoteException
   {
-    remoteModel.deleteRecipe(recipe,category);
+    remoteModel.deleteRecipe(id);
   }
 
   @Override public void close() throws Exception
