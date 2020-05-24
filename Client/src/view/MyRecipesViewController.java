@@ -7,6 +7,7 @@ import javafx.scene.layout.Region;
 import viewmodel.ViewModelFactory;
 
 import java.rmi.RemoteException;
+import java.sql.SQLException;
 import java.util.Optional;
 
 public class MyRecipesViewController extends ViewController
@@ -20,9 +21,9 @@ public class MyRecipesViewController extends ViewController
   {
     super();
   }
-
   @Override public void init(ViewHandler viewHandler,
       ViewModelFactory viewModels, Region root)
+      throws RemoteException, SQLException
   {
     super.init(viewHandler, viewModels, root);
     categoryColumn.setCellValueFactory(
@@ -33,7 +34,6 @@ public class MyRecipesViewController extends ViewController
     deleteErrorLabel.textProperty().bindBidirectional(
         super.getViewModels().getMyRecipesViewModel().getDeleteErrorLabel());
   }
-
   public void onAddRecipe(ActionEvent actionEvent)
   {
     super.getHandler().openView("CreateRecipeView");
@@ -54,17 +54,13 @@ public class MyRecipesViewController extends ViewController
       boolean remove = confirmation();
       if (remove)
       {
-        super.getViewModels().getMyRecipesViewModel().deleteRecipe();
         super.getViewModels().getMyRecipesViewModel()
-            .removeRecipe(selectedItem.getRecipeProperty().get(),
-                selectedItem.getCategoryProperty().get());
+            .removeRecipe(selectedItem.getIdProperty().get());
         myRecipeList.getSelectionModel().clearSelection();
-        getViewModels().getCreateRecipeViewModel()
-            .remove(selectedItem.getRecipeProperty().get());
         super.getViewModels().getAllRecipesViewModel()
-            .removeRecipe(selectedItem.getRecipeProperty().get(),
-                selectedItem.getCategoryProperty().get());
-
+            .removeRecipe(selectedItem.getIdProperty().get());
+//database delete
+        super.getViewModels().getMyRecipesViewModel().deleteRecipe();
       }
     }
     catch (Exception e)

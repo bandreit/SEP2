@@ -8,6 +8,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Region;
 import viewmodel.ViewModelFactory;
 
+import java.rmi.RemoteException;
+import java.sql.SQLException;
+
 public class RegisterViewController extends ViewController
 {
   @FXML TextField username;
@@ -23,6 +26,7 @@ public class RegisterViewController extends ViewController
 
   @Override public void init(ViewHandler viewHandler,
       ViewModelFactory viewModels, Region root)
+      throws RemoteException, SQLException
   {
     super.init(viewHandler, viewModels, root);
     username.textProperty().bindBidirectional(

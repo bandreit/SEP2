@@ -12,7 +12,7 @@ public interface LocalModel extends LocalSubject<Ingredient, Ingredient>
       String confirmPassword) throws RemoteException, SQLException;
   void close(Recipe recipe);
 
-  void createRecipe(String recipeName, String description,
+  Recipe createRecipe(String recipeName, String description,
       ListOfIngredients ingredients, String instructions, int preparationTime,
       String category) throws RemoteException;
   void deleteRecipe(String recipe, String category) throws SQLException, RemoteException;
@@ -20,4 +20,5 @@ public interface LocalModel extends LocalSubject<Ingredient, Ingredient>
   ListOfIngredients getListOfIngredients();
   void removeIngredient(String ingredientName);
   void setUser(int userId);
+  RecipeList getRecipes() throws RemoteException, SQLException;
 }

@@ -15,6 +15,7 @@ import viewmodel.ViewModelFactory;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.rmi.RemoteException;
+import java.sql.SQLException;
 import java.util.Optional;
 
 public class CreateRecipeViewController extends ViewController
@@ -40,6 +41,7 @@ public class CreateRecipeViewController extends ViewController
 
   @Override public void init(ViewHandler viewHandler,
       ViewModelFactory viewModels, Region root)
+      throws RemoteException, SQLException
   {
     super.init(viewHandler, viewModels, root);
     recipeName.textProperty().bindBidirectional(
@@ -105,8 +107,7 @@ public class CreateRecipeViewController extends ViewController
   {
     super.getViewModels().getCreateRecipeViewModel().createRecipe();
     super.getHandler().openView("AllRecipes");
-    super.getViewModels().getAllRecipesViewModel().addRecipe(super.getViewModels().getCreateRecipeViewModel().recipe());
-    super.getViewModels().getMyRecipesViewModel().addRecipe(super.getViewModels().getCreateRecipeViewModel().recipe());
+    super.getViewModels().getMyRecipesViewModel().addRecipe(super.getViewModels().getCreateRecipeViewModel().createRecipe());
   }
 
   public void onCancel(ActionEvent actionEvent)

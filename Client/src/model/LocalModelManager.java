@@ -40,11 +40,11 @@ public class LocalModelManager
     return clientModel.login(user, password);
   }
 
-  @Override public void createRecipe(String recipeName, String description,
+  @Override public Recipe createRecipe(String recipeName, String description,
       ListOfIngredients ingredients, String instructions, int preparationTime,
       String category) throws RemoteException
   {
-    clientModel.createRecipe(recipeName, description, ingredients, instructions, preparationTime, category, User.getInstance().getUserID());
+    return clientModel.createRecipe(recipeName, description, ingredients, instructions, preparationTime, category, User.getInstance().getUserID());
   }
 
   @Override public void deleteRecipe(String recipe, String category)
@@ -80,6 +80,11 @@ public class LocalModelManager
   @Override public void setUser(int userId)
   {
     User.getInstance(userId);
+  }
+
+  @Override public RecipeList getRecipes() throws RemoteException, SQLException
+  {
+    return clientModel.getRecipes();
   }
 
   @Override public void propertyChange(ObserverEvent<Recipe, Recipe> event)

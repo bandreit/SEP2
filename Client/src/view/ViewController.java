@@ -3,6 +3,9 @@ package view;
 import javafx.scene.layout.Region;
 import viewmodel.ViewModelFactory;
 
+import java.rmi.RemoteException;
+import java.sql.SQLException;
+
 public abstract class ViewController
 {
   private Region root;
@@ -20,7 +23,7 @@ public abstract class ViewController
   }
 
   public void init(ViewHandler viewHandler, ViewModelFactory viewModels,
-      Region root)
+      Region root) throws RemoteException, SQLException
   {
     this.viewHandler = viewHandler;
     this.viewModels = viewModels;

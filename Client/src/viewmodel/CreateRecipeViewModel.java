@@ -153,17 +153,16 @@ public class CreateRecipeViewModel
     });
   }
 
-  public Recipe recipe()
-  {
-    return new Recipe(recipeName.get(), description.get(),
-        model.getListOfIngredients(), instructions.get(),
-        Integer.parseInt(time.get()), category.get());
-  }
+//  public Recipe recipe()
+//  {
+//    return new Recipe(recipeName.get(), description.get(),
+//        model.getListOfIngredients(), instructions.get(),
+//        Integer.parseInt(time.get()), category.get());
+//  }
 
-
-  public void createRecipe() throws RemoteException
+  public Recipe createRecipe() throws RemoteException
   {
-    model.createRecipe(recipeName.get(), description.get(),
+    return model.createRecipe(recipeName.get(), description.get(),
         model.getListOfIngredients(), instructions.get(),
         Integer.parseInt(time.get()), category.get());
   }

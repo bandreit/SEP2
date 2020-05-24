@@ -53,7 +53,7 @@ public class ModelManager implements Model
     userList.addUser(UserDAOImpl.getInstance().create(user, password, email));
   }
 
-  @Override public void createRecipe(String recipeName, String description,
+  @Override public Recipe createRecipe(String recipeName, String description,
       ListOfIngredients ingredients, String instructions, int preparationTime,
       String category, int userId) throws SQLException
   {
@@ -75,6 +75,7 @@ public class ModelManager implements Model
       RecipeDAOImpl.getInstance()
           .addIngredientsToRecipe(recipe.getId(), ingredientId);
     }
+    return recipe;
   }
 
   @Override public void deleteRecipe(String recipe, String category) throws SQLException

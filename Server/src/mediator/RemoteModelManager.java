@@ -65,12 +65,12 @@ public class RemoteModelManager implements RemoteModel, LocalListener<Recipe, Re
     model.register(user, password, email, confirmPassword);
   }
 
-  @Override public void createRecipe(String recipeName, String description,
+  @Override public Recipe createRecipe(String recipeName, String description,
       ListOfIngredients ingredients, String instructions, int preparationTime,
       String category, int userId)
       throws RemoteException, SQLException
   {
-    model.createRecipe(recipeName, description, ingredients, instructions, preparationTime, category, userId);
+    return model.createRecipe(recipeName, description, ingredients, instructions, preparationTime, category, userId);
   }
 
   @Override public void deleteRecipe(String recipe, String category) throws RemoteException,SQLException

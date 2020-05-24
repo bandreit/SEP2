@@ -8,13 +8,13 @@ public class Recipe implements Serializable
   private int id;
   private String recipeName;
   private String description;
-//  private ListOfIngredients ingredients;
+  private ListOfIngredients ingredients;
   private String instructions;
   private int preparationTime;
   private String category;
 
-  public Recipe(int id, String recipeName, String description, String instructions, int preparationTime,
-      String category)
+  public Recipe(int id, String recipeName, String description,
+      String instructions, int preparationTime, String category)
   {
     this.id = id;
     this.recipeName = recipeName;
@@ -24,9 +24,36 @@ public class Recipe implements Serializable
     this.category = category;
   }
 
+  public Recipe(String recipeName, String description, String instructions,
+      int preparationTime, String category)
+  {
+    this.recipeName = recipeName;
+    this.description = description;
+    this.instructions = instructions;
+    this.preparationTime = preparationTime;
+    this.category = category;
+  }
+
+  public Recipe(String recipeName, String description,
+      ListOfIngredients ingredients, String instructions, int preparationTime,
+      String category)
+  {
+    this.recipeName = recipeName;
+    this.description = description;
+    this.ingredients = ingredients;
+    this.instructions = instructions;
+    this.preparationTime = preparationTime;
+    this.category = category;
+  }
+
   public int getId()
   {
     return id;
+  }
+
+  public ListOfIngredients getIngredients()
+  {
+    return ingredients;
   }
 
   @Override public String toString()

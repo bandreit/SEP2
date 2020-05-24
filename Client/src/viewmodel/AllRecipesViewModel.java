@@ -24,7 +24,12 @@ public class AllRecipesViewModel
   }
 
   public ObservableList<RecipeTable> getList()
+      throws RemoteException, SQLException
   {
+    for(int i=0;i<model.getRecipes().getSize();i++)
+    {
+      list.add(new RecipeTable(model.getRecipes().getRecipe(i)));
+    }
     return list;
   }
 
@@ -33,13 +38,12 @@ public class AllRecipesViewModel
     list.add(new RecipeTable(recipe));
   }
 
-  public void removeRecipe(String Recipe, String Category)
+  public void removeRecipe(int id)
       throws SQLException, RemoteException
   {
     for (int i = 0; i < list.size(); i++)
     {
-      if (list.get(i).getRecipeProperty().get().equals(Recipe) && list.get(i)
-          .getCategoryProperty().get().equals(Category))
+      if (list.get(i).getIdProperty().get() == id)
       {
         list.remove(i);
         break;

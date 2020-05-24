@@ -7,7 +7,7 @@ import javafx.scene.layout.Region;
 import viewmodel.ViewModelFactory;
 
 import java.rmi.RemoteException;
-import java.util.Optional;
+import java.sql.SQLException;
 
 public class AllRecipesViewController extends ViewController
 {
@@ -22,18 +22,17 @@ public class AllRecipesViewController extends ViewController
   }
   @Override public void init(ViewHandler viewHandler,
       ViewModelFactory viewModels, Region root)
+      throws RemoteException, SQLException
   {
     super.init(viewHandler, viewModels, root);
     categoryColumn.setCellValueFactory(cellData->cellData.getValue().getCategoryProperty());
     recipeColumn.setCellValueFactory(cellData->cellData.getValue().getRecipeProperty());
     descriptionColumn.setCellValueFactory(cellData->cellData.getValue().getDescriptionProperty());
     recipeList.setItems(viewModels.getAllRecipesViewModel().getList());
-
   }
 
   public void onMyRecipes(ActionEvent actionEvent)
   {
     super.getHandler().openView("MyRecipes");
   }
-
 }
