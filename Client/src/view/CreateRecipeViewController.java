@@ -54,7 +54,8 @@ public class CreateRecipeViewController extends ViewController
         super.getViewModels().getCreateRecipeViewModel().getInstructions());
     ingredientNameField.textProperty().bindBidirectional(
         super.getViewModels().getCreateRecipeViewModel().getIngredientName());
-    deleteErrorLabel.textProperty().bindBidirectional(super.getViewModels().getCreateRecipeViewModel().getDeleteErrorLabel());
+    deleteErrorLabel.textProperty().bindBidirectional(
+        super.getViewModels().getCreateRecipeViewModel().getDeleteErrorLabel());
     Bindings.bindBidirectional(quantityField.textProperty(),
         super.getViewModels().getCreateRecipeViewModel().getQuantity(),
         new StringConverter<Number>()
@@ -88,11 +89,10 @@ public class CreateRecipeViewController extends ViewController
 
     ingredientColumn
         .setCellValueFactory(cellData -> cellData.getValue().getIngredient());
-    quantityColumn
-        .setCellValueFactory(cellData -> cellData.getValue().getQuantity().asObject());
+    quantityColumn.setCellValueFactory(
+        cellData -> cellData.getValue().getQuantity().asObject());
     measurementColumn
         .setCellValueFactory(cellData -> cellData.getValue().getMeasurement());
-
 
     ingredientsList.setItems(
         super.getViewModels().getCreateRecipeViewModel().getAllIngredients());
@@ -105,9 +105,14 @@ public class CreateRecipeViewController extends ViewController
 
   public void onCreate(ActionEvent actionEvent) throws RemoteException
   {
-    super.getHandler().openView("AllRecipes");
-    super.getViewModels().getMyRecipesViewModel().addRecipe(super.getViewModels().getCreateRecipeViewModel().createRecipe());
-
+    if (super.getViewModels().getCreateRecipeViewModel().validateRecipeFields())
+    {
+      super.getViewModels().getCreateRecipeViewModel().createRecipe();
+      super.getViewModels().getCreateRecipeViewModel().clear();
+      super.getHandler().openView("AllRecipes");
+//      super.getViewModels().getMyRecipesViewModel()
+//          .addRecipe(super.getViewModels().getCreateRecipeViewModel().recipe());
+    }
   }
 
   public void onCancel(ActionEvent actionEvent)
