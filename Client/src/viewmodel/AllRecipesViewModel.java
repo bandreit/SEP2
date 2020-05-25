@@ -19,12 +19,18 @@ public class AllRecipesViewModel implements LocalListener<Recipe, Ingredient>
 {
   private ObservableList<RecipeTable> list;
   private LocalModel model;
+  private StringProperty filter;
 
   public AllRecipesViewModel(LocalModel model)
   {
     this.model = model;
     list = FXCollections.observableArrayList();
+    this.filter=new SimpleStringProperty();
     this.model.addListener(this,"ADD");
+  }
+  public StringProperty getFilter()
+  {
+    return filter;
   }
 
   public ObservableList<RecipeTable> getList()

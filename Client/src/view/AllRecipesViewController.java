@@ -1,16 +1,20 @@
 package view;
 
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.Region;
 import viewmodel.ViewModelFactory;
 
+import java.net.URL;
 import java.rmi.RemoteException;
 import java.sql.SQLException;
+import java.util.ResourceBundle;
 
 public class AllRecipesViewController extends ViewController
 {
+  @FXML private ChoiceBox filter;
   @FXML private TableView<RecipeTable> recipeList;
   @FXML private TableColumn<RecipeTable, String> categoryColumn;
   @FXML private TableColumn<RecipeTable, String> recipeColumn;
@@ -29,10 +33,18 @@ public class AllRecipesViewController extends ViewController
     recipeColumn.setCellValueFactory(cellData->cellData.getValue().getRecipeProperty());
     descriptionColumn.setCellValueFactory(cellData->cellData.getValue().getDescriptionProperty());
     recipeList.setItems(viewModels.getAllRecipesViewModel().getList());
+    filter.valueProperty().bindBidirectional(
+        super.getViewModels().getCreateRecipeViewModel().getCategory());
   }
 
   public void onMyRecipes(ActionEvent actionEvent)
   {
     super.getHandler().openView("MyRecipes");
   }
+
+  public TableView<RecipeTable> FilterRecipesByCategory()
+  {
+    if(filter)
+  }
 }
+
