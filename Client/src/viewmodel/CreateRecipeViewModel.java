@@ -18,8 +18,7 @@ import view.CreateRecipeTableRowData;
 import java.rmi.RemoteException;
 import java.util.Arrays;
 
-public class CreateRecipeViewModel
-    implements LocalListener<Recipe, Ingredient>
+public class CreateRecipeViewModel implements LocalListener<Recipe, Ingredient>
 {
   private StringProperty ingredientName;
   private LocalModel model;
@@ -191,24 +190,31 @@ public class CreateRecipeViewModel
     category.setValue(null);
     instructions.setValue(null);
     time.setValue(null);
-    //THIS DOES NOT REMOVE THEM
-    listOfIngredients.removeAll();
+    removeIngredientsFromView();
   }
 
-  @Override public void propertyChange(
-      ObserverEvent<Recipe, Ingredient> event)
+  private void removeIngredientsFromView()
+  {
+    int size = listOfIngredients.size();
+    for (int i = 0; i < size; i++)
+    {
+      listOfIngredients.remove(0);
+    }
+  }
+
+  @Override public void propertyChange(ObserverEvent<Recipe, Ingredient> event)
   {
     Platform.runLater(() -> {
       listOfIngredients.add(new CreateRecipeTableRowData(event.getValue2()));
     });
   }
 
-//  public Recipe recipe()
-//  {
-//    return new Recipe(recipeName.get(), description.get(),
-//        model.getListOfIngredients(), instructions.get(),
-//        Integer.parseInt(time.get()), category.get());
-//  }
+  //  public Recipe recipe()
+  //  {
+  //    return new Recipe(recipeName.get(), description.get(),
+  //        model.getListOfIngredients(), instructions.get(),
+  //        Integer.parseInt(time.get()), category.get());
+  //  }
 
   public Recipe createRecipe() throws RemoteException
   {
@@ -217,7 +223,8 @@ public class CreateRecipeViewModel
       return model.createRecipe(recipeName.get(), description.get(),
           model.getListOfIngredients(), instructions.get(),
           Integer.parseInt(time.get()), category.get());
-    } catch (Exception e)
+    }
+    catch (Exception e)
     {
       deleteErrorLabel.setValue("Something went wrong");
       return null;
