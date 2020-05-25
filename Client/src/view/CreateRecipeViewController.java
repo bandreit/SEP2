@@ -107,7 +107,8 @@ public class CreateRecipeViewController extends ViewController
   {
     if (super.getViewModels().getCreateRecipeViewModel().validateRecipeFields())
     {
-      super.getViewModels().getCreateRecipeViewModel().createRecipe();gi
+      super.getViewModels().getMyRecipesViewModel().addRecipe(super.getViewModels().getCreateRecipeViewModel().createRecipe());
+//      super.getViewModels().getCreateRecipeViewModel().createRecipe();
       super.getViewModels().getCreateRecipeViewModel().clear();
       super.getHandler().openView("AllRecipes");
 //      super.getViewModels().getMyRecipesViewModel()
