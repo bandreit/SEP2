@@ -5,7 +5,7 @@ import utility.observer.subject.LocalSubject;
 import java.rmi.RemoteException;
 import java.sql.SQLException;
 
-public interface LocalModel extends LocalSubject<Ingredient, Ingredient>
+public interface LocalModel extends LocalSubject<Recipe, Ingredient>
 {
   int login(String user, String password) throws Exception;
   void register(String user, String password, String email,

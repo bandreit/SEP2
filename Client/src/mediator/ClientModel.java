@@ -1,5 +1,6 @@
 package mediator;
 
+import model.Ingredient;
 import model.ListOfIngredients;
 import model.Recipe;
 import model.RecipeList;
@@ -8,7 +9,7 @@ import utility.observer.subject.LocalSubject;
 import java.rmi.RemoteException;
 import java.sql.SQLException;
 
-public interface ClientModel extends LocalSubject<Recipe, Recipe>
+public interface ClientModel extends LocalSubject<Recipe, Ingredient>
 {
   int login(String username,String password) throws RemoteException,
       SQLException, Exception;

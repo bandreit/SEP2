@@ -17,9 +17,9 @@ import java.rmi.server.UnicastRemoteObject;
 import java.sql.SQLException;
 import java.util.List;
 
-public class RemoteModelManager implements RemoteModel, LocalListener<Recipe, Recipe>
+public class RemoteModelManager implements RemoteModel, LocalListener<Recipe, Ingredient>
 {
-  private PropertyChangeAction<Recipe, Recipe> property;
+  private PropertyChangeAction<Recipe, Ingredient> property;
   private Model model;
 
   public RemoteModelManager(Model model)
@@ -27,7 +27,6 @@ public class RemoteModelManager implements RemoteModel, LocalListener<Recipe, Re
   {
     this.property = new PropertyChangeProxy<>(this, true);
     this.model = model;
-    this.model.addListener(this, "add", "connected");
     startRegistry();
     startServer();
   }
@@ -70,7 +69,11 @@ public class RemoteModelManager implements RemoteModel, LocalListener<Recipe, Re
       String category, int userId)
       throws RemoteException, SQLException
   {
-    return model.createRecipe(recipeName, description, ingredients, instructions, preparationTime, category, userId);
+    Recipe recipe = model
+        .createRecipe(recipeName, description, ingredients, instructions,
+            preparationTime, category, userId);
+    property.firePropertyChange("ADD", recipe, null);
+    return recipe;
   }
 
   @Override public void deleteRecipe(int id) throws RemoteException,SQLException
@@ -84,22 +87,22 @@ public class RemoteModelManager implements RemoteModel, LocalListener<Recipe, Re
   }
 
   @Override public boolean addListener(
-      GeneralListener<Recipe, Recipe> listener, String... propertyNames)
+      GeneralListener<Recipe, Ingredient> listener, String... propertyNames)
       throws RemoteException
   {
     return property.addListener(listener, propertyNames);
   }
 
   @Override public boolean removeListener(
-      GeneralListener<Recipe, Recipe> listener, String... propertyNames)
+      GeneralListener<Recipe, Ingredient> listener, String... propertyNames)
       throws RemoteException
   {
     return property.addListener(listener, propertyNames);
   }
 
-  @Override public void propertyChange(ObserverEvent<Recipe, Recipe> event)
+  @Override public void propertyChange(ObserverEvent<Recipe, Ingredient> event)
   {
-    property.firePropertyChange(event.getPropertyName(), null, event.getValue2());
+    property.firePropertyChange(event.getPropertyName(), event.getValue1(), null);
   }
 
   public void close()

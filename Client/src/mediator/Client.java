@@ -1,9 +1,6 @@
 package mediator;
 
-import model.ListOfIngredients;
-import model.LocalModel;
-import model.Recipe;
-import model.RecipeList;
+import model.*;
 import utility.observer.event.ObserverEvent;
 import utility.observer.listener.GeneralListener;
 import utility.observer.listener.RemoteListener;
@@ -17,11 +14,11 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.sql.SQLException;
 
-public class Client implements ClientModel, RemoteListener<Recipe, Recipe>
+public class Client implements ClientModel, RemoteListener<Recipe, Ingredient>
 {
   public static final String HOST = "localhost";
   private String host;
-  private PropertyChangeAction<Recipe, Recipe> property;
+  private PropertyChangeAction<Recipe, Ingredient> property;
   private LocalModel model;
   private RemoteModel remoteModel;
 
@@ -39,7 +36,7 @@ public class Client implements ClientModel, RemoteListener<Recipe, Recipe>
     this.remoteModel = (RemoteModel) Naming
         .lookup("rmi://" + host + ":1099/Recipes");
     UnicastRemoteObject.exportObject(this, 0);
-    this.remoteModel.addListener(this);
+    this.remoteModel.addListener(this, "ADD");
     this.property = new PropertyChangeProxy<>(this, true);
   }
 
@@ -92,21 +89,21 @@ public class Client implements ClientModel, RemoteListener<Recipe, Recipe>
     //idk
   }
 
-  @Override public void propertyChange(ObserverEvent<Recipe, Recipe> event)
+  @Override public void propertyChange(ObserverEvent<Recipe, Ingredient> event)
       throws RemoteException
   {
     property
-        .firePropertyChange(event.getPropertyName(), null, event.getValue2());
+        .firePropertyChange(event.getPropertyName(), event.getValue1(), event.getValue2());
   }
 
-  @Override public boolean addListener(GeneralListener<Recipe, Recipe> listener,
+  @Override public boolean addListener(GeneralListener<Recipe, Ingredient> listener,
       String... propertyNames)
   {
     return property.addListener(listener, propertyNames);
   }
 
   @Override public boolean removeListener(
-      GeneralListener<Recipe, Recipe> listener, String... propertyNames)
+      GeneralListener<Recipe, Ingredient> listener, String... propertyNames)
   {
     return property.removeListener(listener, propertyNames);
   }

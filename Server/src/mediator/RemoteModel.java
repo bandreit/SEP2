@@ -1,5 +1,6 @@
 package mediator;
 
+import model.Ingredient;
 import model.ListOfIngredients;
 import model.Recipe;
 import model.RecipeList;
@@ -10,7 +11,7 @@ import java.rmi.RemoteException;
 import java.sql.SQLException;
 import java.util.List;
 
-public interface RemoteModel extends RemoteSubject<Recipe, Recipe>, Remote
+public interface RemoteModel extends RemoteSubject<Recipe, Ingredient>, Remote
 {
   int login(String username, String password)
       throws RemoteException, SQLException;

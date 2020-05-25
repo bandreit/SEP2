@@ -5,14 +5,17 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import model.Ingredient;
 import model.LocalModel;
 import model.Recipe;
+import utility.observer.event.ObserverEvent;
+import utility.observer.listener.LocalListener;
 import view.RecipeTable;
 
 import java.rmi.RemoteException;
 import java.sql.SQLException;
 
-public class AllRecipesViewModel
+public class AllRecipesViewModel implements LocalListener<Recipe, Ingredient>
 {
   private ObservableList<RecipeTable> list;
   private LocalModel model;
@@ -21,6 +24,7 @@ public class AllRecipesViewModel
   {
     this.model = model;
     list = FXCollections.observableArrayList();
+    this.model.addListener(this,"ADD");
   }
 
   public ObservableList<RecipeTable> getList()
@@ -51,4 +55,18 @@ public class AllRecipesViewModel
     }
   }
 
+  @Override public void propertyChange(ObserverEvent<Recipe, Ingredient> event)
+  {
+    Platform.runLater(() -> {
+      list.removeAll();
+      try
+      {
+        getList();
+      }
+      catch (RemoteException | SQLException e)
+      {
+        e.printStackTrace();
+      }
+    });
+  }
 }

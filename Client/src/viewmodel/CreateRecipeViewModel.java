@@ -19,7 +19,7 @@ import java.rmi.RemoteException;
 import java.util.Arrays;
 
 public class CreateRecipeViewModel
-    implements LocalListener<Ingredient, Ingredient>
+    implements LocalListener<Recipe, Ingredient>
 {
   private StringProperty ingredientName;
   private LocalModel model;
@@ -191,11 +191,12 @@ public class CreateRecipeViewModel
     category.setValue(null);
     instructions.setValue(null);
     time.setValue(null);
+    //THIS DOES NOT REMOVE THEM
     listOfIngredients.removeAll();
   }
 
   @Override public void propertyChange(
-      ObserverEvent<Ingredient, Ingredient> event)
+      ObserverEvent<Recipe, Ingredient> event)
   {
     Platform.runLater(() -> {
       listOfIngredients.add(new CreateRecipeTableRowData(event.getValue2()));
@@ -211,9 +212,16 @@ public class CreateRecipeViewModel
 
   public Recipe createRecipe() throws RemoteException
   {
-    return model.createRecipe(recipeName.get(), description.get(),
-        model.getListOfIngredients(), instructions.get(),
-        Integer.parseInt(time.get()), category.get());
+    try
+    {
+      return model.createRecipe(recipeName.get(), description.get(),
+          model.getListOfIngredients(), instructions.get(),
+          Integer.parseInt(time.get()), category.get());
+    } catch (Exception e)
+    {
+      deleteErrorLabel.setValue("Something went wrong");
+      return null;
+    }
   }
   /// GET THE CATEGORY FROM THE VIEW
 
@@ -221,11 +229,6 @@ public class CreateRecipeViewModel
   {
     listOfIngredients = FXCollections.observableArrayList();
     ListOfIngredients list = model.getListOfIngredients();
-    for (int i = 0; i < list.getSize(); i++)
-    {
-      listOfIngredients
-          .add(new CreateRecipeTableRowData(list.getIngredient(i)));
-    }
   }
 
   public void remove(String ingredientName)
