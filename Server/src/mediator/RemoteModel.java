@@ -22,5 +22,6 @@ public interface RemoteModel extends RemoteSubject<Recipe, Ingredient>, Remote
       String category, int userId) throws RemoteException, SQLException;
   void deleteRecipe(int id) throws RemoteException,SQLException;
   RecipeList getRecipes() throws RemoteException, SQLException;
+  RecipeList getRecipesForUser(int id) throws RemoteException, SQLException;
 
 }

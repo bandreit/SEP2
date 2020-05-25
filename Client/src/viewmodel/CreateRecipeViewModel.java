@@ -190,16 +190,7 @@ public class CreateRecipeViewModel implements LocalListener<Recipe, Ingredient>
     category.setValue(null);
     instructions.setValue(null);
     time.setValue(null);
-    removeIngredientsFromView();
-  }
-
-  private void removeIngredientsFromView()
-  {
-    int size = listOfIngredients.size();
-    for (int i = 0; i < size; i++)
-    {
-      listOfIngredients.remove(0);
-    }
+    listOfIngredients.clear();
   }
 
   @Override public void propertyChange(ObserverEvent<Recipe, Ingredient> event)

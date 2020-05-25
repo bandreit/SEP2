@@ -8,9 +8,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
-import model.Ingredient;
-import model.LocalModel;
-import model.Recipe;
+import model.*;
 import utility.observer.event.ObserverEvent;
 import utility.observer.listener.LocalListener;
 import view.CreateRecipeTableRowData;
@@ -25,11 +23,13 @@ public class MyRecipesViewModel
   private LocalModel model;
   private ObservableList<RecipeTable> list;
   private StringProperty deleteErrorLabel;
+
   public MyRecipesViewModel(LocalModel model)
+      throws RemoteException, SQLException
   {
-    this.model=model;
-    list= FXCollections.observableArrayList();
+    this.model = model;
     this.deleteErrorLabel = new SimpleStringProperty();
+    this.list = FXCollections.observableArrayList();
   }
 
   public StringProperty getDeleteErrorLabel()
@@ -38,9 +38,16 @@ public class MyRecipesViewModel
   }
 
   public ObservableList<RecipeTable> getList()
+      throws RemoteException, SQLException
   {
+    RecipeList recipes = model.getRecipesForUser();
+    for (int i = 0; i < recipes.getSize(); i++)
+    {
+      list.add(new RecipeTable(recipes.getRecipe(i)));
+    }
     return list;
   }
+
   public void addRecipe(Recipe recipe)
   {
     list.add(new RecipeTable(recipe));
@@ -57,8 +64,8 @@ public class MyRecipesViewModel
       }
     }
   }
-  public void deleteRecipe(int id)
-      throws SQLException, RemoteException
+
+  public void deleteRecipe(int id) throws SQLException, RemoteException
   {
     model.deleteRecipe(id);
   }

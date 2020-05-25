@@ -2,6 +2,9 @@ package viewmodel;
 
 import model.LocalModel;
 
+import java.rmi.RemoteException;
+import java.sql.SQLException;
+
 public class ViewModelFactory
 {
   private LogInViewModel logInViewModel;
@@ -10,7 +13,7 @@ public class ViewModelFactory
   private MyRecipesViewModel myRecipesViewModel;
   private AllRecipesViewModel allRecipesViewModel;
 
-  public ViewModelFactory(LocalModel model)
+  public ViewModelFactory(LocalModel model) throws RemoteException, SQLException
   {
     this.logInViewModel = new LogInViewModel(model);
     this.registerViewModel = new RegisterViewModel(model);

@@ -118,6 +118,7 @@ public class CreateRecipeViewController extends ViewController
 
   public void onCancel(ActionEvent actionEvent)
   {
+    super.getHandler().openView("AllRecipes");
   }
 
   @FXML private void removeIngredientButtonPressed()

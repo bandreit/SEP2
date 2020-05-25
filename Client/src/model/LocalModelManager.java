@@ -49,6 +49,12 @@ public class LocalModelManager
             preparationTime, category, User.getInstance().getUserID());
   }
 
+  @Override public RecipeList getRecipesForUser()
+      throws RemoteException, SQLException
+  {
+    return clientModel.getRecipesForUser(User.getInstance().getUserID());
+  }
+
   @Override public void register(String user, String password, String email,
       String confirmPassword) throws RemoteException, SQLException
   {
@@ -87,6 +93,7 @@ public class LocalModelManager
   {
     clientModel.deleteRecipe(id);
   }
+
 
   @Override public void propertyChange(ObserverEvent<Recipe, Ingredient> event)
   {

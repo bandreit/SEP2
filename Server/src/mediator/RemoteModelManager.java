@@ -86,6 +86,11 @@ public class RemoteModelManager implements RemoteModel, LocalListener<Recipe, In
     return model.getRecipes();
   }
 
+  @Override public RecipeList getRecipesForUser(int id) throws SQLException, RemoteException
+  {
+    return model.getRecipesForUser(id);
+  }
+
   @Override public boolean addListener(
       GeneralListener<Recipe, Ingredient> listener, String... propertyNames)
       throws RemoteException
