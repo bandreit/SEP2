@@ -6,7 +6,7 @@ class Rema1000Scrapper {
   public getDiscountsCount = () => {
     return new ScrapperService(ScrapperConfig.rema1000.discounts)
       .advancedFetch()
-      .then(html => {
+      .then((html) => {
         const itemContainers = $(".product-wrap", html);
         return itemContainers.length;
       });
@@ -15,11 +15,11 @@ class Rema1000Scrapper {
   public getDiscounts = () => {
     return new ScrapperService(ScrapperConfig.rema1000.discounts)
       .advancedFetch()
-      .then(html => {
+      .then((html) => {
         const discountsList = $(".product", html);
         const discounts: any = [];
 
-        $(discountsList).map(index => {
+        $(discountsList).map((index) => {
           const item = $(discountsList[index]).html();
           if (!item) return;
 
@@ -34,10 +34,7 @@ class Rema1000Scrapper {
   public getDiscountInformation = (html: string) => {
     const image = $(".image img", html).attr("src");
     const title = $(".title", html).text();
-    const details = $(".extra", html)
-      .children()
-      .first()
-      .text();
+    const details = $(".extra", html).children().first().text();
 
     // The UI shows wrong classes
     const normalPrice = $(".price-discount", html).html();
@@ -53,25 +50,19 @@ class Rema1000Scrapper {
     const link = `${ScrapperConfig.rema1000.base}/varer/${uid}`;
 
     return {
-      uid: `${ScrapperConfig.rema1000.name}-${uid}`,
       title,
       details,
-      categoryId: "TO CHANGE",
-      storeId: "TO CHANGE",
+      image,
       discountPrice: this.htmlPriceToValue(discountPrice),
       normalPrice: this.htmlPriceToValue(normalPrice),
-      image,
-      link
+      link,
     };
   };
 
   private htmlPriceToValue = (html: string | null) => {
     if (!html) return html;
 
-    return html
-      .replace("<span>", ".")
-      .replace("</span>", "")
-      .replace(",", ".");
+    return html.replace("<span>", ".").replace("</span>", "").replace(",", ".");
   };
 }
 

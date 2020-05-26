@@ -14,7 +14,7 @@ import Rema1000Scrapper from "../scrappers/Rema1000Scrapper";
 // # * * * * * *
 
 const run = async () => {
-  cron.schedule("* * 3 * * *", async () => {
+  cron.schedule("30 * * * * *", async () => {
     const discounts = await new Rema1000Scrapper().getDiscounts();
 
     if (discounts.length < 1) {
@@ -22,7 +22,6 @@ const run = async () => {
     }
 
     await new DiscountService().create(discounts);
-
     console.log(`🕒 Rema1000 job has been executed`);
   });
 
