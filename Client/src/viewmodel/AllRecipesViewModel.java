@@ -25,9 +25,19 @@ public class AllRecipesViewModel implements LocalListener<Recipe, Ingredient>
   public AllRecipesViewModel(LocalModel model)
   {
     this.model = model;
-    this.filter = new SimpleStringProperty();
+    this.filter = new SimpleStringProperty("All");
     list = FXCollections.observableArrayList();
     this.model.addListener(this, "ADD");
+    filter.addListener((obs, olV, newV) -> {
+      try
+      {
+        filterRecipesByCategory();
+      }
+      catch (RemoteException | SQLException e)
+      {
+        e.printStackTrace();
+      }
+    });
   }
 
   public StringProperty getFilter()
@@ -63,26 +73,21 @@ public class AllRecipesViewModel implements LocalListener<Recipe, Ingredient>
     }
   }
 
-  public ObservableList<RecipeTable> filterRecipesByCategory()
-      throws RemoteException, SQLException
+  public void filterRecipesByCategory() throws RemoteException, SQLException
   {
     RecipeList recipes = model.getRecipes();
-    if (filter.get() != null)
+    list.clear();
+    for (int i = 0; i < recipes.getSize(); i++)
     {
-      list.clear();
-      for (int i = 0; i < recipes.getSize(); i++)
+      if (filter.get().equals(recipes.getRecipe(i).getCategory()))
       {
-        if (filter.get().equals(list.get(i).getCategoryProperty().get()))
-        {
-          list.add(new RecipeTable(recipes.getRecipe(i)));
-        }
-        if (filter.get().equals("All"))
-        {
-          list.add(new RecipeTable(recipes.getRecipe(i)));
-        }
+        list.add(new RecipeTable(recipes.getRecipe(i)));
+      }
+      if (filter.get().equals("All"))
+      {
+        list.add(new RecipeTable(recipes.getRecipe(i)));
       }
     }
-    return null;
   }
 
   @Override public void propertyChange(ObserverEvent<Recipe, Ingredient> event)
@@ -91,7 +96,7 @@ public class AllRecipesViewModel implements LocalListener<Recipe, Ingredient>
       list.clear();
       try
       {
-          getList();
+        getList();
       }
       catch (RemoteException | SQLException e)
       {

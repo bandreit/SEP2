@@ -41,11 +41,5 @@ public class AllRecipesViewController extends ViewController
   {
     super.getHandler().openView("MyRecipes");
   }
-
-  public void searchByCategory(ActionEvent actionEvent)
-      throws RemoteException, SQLException
-  {
-    super.getViewModels().getAllRecipesViewModel().filterRecipesByCategory();
-  }
 }
 
