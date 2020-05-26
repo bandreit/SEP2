@@ -22,6 +22,18 @@ public class RecipeList implements Serializable
       return recipes.get(index);
     }
 
+    public Recipe getRecipeById(int id) {
+      for (int i = 0; i < recipes.size(); i++)
+      {
+        Recipe recipe = recipes.get(i);
+        if (recipe.getId() == id)
+        {
+          return recipe;
+        }
+      }
+      return null;
+    }
+
     public void addRecipe(Recipe recipe)
     {
       if (recipe == null)

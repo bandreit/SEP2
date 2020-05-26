@@ -35,11 +35,13 @@ public class MyRecipesViewController extends ViewController
         super.getViewModels().getMyRecipesViewModel().getDeleteErrorLabel());
   }
   public void onAddRecipe(ActionEvent actionEvent)
+      throws RemoteException, SQLException
   {
     super.getHandler().openView("CreateRecipeView");
   }
 
   public void backToAllRecipes(ActionEvent actionEvent)
+      throws RemoteException, SQLException
   {
     super.getHandler().openView("AllRecipes");
   }

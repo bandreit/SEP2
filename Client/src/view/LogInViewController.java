@@ -38,6 +38,7 @@ public class LogInViewController extends ViewController
   }
 
   public void openRegisterPage(ActionEvent event)
+      throws RemoteException, SQLException
   {
     super.getHandler().openView("RegisterView");
   }
@@ -46,7 +47,7 @@ public class LogInViewController extends ViewController
   {
   }
 
-  public void loginButtonPressed()
+  public void loginButtonPressed() throws RemoteException, SQLException
   {
     if(super.getViewModels().getLogInViewModel().loginButtonPressed())
     {

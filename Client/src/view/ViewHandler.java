@@ -6,6 +6,9 @@ import javafx.stage.Stage;
 import model.LocalModel;
 import viewmodel.ViewModelFactory;
 
+import java.rmi.RemoteException;
+import java.sql.SQLException;
+
 public class ViewHandler
 {
   private Stage primaryStage;
@@ -20,9 +23,10 @@ public class ViewHandler
     this.currentVC = null;
   }
 
-  public void openView(String id)
+  public void openView(String id, int recipeId)
+      throws RemoteException, SQLException
   {
-    this.currentVC = ViewControllerFactory.getViewController(id,this, factory);
+    this.currentVC = ViewControllerFactory.getViewController(id,this, factory, recipeId);
     Region root = currentVC.getRoot();
     currentScene.setRoot(root);
     String title = "";
@@ -37,7 +41,25 @@ public class ViewHandler
     primaryStage.show();
   }
 
-  public void start(Stage primaryStage)
+  public void openView(String id)
+      throws RemoteException, SQLException
+  {
+    this.currentVC = ViewControllerFactory.getViewController(id,this, factory, -1);
+    Region root = currentVC.getRoot();
+    currentScene.setRoot(root);
+    String title = "";
+    if (root.getUserData() != null)
+    {
+      title += root.getUserData();
+    }
+    primaryStage.setTitle(title);
+    primaryStage.setScene(currentScene);
+    primaryStage.setWidth(root.getPrefWidth());
+    primaryStage.setHeight(root.getPrefHeight());
+    primaryStage.show();
+  }
+
+  public void start(Stage primaryStage) throws RemoteException, SQLException
   {
     this.primaryStage = primaryStage;
     openView("LogInView");
