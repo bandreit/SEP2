@@ -22,9 +22,10 @@
          </columnResizePolicy>
       </TableView>
       <Button layoutX="252.0" layoutY="313.0" mnemonicParsing="false" onAction="#onMyRecipes" text="My Recipes" />
-       <ChoiceBox fx:id="filter" layoutX="413.0" layoutY="42.0" prefHeight="30.0" prefWidth="142.0" style="-fx-font-size: 14;" value="Lunch">
+       <ChoiceBox fx:id="filter" layoutX="413.0" layoutY="42.0" prefHeight="30.0" prefWidth="142.0" style="-fx-font-size: 14;" value="All" onAction="#searchByCategory">
            <items>
                <FXCollections fx:factory="observableArrayList">
+                   <String fx:value="All" />
                    <String fx:value="Breakfast" />
                    <String fx:value="Lunch" />
                    <String fx:value="Beverages" />

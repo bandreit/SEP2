@@ -11,4 +11,5 @@ public interface RecipeDAO
   void addIngredientsToRecipe(int recipeId, int ingredientID) throws SQLException;
   void deleteRecipe(int id) throws SQLException;
   RecipeList getRecipes() throws SQLException;
+  RecipeList getRecipesForUser(int id) throws SQLException;
 }

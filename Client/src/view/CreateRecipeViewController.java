@@ -108,16 +108,14 @@ public class CreateRecipeViewController extends ViewController
     if (super.getViewModels().getCreateRecipeViewModel().validateRecipeFields())
     {
       super.getViewModels().getMyRecipesViewModel().addRecipe(super.getViewModels().getCreateRecipeViewModel().createRecipe());
-//      super.getViewModels().getCreateRecipeViewModel().createRecipe();
       super.getViewModels().getCreateRecipeViewModel().clear();
       super.getHandler().openView("AllRecipes");
-//      super.getViewModels().getMyRecipesViewModel()
-//          .addRecipe(super.getViewModels().getCreateRecipeViewModel().recipe());
     }
   }
 
   public void onCancel(ActionEvent actionEvent)
   {
+    super.getHandler().openView("AllRecipes");
   }
 
   @FXML private void removeIngredientButtonPressed()

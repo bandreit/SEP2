@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import model.Ingredient;
 import model.LocalModel;
 import model.Recipe;
+import model.RecipeList;
 import utility.observer.event.ObserverEvent;
 import utility.observer.listener.LocalListener;
 import view.RecipeTable;
@@ -24,10 +25,11 @@ public class AllRecipesViewModel implements LocalListener<Recipe, Ingredient>
   public AllRecipesViewModel(LocalModel model)
   {
     this.model = model;
+    this.filter = new SimpleStringProperty();
     list = FXCollections.observableArrayList();
-    this.filter=new SimpleStringProperty();
-    this.model.addListener(this,"ADD");
+    this.model.addListener(this, "ADD");
   }
+
   public StringProperty getFilter()
   {
     return filter;
@@ -36,9 +38,10 @@ public class AllRecipesViewModel implements LocalListener<Recipe, Ingredient>
   public ObservableList<RecipeTable> getList()
       throws RemoteException, SQLException
   {
-    for(int i=0;i<model.getRecipes().getSize();i++)
+    RecipeList recipes = model.getRecipes();
+    for (int i = 0; i < recipes.getSize(); i++)
     {
-      list.add(new RecipeTable(model.getRecipes().getRecipe(i)));
+      list.add(new RecipeTable(recipes.getRecipe(i)));
     }
     return list;
   }
@@ -48,8 +51,7 @@ public class AllRecipesViewModel implements LocalListener<Recipe, Ingredient>
     list.add(new RecipeTable(recipe));
   }
 
-  public void removeRecipe(int id)
-      throws SQLException, RemoteException
+  public void removeRecipe(int id) throws SQLException, RemoteException
   {
     for (int i = 0; i < list.size(); i++)
     {
@@ -61,13 +63,35 @@ public class AllRecipesViewModel implements LocalListener<Recipe, Ingredient>
     }
   }
 
+  public ObservableList<RecipeTable> filterRecipesByCategory()
+      throws RemoteException, SQLException
+  {
+    RecipeList recipes = model.getRecipes();
+    if (filter.get() != null)
+    {
+      list.clear();
+      for (int i = 0; i < recipes.getSize(); i++)
+      {
+        if (filter.get().equals(list.get(i).getCategoryProperty().get()))
+        {
+          list.add(new RecipeTable(recipes.getRecipe(i)));
+        }
+        if (filter.get().equals("All"))
+        {
+          list.add(new RecipeTable(recipes.getRecipe(i)));
+        }
+      }
+    }
+    return null;
+  }
+
   @Override public void propertyChange(ObserverEvent<Recipe, Ingredient> event)
   {
     Platform.runLater(() -> {
-      list.removeAll();
+      list.clear();
       try
       {
-        getList();
+          getList();
       }
       catch (RemoteException | SQLException e)
       {

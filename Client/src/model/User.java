@@ -14,7 +14,7 @@ public class User
     this.ID = ID;
   }
 
-  public static User getInstance(int ID)
+  public static void getInstance(int ID)
   {
     if (instance == null)
     {
@@ -26,12 +26,14 @@ public class User
         }
       }
     }
-    return instance;
   }
 
   public static User getInstance()
   {
-    return instance;
+    synchronized (lock)
+    {
+      return instance;
+    }
   }
 
   public int getUserID()

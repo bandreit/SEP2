@@ -34,7 +34,7 @@ public class AllRecipesViewController extends ViewController
     descriptionColumn.setCellValueFactory(cellData->cellData.getValue().getDescriptionProperty());
     recipeList.setItems(viewModels.getAllRecipesViewModel().getList());
     filter.valueProperty().bindBidirectional(
-        super.getViewModels().getCreateRecipeViewModel().getCategory());
+        super.getViewModels().getAllRecipesViewModel().getFilter());
   }
 
   public void onMyRecipes(ActionEvent actionEvent)
@@ -42,9 +42,10 @@ public class AllRecipesViewController extends ViewController
     super.getHandler().openView("MyRecipes");
   }
 
-  public TableView<RecipeTable> FilterRecipesByCategory()
+  public void searchByCategory(ActionEvent actionEvent)
+      throws RemoteException, SQLException
   {
-    if(filter)
+    super.getViewModels().getAllRecipesViewModel().filterRecipesByCategory();
   }
 }
 

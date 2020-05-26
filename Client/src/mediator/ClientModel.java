@@ -22,4 +22,5 @@ public interface ClientModel extends LocalSubject<Recipe, Ingredient>
   void deleteRecipe(int id) throws RemoteException,SQLException;
 
   void close() throws Exception;
+  RecipeList getRecipesForUser(int id) throws SQLException, RemoteException;
 }
