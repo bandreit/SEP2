@@ -36,6 +36,12 @@ public class ModelManager implements Model
     return RecipeDAOImpl.getInstance().getRecipesForUser(id);
   }
 
+  @Override public RecipeList searchRecipes(String searchString)
+      throws SQLException
+  {
+    return RecipeDAOImpl.getInstance().searchRecipes(searchString);
+  }
+
   @Override public int login(String username, String password)
       throws SQLException
   {

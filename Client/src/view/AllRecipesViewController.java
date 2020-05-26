@@ -1,10 +1,14 @@
 package view;
 
+import com.sun.javafx.scene.control.InputField;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Region;
+import org.w3c.dom.Text;
 import viewmodel.ViewModelFactory;
 
 import java.net.URL;
@@ -15,6 +19,7 @@ import java.util.ResourceBundle;
 public class AllRecipesViewController extends ViewController
 {
   @FXML private ChoiceBox filter;
+  @FXML private TextField searchString;
   @FXML private TableView<RecipeTable> recipeList;
   @FXML private TableColumn<RecipeTable, String> categoryColumn;
   @FXML private TableColumn<RecipeTable, String> recipeColumn;
@@ -32,6 +37,8 @@ public class AllRecipesViewController extends ViewController
     categoryColumn.setCellValueFactory(cellData->cellData.getValue().getCategoryProperty());
     recipeColumn.setCellValueFactory(cellData->cellData.getValue().getRecipeProperty());
     descriptionColumn.setCellValueFactory(cellData->cellData.getValue().getDescriptionProperty());
+    searchString.textProperty().bindBidirectional(
+        super.getViewModels().getAllRecipesViewModel().getSearchStringProperty());
     recipeList.setItems(viewModels.getAllRecipesViewModel().getList());
     filter.valueProperty().bindBidirectional(
         super.getViewModels().getAllRecipesViewModel().getFilter());
@@ -40,6 +47,14 @@ public class AllRecipesViewController extends ViewController
   public void onMyRecipes(ActionEvent actionEvent)
   {
     super.getHandler().openView("MyRecipes");
+  }
+
+  public void searchRecipes(KeyEvent keyEvent)
+      throws RemoteException, SQLException
+  {
+    if (keyEvent.getCode() == KeyCode.ENTER){
+    super.getViewModels().getAllRecipesViewModel().searchRecipes();
+    }
   }
 }
 

@@ -12,4 +12,5 @@ public interface RecipeDAO
   void deleteRecipe(int id) throws SQLException;
   RecipeList getRecipes() throws SQLException;
   RecipeList getRecipesForUser(int id) throws SQLException;
+  RecipeList searchRecipes(String searchString) throws SQLException;
 }

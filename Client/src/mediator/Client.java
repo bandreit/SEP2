@@ -78,6 +78,12 @@ public class Client implements ClientModel, RemoteListener<Recipe, Ingredient>
     return remoteModel.getRecipes();
   }
 
+  @Override public RecipeList searchRecipes(String searchString)
+      throws RemoteException, SQLException
+  {
+    return remoteModel.searchRecipes(searchString);
+  }
+
   @Override public void deleteRecipe(int id)
       throws SQLException, RemoteException
   {

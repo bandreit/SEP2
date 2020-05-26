@@ -88,6 +88,11 @@ public class LocalModelManager
     return clientModel.getRecipes();
   }
 
+  @Override public RecipeList searchRecipes(String searchString) throws RemoteException, SQLException
+  {
+    return clientModel.searchRecipes(searchString);
+  }
+
   @Override public void deleteRecipe(int id)
       throws RemoteException, SQLException
   {

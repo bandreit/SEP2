@@ -21,11 +21,13 @@ public class AllRecipesViewModel implements LocalListener<Recipe, Ingredient>
   private ObservableList<RecipeTable> list;
   private LocalModel model;
   private StringProperty filter;
+  private StringProperty searchString;
 
   public AllRecipesViewModel(LocalModel model)
   {
     this.model = model;
     this.filter = new SimpleStringProperty("All");
+    this.searchString = new SimpleStringProperty();
     list = FXCollections.observableArrayList();
     this.model.addListener(this, "ADD");
     filter.addListener((obs, olV, newV) -> {
@@ -43,6 +45,11 @@ public class AllRecipesViewModel implements LocalListener<Recipe, Ingredient>
   public StringProperty getFilter()
   {
     return filter;
+  }
+
+  public StringProperty getSearchStringProperty()
+  {
+    return searchString;
   }
 
   public ObservableList<RecipeTable> getList()
@@ -87,6 +94,24 @@ public class AllRecipesViewModel implements LocalListener<Recipe, Ingredient>
       {
         list.add(new RecipeTable(recipes.getRecipe(i)));
       }
+    }
+  }
+
+  public void searchRecipes() throws RemoteException, SQLException
+  {
+    RecipeList recipes;
+    if (searchString.get() == null)
+    {
+      recipes = model.getRecipes();
+    }
+    else
+    {
+      recipes = model.searchRecipes(searchString.get());
+    }
+    list.clear();
+    for (int i = 0; i < recipes.getSize(); i++)
+    {
+      list.add(new RecipeTable(recipes.getRecipe(i)));
     }
   }
 

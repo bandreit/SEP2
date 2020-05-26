@@ -51,4 +51,29 @@ public class IngredientDAOImpl implements IngredientDAO
       }
     }
   }
+
+  @Override public ListOfIngredients getIngredientsForRecipe(int id)
+      throws SQLException
+  {
+    try (Connection connection = getConnection())
+    {
+      PreparedStatement statement = connection
+          .prepareStatement("select distinct i.id, i.name, i.amount, i.measurement from recipes r\n"
+              + "\tinner join recipe_ingredien_connection c on c.recipeid = ?\n"
+              + "\tinner join ingredients i on c.ingredientid = i.id;");
+      statement.setInt(1, id);
+      ResultSet resultSet = statement.executeQuery();
+      ListOfIngredients result = new ListOfIngredients();
+      while (resultSet.next())
+      {
+        int ingredientId = resultSet.getInt("id");
+        String name = resultSet.getString("name");
+        int amount = resultSet.getInt("amount");
+        String measurement = resultSet.getString("measurement");
+        Ingredient ingredient = new Ingredient(ingredientId, name, amount, measurement);
+        result.addIngredient(ingredient);
+      }
+      return result;
+    }
+  }
 }

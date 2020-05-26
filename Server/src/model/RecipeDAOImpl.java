@@ -132,6 +132,32 @@ public class RecipeDAOImpl implements RecipeDAO
     }
   }
 
+  @Override public RecipeList searchRecipes(String searchString)
+      throws SQLException
+  {
+    try (Connection connection = getConnection())
+    {
+      PreparedStatement statement = connection
+          .prepareStatement("SELECT * FROM RECIPES where LOWER(name) LIKE ?");
+      statement.setString(1, "%" + searchString + "%");
+      ResultSet resultSet = statement.executeQuery();
+      RecipeList result = new RecipeList();
+      while (resultSet.next())
+      {
+        String name = resultSet.getString("name");
+        String description = resultSet.getString("description");
+        String category = resultSet.getString("category");
+        int recipeId = resultSet.getInt("id");
+        String instructions = resultSet.getString("instructions");
+        int preparation_time = resultSet.getInt("preperation_time");
+        Recipe recipe = new Recipe(recipeId, name, description, instructions,
+            preparation_time, category);
+        result.addRecipe(recipe);
+      }
+      return result;
+    }
+  }
+
   @Override public void deleteRecipe(int id)
       throws SQLException
   {
