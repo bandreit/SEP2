@@ -18,4 +18,5 @@ public interface Model extends LocalSubject<Recipe, Recipe>
   RecipeList getRecipes() throws SQLException;
   RecipeList getRecipesForUser(int id) throws SQLException;
   RecipeList searchRecipes(String searchString) throws SQLException;
+  ListOfIngredients getIngredientsForRecipe(int recipeId) throws SQLException;
 }

@@ -37,6 +37,7 @@ public class MyRecipesViewController extends ViewController
   }
 
   public void onAddRecipe(ActionEvent actionEvent)
+      throws RemoteException, SQLException
   {
     super.getHandler().openView("CreateRecipeView");
   }
@@ -52,6 +53,7 @@ public class MyRecipesViewController extends ViewController
   }
 
   public void backToAllRecipes(ActionEvent actionEvent)
+      throws RemoteException, SQLException
   {
     super.getHandler().openView("AllRecipes");
   }

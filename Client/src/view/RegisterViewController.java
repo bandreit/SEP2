@@ -43,11 +43,12 @@ public class RegisterViewController extends ViewController
   }
 
   public void backToLogIn(MouseEvent mouseEvent)
+      throws RemoteException, SQLException
   {
     super.getHandler().openView("LogInView");
   }
 
-  public void RegisterButtonPressed()
+  public void RegisterButtonPressed() throws RemoteException, SQLException
   {
     if (super.getViewModels().getRegisterViewModel().registerAccount())
     {

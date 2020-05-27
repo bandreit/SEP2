@@ -13,8 +13,8 @@ public class Recipe implements Serializable
   private int preparationTime;
   private String category;
 
-  public Recipe(int id, String recipeName, String description,
-      String instructions, int preparationTime, String category)
+  public Recipe(int id, String recipeName, String description, String instructions, int preparationTime,
+      String category)
   {
     this.id = id;
     this.recipeName = recipeName;
@@ -24,8 +24,8 @@ public class Recipe implements Serializable
     this.category = category;
   }
 
-  public Recipe(String recipeName, String description, String instructions,
-      int preparationTime, String category)
+  public Recipe(String recipeName, String description, String instructions, int preparationTime,
+      String category)
   {
     this.recipeName = recipeName;
     this.description = description;
@@ -34,8 +34,7 @@ public class Recipe implements Serializable
     this.category = category;
   }
 
-  public Recipe(String recipeName, String description,
-      ListOfIngredients ingredients, String instructions, int preparationTime,
+  public Recipe(String recipeName, String description, ListOfIngredients ingredients,String instructions, int preparationTime,
       String category)
   {
     this.recipeName = recipeName;
@@ -51,22 +50,29 @@ public class Recipe implements Serializable
     return id;
   }
 
-  public ListOfIngredients getIngredients()
+  public String getRecipeName()
   {
-    return ingredients;
-  }
-
-  @Override public String toString()
-  {
-    return "Recipe{" + "id=" + id + ", recipeName='" + recipeName + '\''
-        + ", description='" + description + '\'' + ", instructions='"
-        + instructions + '\'' + ", preparationTime=" + preparationTime
-        + ", category='" + category + '\'' + '}';
+    return recipeName;
   }
 
   public String getDescription()
   {
     return description;
+  }
+
+  public ListOfIngredients getIngredients()
+  {
+    return ingredients;
+  }
+
+  public void setIngredients(ListOfIngredients ingredients)
+  {
+    this.ingredients = ingredients;
+  }
+
+  public String getInstructions()
+  {
+    return instructions;
   }
 
   public int getPreparationTime()
@@ -79,13 +85,11 @@ public class Recipe implements Serializable
     return category;
   }
 
-  public String getInstructions()
+  @Override public String toString()
   {
-    return instructions;
-  }
-
-  public String getRecipeName()
-  {
-    return recipeName;
+    return "Recipe{" + "id=" + id + ", recipeName='" + recipeName + '\''
+        + ", description='" + description + '\'' + ", instructions='"
+        + instructions + '\'' + ", preparationTime=" + preparationTime
+        + ", category='" + category + '\'' + '}';
   }
 }

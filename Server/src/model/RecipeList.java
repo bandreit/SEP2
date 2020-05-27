@@ -5,30 +5,42 @@ import java.util.ArrayList;
 
 public class RecipeList implements Serializable
 {
-    private ArrayList<Recipe> recipes;
+  private ArrayList<Recipe> recipes;
 
-    public RecipeList()
-    {
-      this.recipes = new ArrayList<>();
-    }
+  public RecipeList()
+  {
+    this.recipes = new ArrayList<>();
+  }
 
-    public int getSize()
-    {
-      return recipes.size();
-    }
+  public int getSize()
+  {
+    return recipes.size();
+  }
 
-    public Recipe getRecipe(int index)
-    {
-      return recipes.get(index);
-    }
+  public Recipe getRecipe(int index)
+  {
+    return recipes.get(index);
+  }
 
-    public void addRecipe(Recipe recipe)
+  public Recipe getRecipeById(int id) {
+    for (int i = 0; i < recipes.size(); i++)
     {
-      if (recipe == null)
+      Recipe recipe = recipes.get(i);
+      if (recipe.getId() == id)
       {
-        throw new IllegalArgumentException("A null recipe");
+        return recipe;
       }
-      recipes.add(recipe);
     }
+    return null;
+  }
+
+  public void addRecipe(Recipe recipe)
+  {
+    if (recipe == null)
+    {
+      throw new IllegalArgumentException("A null recipe");
+    }
+    recipes.add(recipe);
+  }
 
 }

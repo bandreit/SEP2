@@ -103,7 +103,8 @@ public class CreateRecipeViewController extends ViewController
     super.getViewModels().getCreateRecipeViewModel().createIngredient();
   }
 
-  public void onCreate(ActionEvent actionEvent) throws RemoteException
+  public void onCreate(ActionEvent actionEvent)
+      throws RemoteException, SQLException
   {
     if (super.getViewModels().getCreateRecipeViewModel().validateRecipeFields())
     {
@@ -114,6 +115,7 @@ public class CreateRecipeViewController extends ViewController
   }
 
   public void onCancel(ActionEvent actionEvent)
+      throws RemoteException, SQLException
   {
     super.getHandler().openView("AllRecipes");
   }

@@ -65,6 +65,11 @@ public class Recipe implements Serializable
     return ingredients;
   }
 
+  public void setIngredients(ListOfIngredients ingredients)
+  {
+    this.ingredients = ingredients;
+  }
+
   public String getInstructions()
   {
     return instructions;

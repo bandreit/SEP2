@@ -1,6 +1,7 @@
 package view;
 
 import javafx.scene.layout.Region;
+import model.Recipe;
 import viewmodel.ViewModelFactory;
 
 import java.rmi.RemoteException;
@@ -29,7 +30,6 @@ public abstract class ViewController
     this.viewModels = viewModels;
     this.root = root;
   }
-
 
   public void reset()
   {

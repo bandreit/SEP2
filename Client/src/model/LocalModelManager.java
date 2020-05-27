@@ -55,6 +55,12 @@ public class LocalModelManager
     return clientModel.getRecipesForUser(User.getInstance().getUserID());
   }
 
+  @Override public ListOfIngredients getIngredientsForRecipe(int recipeId)
+      throws SQLException, RemoteException
+  {
+    return clientModel.getIngredientsForRecipe(recipeId);
+  }
+
   @Override public void register(String user, String password, String email,
       String confirmPassword) throws RemoteException, SQLException
   {
