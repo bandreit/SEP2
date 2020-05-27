@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="439.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.SpecificRecipeController">
+<AnchorPane prefHeight="439.0" prefWidth="606.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.SpecificRecipeController">
    <children>
       <HBox alignment="CENTER_LEFT" prefHeight="105.0" prefWidth="600.0">
          <children>
@@ -45,12 +45,15 @@
             </VBox>
             <VBox prefHeight="126.0" prefWidth="368.0">
                <children>
-                  <Label prefHeight="26.0" prefWidth="89.0" text="Description">
+                  <Label prefHeight="26.0" prefWidth="89.0" text="Description" textFill="#da0000">
                      <font>
-                        <Font name="System Bold" size="13.0" />
+                        <Font name="System Bold" size="15.0" />
                      </font>
                   </Label>
-                  <Label fx:id="description" alignment="TOP_LEFT" prefHeight="82.0" prefWidth="286.0" text="Description...." />
+                  <Label fx:id="description" alignment="TOP_LEFT" prefHeight="82.0" prefWidth="298.0" text="Description...." wrapText="true">
+                     <font>
+                        <Font size="15.0" />
+                     </font></Label>
                </children>
             </VBox>
          </children>
@@ -61,10 +64,13 @@
                <children>
                   <Label prefHeight="18.0" prefWidth="91.0" text="Ingredients" textFill="#da0000">
                      <font>
-                        <Font size="14.0" />
+                        <Font name="System Bold" size="15.0" />
                      </font>
                   </Label>
-                  <Label fx:id="ingredients" alignment="TOP_LEFT" prefHeight="276.0" prefWidth="323.0" text="List.." />
+                  <Label fx:id="ingredients" alignment="TOP_LEFT" prefHeight="276.0" prefWidth="323.0" style="-fx-line-spacing: 0.4em;" text="List.." wrapText="true">
+                     <font>
+                        <Font size="15.0" />
+                     </font></Label>
                   <Button mnemonicParsing="false" onAction="#goBack" text="BACK" />
                </children>
             </VBox>
@@ -72,10 +78,13 @@
                <children>
                   <Label prefHeight="18.0" prefWidth="91.0" text="Directions" textFill="#da0000">
                      <font>
-                        <Font size="14.0" />
+                        <Font name="System Bold" size="15.0" />
                      </font>
                   </Label>
-                  <Label fx:id="directions" alignment="TOP_LEFT" prefHeight="276.0" prefWidth="323.0" text="List.." />
+                  <Label fx:id="directions" alignment="TOP_LEFT" prefHeight="272.0" prefWidth="287.0" text="List.." wrapText="true">
+                     <font>
+                        <Font size="15.0" />
+                     </font></Label>
                </children>
             </VBox>
          </children>

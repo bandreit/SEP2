@@ -46,11 +46,15 @@ public class SpecificRecipeViewModel
 
   private void setIngredients() throws SQLException, RemoteException
   {
-    ListOfIngredients ingredients = model.getIngredientsForRecipe(recipe.getId());
+    ListOfIngredients ingredients = model
+        .getIngredientsForRecipe(recipe.getId());
     String ingredientsText = "";
     for (int i = 0; i < ingredients.getSize(); i++)
     {
-      ingredientsText += ingredients.getIngredient(i).getIngredient() + " " + ingredients.getIngredient(i).getAmount() + ingredients.getIngredient(i).getAmount() + "\n";
+      ingredientsText +=
+          "•" + ingredients.getIngredient(i).getAmount() + " " + ingredients
+              .getIngredient(i).getMeasurement() + " " + ingredients
+              .getIngredient(i).getIngredient() + "\n";
     }
     this.ingredients.setValue(ingredientsText);
   }
