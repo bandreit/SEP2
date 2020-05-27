@@ -23,28 +23,10 @@ public class ViewHandler
     this.currentVC = null;
   }
 
-  public void openView(String id, int recipeId)
-      throws RemoteException, SQLException
-  {
-    this.currentVC = ViewControllerFactory.getViewController(id,this, factory, recipeId);
-    Region root = currentVC.getRoot();
-    currentScene.setRoot(root);
-    String title = "";
-    if (root.getUserData() != null)
-    {
-      title += root.getUserData();
-    }
-    primaryStage.setTitle(title);
-    primaryStage.setScene(currentScene);
-    primaryStage.setWidth(root.getPrefWidth());
-    primaryStage.setHeight(root.getPrefHeight());
-    primaryStage.show();
-  }
-
   public void openView(String id)
       throws RemoteException, SQLException
   {
-    this.currentVC = ViewControllerFactory.getViewController(id,this, factory, -1);
+    this.currentVC = ViewControllerFactory.getViewController(id,this, factory);
     Region root = currentVC.getRoot();
     currentScene.setRoot(root);
     String title = "";

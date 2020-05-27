@@ -24,4 +24,5 @@ public interface ClientModel extends LocalSubject<Recipe, Ingredient>
 
   void close() throws Exception;
   RecipeList getRecipesForUser(int id) throws SQLException, RemoteException;
+  ListOfIngredients getIngredientsForRecipe(int recipeId) throws SQLException, RemoteException;
 }

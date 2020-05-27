@@ -25,11 +25,10 @@ public class SpecificRecipeController extends ViewController
   }
 
   @Override public void init(ViewHandler viewHandler,
-      ViewModelFactory viewModels, Region root, int recipeId)
+      ViewModelFactory viewModels, Region root)
       throws RemoteException, SQLException
   {
-    super.init(viewHandler, viewModels, root, recipeId);
-    super.getViewModels().getSpecificRecipeViewModel().setRecipe(super.getRecipeId());
+    super.init(viewHandler, viewModels, root);
     recipeName.textProperty().bindBidirectional(
         super.getViewModels().getSpecificRecipeViewModel()
             .getRecipeNameProperty());

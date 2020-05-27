@@ -4,6 +4,7 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import model.ListOfIngredients;
 import model.LocalModel;
 import model.Recipe;
 
@@ -39,7 +40,19 @@ public class SpecificRecipeViewModel
     category.setValue(recipe.getCategory());
     time.setValue(Integer.toString(recipe.getPreparationTime()));
     description.setValue(recipe.getDescription());
-    directions.setValue(recipe.getDescription());
+    directions.setValue(recipe.getInstructions());
+    setIngredients();
+  }
+
+  private void setIngredients() throws SQLException, RemoteException
+  {
+    ListOfIngredients ingredients = model.getIngredientsForRecipe(recipe.getId());
+    String ingredientsText = "";
+    for (int i = 0; i < ingredients.getSize(); i++)
+    {
+      ingredientsText += ingredients.getIngredient(i).getIngredient() + " " + ingredients.getIngredient(i).getAmount() + ingredients.getIngredient(i).getAmount() + "\n";
+    }
+    this.ingredients.setValue(ingredientsText);
   }
 
   public StringProperty getRecipeNameProperty()

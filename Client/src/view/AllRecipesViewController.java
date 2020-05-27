@@ -53,7 +53,8 @@ public class AllRecipesViewController extends ViewController
       {
         try
         {
-          super.getHandler().openView("SpecificRecipe",  recipeList.getSelectionModel().getSelectedItem().getIdProperty().get());
+          super.getHandler().openView("SpecificRecipe");
+          super.getViewModels().getSpecificRecipeViewModel().setRecipe(recipeList.getSelectionModel().getSelectedItem().getIdProperty().get());
         }
         catch (RemoteException | SQLException e)
         {

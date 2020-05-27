@@ -100,6 +100,12 @@ public class Client implements ClientModel, RemoteListener<Recipe, Ingredient>
     return remoteModel.getRecipesForUser(id);
   }
 
+  @Override public ListOfIngredients getIngredientsForRecipe(int recipeId)
+      throws SQLException, RemoteException
+  {
+    return remoteModel.getIngredientsForRecipe(recipeId);
+  }
+
   @Override public void propertyChange(ObserverEvent<Recipe, Ingredient> event)
       throws RemoteException
   {

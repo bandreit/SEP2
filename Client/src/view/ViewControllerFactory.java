@@ -15,8 +15,8 @@ public class ViewControllerFactory
 {
   private static Map<String, ViewController> viewControllerMap = new HashMap<>();
 
-  public static ViewController getViewController(String id, ViewHandler viewHandler, ViewModelFactory viewModelFactory, int recipeId)
-      throws RemoteException, SQLException
+  public static ViewController getViewController(String id,
+      ViewHandler viewHandler, ViewModelFactory viewModelFactory)
   {
     ViewController viewController = viewControllerMap.get(id);
 
@@ -26,15 +26,11 @@ public class ViewControllerFactory
       try
       {
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(ViewControllerFactory.class.getResource(id+".fxml"));
+        loader
+            .setLocation(ViewControllerFactory.class.getResource(id + ".fxml"));
         Region root = loader.load();
         viewController = loader.getController();
-        if (recipeId == -1)
-        {
-          viewController.init(viewHandler, viewModelFactory, root);
-        } else {
-        viewController.init(viewHandler, viewModelFactory, root, recipeId);
-        }
+        viewController.init(viewHandler, viewModelFactory, root);
       }
       catch (Exception e)
       {
@@ -47,17 +43,23 @@ public class ViewControllerFactory
   }
 
   private static ViewController createViewController(String id)
-      throws RemoteException, SQLException
   {
     switch (id)
     {
-      case "LogInView": return new LogInViewController();
-      case "RegisterView": return new RegisterViewController();
-      case "CreateRecipeView": return new CreateRecipeViewController();
-      case "AllRecipes": return new AllRecipesViewController();
-      case "MyRecipes": return new MyRecipesViewController();
-      case "SpecificRecipe": return new SpecificRecipeController();
-      default: throw new IllegalArgumentException("No such id for view controller");
+      case "LogInView":
+        return new LogInViewController();
+      case "RegisterView":
+        return new RegisterViewController();
+      case "CreateRecipeView":
+        return new CreateRecipeViewController();
+      case "AllRecipes":
+        return new AllRecipesViewController();
+      case "MyRecipes":
+        return new MyRecipesViewController();
+      case "SpecificRecipe":
+        return new SpecificRecipeController();
+      default:
+        throw new IllegalArgumentException("No such id for view controller");
     }
   }
 }
