@@ -104,7 +104,7 @@ public class CreateRecipeViewController extends ViewController
     {
       if (super.getViewModels().getCreateRecipeViewModel().getIsEditing())
       {
-        super.getViewModels().getMyRecipesViewModel().addRecipe(
+        super.getViewModels().getMyRecipesViewModel().editRecipe(
             super.getViewModels().getCreateRecipeViewModel().editRecipe());
       }
       else

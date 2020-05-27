@@ -230,7 +230,7 @@ public class CreateRecipeViewModel implements LocalListener<Recipe, Ingredient>
   public Recipe editRecipe() throws RemoteException {
     try
     {
-      return model.createRecipe(recipeName.get(), description.get(),
+      return model.editRecipe(recipe.getId(),recipeName.get(), description.get(),
           model.getListOfIngredients(), instructions.get(),
           Integer.parseInt(time.get()), category.get());
     }
