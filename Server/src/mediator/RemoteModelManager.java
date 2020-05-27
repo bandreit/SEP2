@@ -103,6 +103,18 @@ public class RemoteModelManager implements RemoteModel, LocalListener<Recipe, In
     return model.getIngredientsForRecipe(recipeId);
   }
 
+  @Override public String getComment(int id)
+      throws SQLException, RemoteException
+  {
+    return model.getComment(id);
+  }
+
+  @Override public String createComment(int Id, String userName, String text)
+      throws SQLException, RemoteException
+  {
+    return model.createComment(Id,userName,text);
+  }
+
   @Override public boolean addListener(
       GeneralListener<Recipe, Ingredient> listener, String... propertyNames)
       throws RemoteException

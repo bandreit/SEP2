@@ -61,6 +61,18 @@ public class LocalModelManager
     return clientModel.getIngredientsForRecipe(recipeId);
   }
 
+  @Override public String getComment(int id)
+      throws SQLException, RemoteException
+  {
+    return clientModel.getComment(id);
+  }
+
+  @Override public String createComment(int Id, String userName, String text)
+      throws SQLException, RemoteException
+  {
+    return clientModel.createComment(Id,userName,text);
+  }
+
   @Override public void register(String user, String password, String email,
       String confirmPassword) throws RemoteException, SQLException
   {

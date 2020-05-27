@@ -48,6 +48,18 @@ public class ModelManager implements Model
     return IngredientDAOImpl.getInstance().getIngredientsForRecipe(recipeId);
   }
 
+  @Override public String getComment(int id)
+      throws SQLException, RemoteException
+  {
+    return CommentDAOImpl.getInstance().getComments(id);
+  }
+
+  @Override public String createComment(int Id, String userName, String text)
+      throws SQLException, RemoteException
+  {
+    return CommentDAOImpl.getInstance().create(Id,userName,text);
+  }
+
   @Override public int login(String username, String password)
       throws SQLException
   {

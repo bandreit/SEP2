@@ -3,6 +3,7 @@ package view;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.layout.Region;
 import viewmodel.ViewModelFactory;
 
@@ -17,7 +18,9 @@ public class SpecificRecipeController extends ViewController
   @FXML public Label description;
   @FXML public Label ingredients;
   @FXML public Label directions;
-  @FXML private Label recipeName;
+  @FXML public TextArea writeComment;
+  @FXML public Label comments;
+  @FXML public Label recipeName;
 
   public SpecificRecipeController()
   {
@@ -29,19 +32,26 @@ public class SpecificRecipeController extends ViewController
       throws RemoteException, SQLException
   {
     super.init(viewHandler, viewModels, root);
-    recipeName.textProperty().bindBidirectional(
-        super.getViewModels().getSpecificRecipeViewModel()
-            .getRecipeNameProperty());
+    recipeName.textProperty().bindBidirectional(super.getViewModels().getSpecificRecipeViewModel().getRecipeNameProperty());
     category.textProperty().bindBidirectional(super.getViewModels().getSpecificRecipeViewModel().getCategoryProperty());
     time.textProperty().bindBidirectional(super.getViewModels().getSpecificRecipeViewModel().getTimeProperty());
     description.textProperty().bindBidirectional(super.getViewModels().getSpecificRecipeViewModel().getDescriptionProperty());
     ingredients.textProperty().bindBidirectional(super.getViewModels().getSpecificRecipeViewModel().getIngredientsProperty());
     directions.textProperty().bindBidirectional(super.getViewModels().getSpecificRecipeViewModel().getDirectionsProperty());
+    writeComment.textProperty().bindBidirectional(super.getViewModels().getSpecificRecipeViewModel().getWriteComment());
+    comments.textProperty().bindBidirectional(super.getViewModels().getSpecificRecipeViewModel().getComments());
   }
 
   public void goBack(ActionEvent actionEvent)
       throws RemoteException, SQLException
   {
     super.getHandler().openView("AllRecipes");
+  }
+
+
+  public void AddComment(ActionEvent actionEvent)
+      throws RemoteException, SQLException
+  {
+  super.getViewModels().getSpecificRecipeViewModel().setComment();
   }
 }

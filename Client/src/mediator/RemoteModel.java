@@ -1,9 +1,6 @@
 package mediator;
 
-import model.Ingredient;
-import model.ListOfIngredients;
-import model.Recipe;
-import model.RecipeList;
+import model.*;
 import utility.observer.subject.RemoteSubject;
 
 import java.rmi.Remote;
@@ -23,4 +20,7 @@ public interface RemoteModel extends RemoteSubject<Recipe, Ingredient>, Remote
   void deleteRecipe(int id) throws RemoteException,SQLException;
   RecipeList getRecipesForUser(int id) throws SQLException, RemoteException;
   ListOfIngredients getIngredientsForRecipe(int recipeId) throws SQLException, RemoteException;
+  String getComment(int id)  throws SQLException, RemoteException;
+public String createComment(int Id, String userName, String text)
+      throws SQLException, RemoteException;
 }

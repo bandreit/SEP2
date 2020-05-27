@@ -4,9 +4,7 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import model.ListOfIngredients;
-import model.LocalModel;
-import model.Recipe;
+import model.*;
 
 import java.rmi.RemoteException;
 import java.sql.SQLException;
@@ -21,6 +19,9 @@ public class SpecificRecipeViewModel
   private StringProperty description;
   private StringProperty ingredients;
   private StringProperty directions;
+  private StringProperty writeComment;
+  private StringProperty comments;
+
 
   public SpecificRecipeViewModel(LocalModel model)
   {
@@ -31,6 +32,9 @@ public class SpecificRecipeViewModel
     this.description = new SimpleStringProperty();
     this.ingredients = new SimpleStringProperty();
     this.directions = new SimpleStringProperty();
+    this.writeComment = new SimpleStringProperty();
+    this.comments = new SimpleStringProperty();
+
   }
 
   public void setRecipe(int id) throws RemoteException, SQLException
@@ -42,8 +46,15 @@ public class SpecificRecipeViewModel
     description.setValue(recipe.getDescription());
     directions.setValue(recipe.getInstructions());
     setIngredients();
+    updateComments();
   }
 
+  public void setComment() throws RemoteException, SQLException
+  {
+    model.createComment(recipe.getId(),"Edva",writeComment.get());
+    updateComments();
+
+  }
   private void setIngredients() throws SQLException, RemoteException
   {
     ListOfIngredients ingredients = model
@@ -58,6 +69,12 @@ public class SpecificRecipeViewModel
     }
     this.ingredients.setValue(ingredientsText);
   }
+
+  private void updateComments() throws SQLException, RemoteException
+  {
+    this.comments.setValue(model.getComment(recipe.getId()));
+  }
+
 
   public StringProperty getRecipeNameProperty()
   {
@@ -87,5 +104,13 @@ public class SpecificRecipeViewModel
   public StringProperty getDirectionsProperty()
   {
     return directions;
+  }
+  public StringProperty getWriteComment()
+  {
+    return writeComment;
+  }
+  public StringProperty getComments()
+  {
+    return comments;
   }
 }
