@@ -13,6 +13,9 @@ public interface LocalModel extends LocalSubject<Recipe, Ingredient>
   void close(Recipe recipe);
 
   Recipe createRecipe(String recipeName, String description,
+    ListOfIngredients ingredients, String instructions, int preparationTime,
+    String category) throws RemoteException;
+  Recipe editRecipe(String recipeName, String description,
       ListOfIngredients ingredients, String instructions, int preparationTime,
       String category) throws RemoteException;
   void addFullIngredientWithQtyAndAMeasurement(Ingredient ingredient);

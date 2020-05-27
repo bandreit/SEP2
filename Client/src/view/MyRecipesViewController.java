@@ -42,14 +42,13 @@ public class MyRecipesViewController extends ViewController
     super.getHandler().openView("CreateRecipeView");
   }
 
-  public void onEditRecipe()
+  public void onEditRecipe() throws RemoteException, SQLException
   {
     super.getHandler().openView("CreateRecipeView");
 
-    RecipeTable selectedItem = myRecipeList.getSelectionModel()
-        .getSelectedItem();
-    System.out.println(selectedItem.getIdProperty() + " " + selectedItem
-        .getDescriptionProperty());
+    super.getViewModels().getCreateRecipeViewModel().setRecipe(
+        myRecipeList.getSelectionModel().getSelectedItem().getIdProperty()
+            .get());
   }
 
   public void backToAllRecipes(ActionEvent actionEvent)
