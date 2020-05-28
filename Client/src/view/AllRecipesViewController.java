@@ -86,6 +86,7 @@ public class AllRecipesViewController extends ViewController
   }
 
   public void searchRecipesByIngredients(KeyEvent keyEvent)
+      throws RemoteException, SQLException
   {
     if (keyEvent.getCode() == KeyCode.ENTER)
     {

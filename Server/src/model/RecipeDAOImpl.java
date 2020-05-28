@@ -194,15 +194,16 @@ public class RecipeDAOImpl implements RecipeDAO
     {
       searchString = searchString.replaceAll("\\s+", "");
       String[] ingredientsArray = searchString.split(",");
-      String sql = "SELECT * FROM RECIPES where LOWER(name) LIKE ?";
-      for (int i = 0; i < ingredientsArray.length; i++)
+      String sql = "Select distinct r.name, r.description, r.category, r.id, r.instructions, r.preperation_time from recipes r inner join recipe_ingredien_connection c on r.id = c.recipeid \n"
+          + "\tinner join ingredients i on c.ingredientid = i.id where i.name LIKE ?";
+      for (int i = 0; i < ingredientsArray.length - 1; i++)
       {
         sql += " or i.name LIKE ? ";
       }
       PreparedStatement statement = connection
           .prepareStatement(sql);
       statement.setString(1, "%" + searchString + "%");
-      for (int i = 0; i < ingredientsArray.length; i++)
+      for (int i = 0; i < ingredientsArray.length - 1; i++)
       {
         statement.setString(i+2, "%" + ingredientsArray[i] + "%");
       }
