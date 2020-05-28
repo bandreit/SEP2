@@ -21,6 +21,7 @@ public class MyRecipesViewController extends ViewController
   {
     super();
   }
+
   @Override public void init(ViewHandler viewHandler,
       ViewModelFactory viewModels, Region root)
       throws RemoteException, SQLException
@@ -34,10 +35,20 @@ public class MyRecipesViewController extends ViewController
     deleteErrorLabel.textProperty().bindBidirectional(
         super.getViewModels().getMyRecipesViewModel().getDeleteErrorLabel());
   }
+
   public void onAddRecipe(ActionEvent actionEvent)
       throws RemoteException, SQLException
   {
     super.getHandler().openView("CreateRecipeView");
+  }
+
+  public void onEditRecipe() throws RemoteException, SQLException
+  {
+    super.getHandler().openView("CreateRecipeView");
+
+    super.getViewModels().getCreateRecipeViewModel().setRecipe(
+        myRecipeList.getSelectionModel().getSelectedItem().getIdProperty()
+            .get());
   }
 
   public void backToAllRecipes(ActionEvent actionEvent)
@@ -56,10 +67,13 @@ public class MyRecipesViewController extends ViewController
       boolean remove = confirmation();
       if (remove)
       {
-        super.getViewModels().getMyRecipesViewModel().removeRecipe(selectedItem.getIdProperty().get());
+        super.getViewModels().getMyRecipesViewModel()
+            .removeRecipe(selectedItem.getIdProperty().get());
         myRecipeList.getSelectionModel().clearSelection();
-        super.getViewModels().getAllRecipesViewModel().removeRecipe(selectedItem.getIdProperty().get());
-        super.getViewModels().getMyRecipesViewModel().deleteRecipe(selectedItem.getIdProperty().get());
+        super.getViewModels().getAllRecipesViewModel()
+            .removeRecipe(selectedItem.getIdProperty().get());
+        super.getViewModels().getMyRecipesViewModel()
+            .deleteRecipe(selectedItem.getIdProperty().get());
       }
     }
     catch (Exception e)

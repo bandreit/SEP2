@@ -1,19 +1,13 @@
 package view;
 
 import javafx.beans.binding.Bindings;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.Region;
-import javafx.scene.text.Text;
 import javafx.util.StringConverter;
-import viewmodel.CreateRecipeViewModel;
 import viewmodel.ViewModelFactory;
 
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 import java.rmi.RemoteException;
 import java.sql.SQLException;
 import java.util.Optional;
@@ -108,7 +102,17 @@ public class CreateRecipeViewController extends ViewController
   {
     if (super.getViewModels().getCreateRecipeViewModel().validateRecipeFields())
     {
-      super.getViewModels().getMyRecipesViewModel().addRecipe(super.getViewModels().getCreateRecipeViewModel().createRecipe());
+      if (super.getViewModels().getCreateRecipeViewModel().getIsEditing())
+      {
+        super.getViewModels().getMyRecipesViewModel().editRecipe(
+            super.getViewModels().getCreateRecipeViewModel().editRecipe());
+      }
+      else
+      {
+        super.getViewModels().getMyRecipesViewModel().addRecipe(
+            super.getViewModels().getCreateRecipeViewModel().createRecipe());
+      }
+
       super.getViewModels().getCreateRecipeViewModel().clear();
       super.getHandler().openView("AllRecipes");
     }
@@ -130,9 +134,11 @@ public class CreateRecipeViewController extends ViewController
       boolean remove = confirmation();
       if (remove)
       {
-        super.getViewModels().getCreateRecipeViewModel().remove(selectedItem.getIngredient().get());
+        super.getViewModels().getCreateRecipeViewModel()
+            .remove(selectedItem.getIngredient().get());
         ingredientsList.getSelectionModel().clearSelection();
-        getViewModels().getCreateRecipeViewModel().remove(selectedItem.getIngredient().get());
+        getViewModels().getCreateRecipeViewModel()
+            .remove(selectedItem.getIngredient().get());
       }
     }
     catch (Exception e)
@@ -144,7 +150,8 @@ public class CreateRecipeViewController extends ViewController
   private boolean confirmation()
   {
     int index = ingredientsList.getSelectionModel().getSelectedIndex();
-    CreateRecipeTableRowData selectedItem = ingredientsList.getItems().get(index);
+    CreateRecipeTableRowData selectedItem = ingredientsList.getItems()
+        .get(index);
     if (index < 0 || index >= ingredientsList.getItems().size())
     {
       return false;

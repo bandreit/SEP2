@@ -59,6 +59,36 @@ public class RecipeDAOImpl implements RecipeDAO
     }
   }
 
+  @Override public Recipe editRecipe(int id, String recipeName,
+      String description, ListOfIngredients ingredients, String instructions,
+      int preparationTime, String category, int userId) throws SQLException
+  {
+    try (Connection connection = getConnection())
+    {
+      PreparedStatement statement = connection.prepareStatement(
+          "UPDATE recipes SET name=?, description=?, instructions=?, preperation_time=?, category=? WHERE id=?",
+          PreparedStatement.RETURN_GENERATED_KEYS);
+      statement.setString(1, recipeName);
+      statement.setString(2, description);
+      statement.setString(3, instructions);
+      statement.setInt(4, preparationTime);
+      statement.setString(5, category);
+      statement.setInt(6, id);
+
+      statement.executeUpdate();
+      ResultSet keys = statement.getGeneratedKeys();
+      if (keys.next())
+      {
+        return new Recipe(keys.getInt(1), recipeName, description, instructions,
+            preparationTime, category);
+      }
+      else
+      {
+        throw new SQLException("No keys generated");
+      }
+    }
+  }
+
   @Override public void addIngredientsToRecipe(int recipeId, int ingredientID)
       throws SQLException
   {

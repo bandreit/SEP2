@@ -24,8 +24,12 @@ public interface ClientModel extends LocalSubject<Recipe, Ingredient>
   RecipeList getRecipesForUser(int id) throws SQLException, RemoteException;
   ListOfIngredients getIngredientsForRecipe(int recipeId)
       throws SQLException, RemoteException;
+  Recipe editRecipe(int id, String recipeName, String description,
+      ListOfIngredients ingredients, String instructions, int preparationTime,
+      String category, int userID) throws RemoteException;
   String getComment(int id) throws SQLException, RemoteException;
 
   public String createComment(int Id, String userName, String text)
       throws SQLException, RemoteException;
+
 }

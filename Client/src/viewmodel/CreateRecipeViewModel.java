@@ -16,7 +16,7 @@ import utility.observer.listener.LocalListener;
 import view.CreateRecipeTableRowData;
 
 import java.rmi.RemoteException;
-import java.util.Arrays;
+import java.sql.SQLException;
 
 public class CreateRecipeViewModel implements LocalListener<Recipe, Ingredient>
 {
@@ -31,6 +31,8 @@ public class CreateRecipeViewModel implements LocalListener<Recipe, Ingredient>
   private StringProperty category;
   private StringProperty deleteErrorLabel;
   private ObservableList<CreateRecipeTableRowData> listOfIngredients;
+  private Recipe recipe;
+  private boolean isEditing;
 
   public CreateRecipeViewModel(LocalModel model)
   {
@@ -44,8 +46,10 @@ public class CreateRecipeViewModel implements LocalListener<Recipe, Ingredient>
     this.instructions = new SimpleStringProperty();
     this.category = new SimpleStringProperty();
     this.deleteErrorLabel = new SimpleStringProperty();
+    this.isEditing = false;
     updateIngredients();
     this.model.addListener(this, "addIngredient");
+
   }
 
   public StringProperty getDeleteErrorLabel()
@@ -223,6 +227,20 @@ public class CreateRecipeViewModel implements LocalListener<Recipe, Ingredient>
   }
   /// GET THE CATEGORY FROM THE VIEW
 
+  public Recipe editRecipe() throws RemoteException {
+    try
+    {
+      return model.editRecipe(recipe.getId(),recipeName.get(), description.get(),
+          model.getListOfIngredients(), instructions.get(),
+          Integer.parseInt(time.get()), category.get());
+    }
+    catch (Exception e)
+    {
+      deleteErrorLabel.setValue("Something went wrong");
+      return null;
+    }
+  }
+
   private void updateIngredients()
   {
     listOfIngredients = FXCollections.observableArrayList();
@@ -239,6 +257,27 @@ public class CreateRecipeViewModel implements LocalListener<Recipe, Ingredient>
         break;
       }
     }
+  }
+
+  public void setRecipe(int id) throws RemoteException, SQLException
+  {
+    this.isEditing = true;
+    this.recipe = model.getRecipes().getRecipeById(id);
+    recipeName.setValue(recipe.getRecipeName());
+    category.setValue(recipe.getCategory());
+    time.setValue(Integer.toString(recipe.getPreparationTime()));
+    description.setValue(recipe.getDescription());
+    instructions.setValue(recipe.getInstructions());
+    ListOfIngredients ingredients  = model.getIngredientsForRecipe(id);
+
+    for(int i = 0; i < ingredients.getSize(); i++) {
+      listOfIngredients.add(new CreateRecipeTableRowData(ingredients.getIngredient(i)));
+    }
+
+  }
+
+  public boolean getIsEditing() {
+    return isEditing;
   }
 }
 

@@ -49,6 +49,15 @@ public class LocalModelManager
             preparationTime, category, User.getInstance().getUserID());
   }
 
+  @Override public Recipe editRecipe(int id, String recipeName, String description,
+      ListOfIngredients ingredients, String instructions, int preparationTime,
+      String category) throws RemoteException
+  {
+    return clientModel
+        .editRecipe(id, recipeName, description, ingredients, instructions,
+            preparationTime, category, User.getInstance().getUserID());
+  }
+
   @Override public RecipeList getRecipesForUser()
       throws RemoteException, SQLException
   {

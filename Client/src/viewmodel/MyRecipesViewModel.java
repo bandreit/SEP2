@@ -53,6 +53,21 @@ public class MyRecipesViewModel
     list.add(new RecipeTable(recipe));
   }
 
+  public void editRecipe(Recipe recipe) {
+    int recipeIndex = -1;
+
+    for(int i = 0; i < list.size(); i++) {
+      if(list.get(i).getIdProperty().equals(recipe.getId())) {
+        recipeIndex = i;
+        break;
+      }
+    }
+
+    if(recipeIndex > -1) {
+      list.set(recipeIndex, new RecipeTable(recipe));
+    }
+  }
+
   public void removeRecipe(int id)
   {
     for (int i = 0; i < list.size(); i++)

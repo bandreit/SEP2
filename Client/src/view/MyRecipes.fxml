@@ -18,7 +18,7 @@
          </columnResizePolicy>
       </TableView>
       <Button layoutX="116.0" layoutY="81.0" mnemonicParsing="false" onAction="#onAddRecipe" text="Add Recipe" />
-      <Button layoutX="116.0" layoutY="137.0" mnemonicParsing="false" text="Edit Recipe" />
+      <Button layoutX="116.0" layoutY="137.0" mnemonicParsing="false" onAction="#onEditRecipe" text="Edit Recipe" />
       <Button layoutX="109.0" layoutY="200.0" mnemonicParsing="false" onAction="#removeRecipeButtonPressed" text="Delete Recipe" />
       <Button layoutX="522.0" layoutY="360.0" mnemonicParsing="false" text="Log out" />
       <Button layoutX="57.0" layoutY="348.0" mnemonicParsing="false" onAction="#backToAllRecipes" text="Back to all recipes" />

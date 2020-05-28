@@ -70,7 +70,9 @@ public class Client implements ClientModel, RemoteListener<Recipe, Ingredient>
       ListOfIngredients ingredients, String instructions, int preparationTime,
       String category, int userId) throws RemoteException
   {
-    return remoteModel.createRecipe(recipeName, description, ingredients, instructions, preparationTime, category, userId);
+    return remoteModel
+        .createRecipe(recipeName, description, ingredients, instructions,
+            preparationTime, category, userId);
   }
 
   @Override public RecipeList getRecipes() throws RemoteException, SQLException
@@ -95,7 +97,8 @@ public class Client implements ClientModel, RemoteListener<Recipe, Ingredient>
     //idk
   }
 
-  @Override public RecipeList getRecipesForUser(int id) throws SQLException, RemoteException
+  @Override public RecipeList getRecipesForUser(int id)
+      throws SQLException, RemoteException
   {
     return remoteModel.getRecipesForUser(id);
   }
@@ -104,6 +107,15 @@ public class Client implements ClientModel, RemoteListener<Recipe, Ingredient>
       throws SQLException, RemoteException
   {
     return remoteModel.getIngredientsForRecipe(recipeId);
+  }
+
+  @Override public Recipe editRecipe(int id, String recipeName,
+      String description, ListOfIngredients ingredients, String instructions,
+      int preparationTime, String category, int userID) throws RemoteException
+  {
+    return remoteModel
+        .editRecipe(id, recipeName, description, ingredients, instructions,
+            preparationTime, category, userID);
   }
 
   @Override public String getComment(int id)
@@ -125,8 +137,8 @@ public class Client implements ClientModel, RemoteListener<Recipe, Ingredient>
         .firePropertyChange(event.getPropertyName(), event.getValue1(), event.getValue2());
   }
 
-  @Override public boolean addListener(GeneralListener<Recipe, Ingredient> listener,
-      String... propertyNames)
+  @Override public boolean addListener(
+      GeneralListener<Recipe, Ingredient> listener, String... propertyNames)
   {
     return property.addListener(listener, propertyNames);
   }
@@ -142,10 +154,10 @@ public class Client implements ClientModel, RemoteListener<Recipe, Ingredient>
     String message = e.getMessage();
     if (message != null)
     {
-      String [] messageArray = message.split(":");
+      String[] messageArray = message.split(":");
       if (messageArray.length > 0)
       {
-        message = messageArray[messageArray.length-1];
+        message = messageArray[messageArray.length - 1];
       }
     }
     return message;
