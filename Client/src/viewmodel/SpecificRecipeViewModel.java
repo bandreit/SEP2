@@ -51,9 +51,12 @@ public class SpecificRecipeViewModel
 
   public void setComment() throws RemoteException, SQLException
   {
-    model.createComment(recipe.getId(),"Edva",writeComment.get());
-    updateComments();
-
+    if (writeComment.get() != null)
+    {
+      model.createComment(recipe.getId(), User.getInstance().getUserID() ,writeComment.get());
+      writeComment.setValue("");
+      updateComments();
+    }
   }
   private void setIngredients() throws SQLException, RemoteException
   {

@@ -122,10 +122,10 @@ public class RemoteModelManager
     return model.getComment(id);
   }
 
-  @Override public String createComment(int Id, String userName, String text)
+  @Override public String createComment(int Id, int user, String text)
       throws SQLException, RemoteException
   {
-    return model.createComment(Id,userName,text);
+    return model.createComment(Id, user, text);
   }
 
   @Override public boolean addListener(

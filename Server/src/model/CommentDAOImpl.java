@@ -15,7 +15,7 @@ public class CommentDAOImpl implements CommentDAO
   {
     return DriverManager.getConnection(
         "jdbc:postgresql://localhost:5432/postgres?currentSchema=recipenetwork",
-        "postgres", "1");
+        "postgres", "1234");
   }
 
   public static synchronized CommentDAOImpl getInstance() throws SQLException
@@ -46,16 +46,16 @@ public class CommentDAOImpl implements CommentDAO
     }
   }
 
-  @Override public String create(int id, String userName, String text)
+  @Override public String create(int id, int user, String text)
       throws SQLException
   {
     try (Connection connection = getConnection())
     {
       PreparedStatement statement = connection.prepareStatement(
-          "INSERT INTO Comments(recipe_id, userName, text) VALUES (?, ?, ?);",
+          "INSERT INTO Comments(recipe_id, userName, text) VALUES (?, (SELECT username from users where id = ?), ?);",
           PreparedStatement.RETURN_GENERATED_KEYS);
       statement.setInt(1, id);
-      statement.setString(2, userName);
+      statement.setInt(2, user);
       statement.setString(3, text);
 
       statement.executeUpdate();

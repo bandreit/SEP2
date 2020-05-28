@@ -106,17 +106,18 @@
                         <Font size="15.0" />
                      </font>
                   </Label>
+                  <Button mnemonicParsing="false" onAction="#goBack" prefWidth="72.0" text="BACK" />
                </children>
             </VBox>
-            <VBox prefHeight="292.0" prefWidth="313.0">
+            <VBox prefHeight="123.0" prefWidth="301.0">
                <children>
                   <Label prefHeight="22.0" prefWidth="300.0" text="Write a comment" textFill="#da0000">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
                   </Label>
-                  <TextArea fx:id="writeComment" prefHeight="200.0" prefWidth="200.0" />
-                  <Button mnemonicParsing="false" onAction="#AddComment" text="Button" />
+                  <TextArea fx:id="writeComment" prefHeight="41.0" prefWidth="296.0" />
+                  <Button mnemonicParsing="false" onAction="#AddComment" text="POST COMMENT" />
                </children>
             </VBox>
          </children>
@@ -124,6 +125,5 @@
             <Insets left="5.0" />
          </padding>
       </HBox>
-      <Button layoutX="21.0" layoutY="578.0" mnemonicParsing="false" onAction="#goBack" text="BACK" />
    </children>
 </AnchorPane>

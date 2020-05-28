@@ -23,6 +23,6 @@ public interface Model extends LocalSubject<Recipe, Recipe>
   RecipeList searchRecipes(String searchString) throws SQLException;
   ListOfIngredients getIngredientsForRecipe(int recipeId) throws SQLException;
   String getComment(int id)  throws SQLException, RemoteException;
-  public String createComment(int Id, String userName, String text)
+  public String createComment(int Id, int user, String text)
       throws SQLException, RemoteException;
 }

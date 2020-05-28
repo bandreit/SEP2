@@ -28,6 +28,6 @@ public interface RemoteModel extends RemoteSubject<Recipe, Ingredient>, Remote
   RecipeList getRecipesForUser(int id) throws SQLException, RemoteException;
   ListOfIngredients getIngredientsForRecipe(int recipeId) throws SQLException, RemoteException;
   String getComment(int id)  throws SQLException, RemoteException;
-  public String createComment(int Id, String userName, String text)
+  public String createComment(int Id, int user, String text)
       throws SQLException, RemoteException;
 }

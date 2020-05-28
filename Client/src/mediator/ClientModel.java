@@ -29,7 +29,7 @@ public interface ClientModel extends LocalSubject<Recipe, Ingredient>
       String category, int userID) throws RemoteException;
   String getComment(int id) throws SQLException, RemoteException;
 
-  public String createComment(int Id, String userName, String text)
+  public String createComment(int Id, int user, String text)
       throws SQLException, RemoteException;
 
 }

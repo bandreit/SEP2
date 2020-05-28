@@ -124,17 +124,17 @@ public class Client implements ClientModel, RemoteListener<Recipe, Ingredient>
     return remoteModel.getComment(id);
   }
 
-  @Override public String createComment(int Id, String userName, String text)
+  @Override public String createComment(int Id, int user, String text)
       throws SQLException, RemoteException
   {
-    return remoteModel.createComment(Id,userName,text);
+    return remoteModel.createComment(Id, user, text);
   }
 
   @Override public void propertyChange(ObserverEvent<Recipe, Ingredient> event)
       throws RemoteException
   {
-    property
-        .firePropertyChange(event.getPropertyName(), event.getValue1(), event.getValue2());
+    property.firePropertyChange(event.getPropertyName(), event.getValue1(),
+        event.getValue2());
   }
 
   @Override public boolean addListener(

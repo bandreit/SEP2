@@ -54,10 +54,10 @@ public class ModelManager implements Model
     return CommentDAOImpl.getInstance().getComments(id);
   }
 
-  @Override public String createComment(int Id, String userName, String text)
+  @Override public String createComment(int Id, int user, String text)
       throws SQLException, RemoteException
   {
-    return CommentDAOImpl.getInstance().create(Id,userName,text);
+    return CommentDAOImpl.getInstance().create(Id, user, text);
   }
 
   @Override public int login(String username, String password)
