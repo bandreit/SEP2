@@ -125,6 +125,7 @@ public class RemoteModelManager
   @Override public String createComment(int Id, int user, String text)
       throws SQLException, RemoteException
   {
+    property.firePropertyChange("Comment", new Recipe("99","bb","cc",11,"aa"),null);
     return model.createComment(Id, user, text);
   }
 

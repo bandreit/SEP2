@@ -18,6 +18,7 @@ public class LocalModelManager
   private ClientModel clientModel;
   private PropertyChangeAction<Recipe, Ingredient> property;
   private ListOfIngredients ingredientList;
+  private RecipeList recipeList;
 
   public LocalModelManager() throws IOException
   {
@@ -112,13 +113,15 @@ public class LocalModelManager
 
   @Override public RecipeList getRecipes() throws RemoteException, SQLException
   {
-    return clientModel.getRecipes();
+
+    this.recipeList = clientModel.getRecipes();
+    return recipeList;
   }
 
   @Override public RecipeList searchRecipes(String searchString)
       throws RemoteException, SQLException
   {
-    return clientModel.searchRecipes(searchString);
+
   }
 
   @Override public void deleteRecipe(int id)
@@ -137,6 +140,11 @@ public class LocalModelManager
   @Override public void close(Recipe recipe)
   {
     //hz
+  }
+
+  @Override public RecipeList getSavedRecipeList()
+  {
+    return recipeList;
   }
 
   @Override public boolean addListener(

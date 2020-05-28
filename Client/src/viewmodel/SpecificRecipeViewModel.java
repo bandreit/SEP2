@@ -1,15 +1,21 @@
 package viewmodel;
 
+import javafx.application.Platform;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import model.*;
+import utility.observer.event.ObserverEvent;
+import utility.observer.listener.LocalListener;
 
 import java.rmi.RemoteException;
 import java.sql.SQLException;
+import java.util.Optional;
 
-public class SpecificRecipeViewModel
+public class SpecificRecipeViewModel implements LocalListener<Recipe, Ingredient>
 {
   private LocalModel model;
   private Recipe recipe;
@@ -34,6 +40,7 @@ public class SpecificRecipeViewModel
     this.directions = new SimpleStringProperty();
     this.writeComment = new SimpleStringProperty();
     this.comments = new SimpleStringProperty();
+    this.model.addListener(this,"Comment");
 
   }
 
@@ -116,4 +123,30 @@ public class SpecificRecipeViewModel
   {
     return comments;
   }
+  private boolean confirmation()
+  {
+    RecipeList savedRecipeList = model.getSavedRecipeList();
+    for (int i = 0; i < savedRecipeList.getSize() ; i++)
+    {
+      if (savedRecipeList.getRecipe(i).getOwnerId() == recipe.getOwnerId())
+      {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Somebody commented under your comment");
+        alert.setHeaderText("Somebody commented on " + recipe.getId() + recipe.getRecipeName());
+        Optional<ButtonType> result = alert.showAndWait();
+        return (result.isPresent()) && (result.get() == ButtonType.OK);
+      }
+    }
+    return false;
+  }
+
+
+  @Override public void propertyChange(ObserverEvent<Recipe, Ingredient> event)
+  {
+    Platform.runLater(() -> {
+      confirmation();
+    });
+  }
+
 }
+

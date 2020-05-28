@@ -24,7 +24,7 @@ public class IngredientDAOImpl implements IngredientDAO
   {
     return DriverManager.getConnection(
         "jdbc:postgresql://localhost:5432/postgres?currentSchema=recipenetwork",
-        "postgres", "1234");
+        "postgres", "1");
   }
 
   @Override public Ingredient create(String ingredient, int amount, String measurement)

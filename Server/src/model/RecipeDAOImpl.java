@@ -50,7 +50,7 @@ public class RecipeDAOImpl implements RecipeDAO
       if (keys.next())
       {
         return new Recipe(keys.getInt(1), recipeName, description, instructions,
-            preparationTime, category);
+            preparationTime, category,userId);
       }
       else
       {
@@ -80,7 +80,7 @@ public class RecipeDAOImpl implements RecipeDAO
       if (keys.next())
       {
         return new Recipe(keys.getInt(1), recipeName, description, instructions,
-            preparationTime, category);
+            preparationTime, category,id);
       }
       else
       {
@@ -129,8 +129,9 @@ public class RecipeDAOImpl implements RecipeDAO
         int id = resultSet.getInt("id");
         String instructions = resultSet.getString("instructions");
         int preparation_time = resultSet.getInt("preperation_time");
+        int ownerId = resultSet.getInt("owner_id");
         Recipe recipe = new Recipe(id, name, description, instructions,
-            preparation_time, category);
+            preparation_time, category,ownerId);
         result.addRecipe(recipe);
       }
       return result;
@@ -154,8 +155,9 @@ public class RecipeDAOImpl implements RecipeDAO
         int recipeId = resultSet.getInt("id");
         String instructions = resultSet.getString("instructions");
         int preparation_time = resultSet.getInt("preperation_time");
+        int ownerId = resultSet.getInt("owner_id");
         Recipe recipe = new Recipe(recipeId, name, description, instructions,
-            preparation_time, category);
+            preparation_time, category,ownerId);
         result.addRecipe(recipe);
       }
       return result;
@@ -180,8 +182,10 @@ public class RecipeDAOImpl implements RecipeDAO
         int recipeId = resultSet.getInt("id");
         String instructions = resultSet.getString("instructions");
         int preparation_time = resultSet.getInt("preperation_time");
+        int ownerId = resultSet.getInt("owner_id");
         Recipe recipe = new Recipe(recipeId, name, description, instructions,
-            preparation_time, category);
+            preparation_time, category,ownerId);
+
         result.addRecipe(recipe);
       }
       return result;
