@@ -22,6 +22,7 @@ public class AllRecipesViewModel implements LocalListener<Recipe, Ingredient>
   private LocalModel model;
   private StringProperty filter;
   private StringProperty searchString;
+  private StringProperty searchStringForIngredients;
 
   public AllRecipesViewModel(LocalModel model)
   {
@@ -50,6 +51,11 @@ public class AllRecipesViewModel implements LocalListener<Recipe, Ingredient>
   public StringProperty getSearchStringProperty()
   {
     return searchString;
+  }
+
+  public StringProperty getSearchStringForIngredientsProperty()
+  {
+    return searchStringForIngredients;
   }
 
   public ObservableList<RecipeTable> getList()
@@ -128,5 +134,23 @@ public class AllRecipesViewModel implements LocalListener<Recipe, Ingredient>
         e.printStackTrace();
       }
     });
+  }
+
+  public void searchRecipesByIngredients()
+  {
+//    RecipeList recipes;
+//    if (searchString.get() == null)
+//    {
+//      recipes = model.getRecipes();
+//    }
+//    else
+//    {
+//      recipes = model.searchRecipes(searchString.get());
+//    }
+//    list.clear();
+//    for (int i = 0; i < recipes.getSize(); i++)
+//    {
+//      list.add(new RecipeTable(recipes.getRecipe(i)));
+//    }
   }
 }

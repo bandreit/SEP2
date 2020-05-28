@@ -93,7 +93,7 @@
                                                 </HBox>
                                                 <HBox prefHeight="100.0" prefWidth="200.0">
                                                    <children>
-                                                      <ImageView fitHeight="134.0" fitWidth="129.0" pickOnBounds="true" preserveRatio="true">
+                                                      <ImageView fx:id="imageView" fitHeight="134.0" fitWidth="129.0" pickOnBounds="true" preserveRatio="true">
                                                          <image>
                                                             <Image url="@fruit.png" />
                                                          </image>

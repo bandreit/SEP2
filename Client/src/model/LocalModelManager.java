@@ -121,6 +121,13 @@ public class LocalModelManager
     return clientModel.searchRecipes(searchString);
   }
 
+  @Override public RecipeList searchRecipesByIngredients(String searchString)
+      throws RemoteException, SQLException
+  {
+    return clientModel.searchRecipesByIngredients(searchString);
+  }
+
+
   @Override public void deleteRecipe(int id)
       throws RemoteException, SQLException
   {
