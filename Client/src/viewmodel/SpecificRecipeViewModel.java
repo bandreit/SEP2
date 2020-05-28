@@ -42,8 +42,8 @@ public class SpecificRecipeViewModel
     this.recipe = model.getRecipes().getRecipeById(id);
     recipeName.setValue(recipe.getRecipeName());
     category.setValue(recipe.getCategory());
-    time.setValue(Integer.toString(recipe.getPreparationTime()));
-    description.setValue(recipe.getDescription());
+    time.setValue(recipe.getPreparationTime() + " m");
+    description.setValue(" '' " + recipe.getDescription() + " '' ");
     directions.setValue(recipe.getInstructions());
     setIngredients();
     updateComments();
@@ -66,7 +66,7 @@ public class SpecificRecipeViewModel
     for (int i = 0; i < ingredients.getSize(); i++)
     {
       ingredientsText +=
-          "•" + ingredients.getIngredient(i).getAmount() + " " + ingredients
+          "• " + ingredients.getIngredient(i).getAmount() + " " + ingredients
               .getIngredient(i).getMeasurement() + " " + ingredients
               .getIngredient(i).getIngredient() + "\n";
     }
