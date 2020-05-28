@@ -15,9 +15,9 @@ import java.rmi.registry.Registry;
 import java.rmi.server.ExportException;
 import java.rmi.server.UnicastRemoteObject;
 import java.sql.SQLException;
-import java.util.List;
 
-public class RemoteModelManager implements RemoteModel, LocalListener<Recipe, Ingredient>
+public class RemoteModelManager
+    implements RemoteModel, LocalListener<Recipe, Ingredient>
 {
   private PropertyChangeAction<Recipe, Ingredient> property;
   private Model model;
@@ -51,11 +51,10 @@ public class RemoteModelManager implements RemoteModel, LocalListener<Recipe, In
     System.out.println("Server started...");
   }
 
-
   @Override public int login(String username, String password)
       throws SQLException
   {
-    return model.login(username,password);
+    return model.login(username, password);
   }
 
   @Override public void register(String user, String password, String email,
@@ -66,8 +65,7 @@ public class RemoteModelManager implements RemoteModel, LocalListener<Recipe, In
 
   @Override public Recipe createRecipe(String recipeName, String description,
       ListOfIngredients ingredients, String instructions, int preparationTime,
-      String category, int userId)
-      throws RemoteException, SQLException
+      String category, int userId) throws RemoteException, SQLException
   {
     Recipe recipe = model
         .createRecipe(recipeName, description, ingredients, instructions,
@@ -76,7 +74,21 @@ public class RemoteModelManager implements RemoteModel, LocalListener<Recipe, In
     return recipe;
   }
 
-  @Override public void deleteRecipe(int id) throws RemoteException,SQLException
+  @Override public Recipe editRecipe(int id, String recipeName,
+      String description, ListOfIngredients ingredients, String instructions,
+      int preparationTime, String category, int userId)
+      throws RemoteException, SQLException
+  {
+    Recipe recipe = model
+        .editRecipe(id, recipeName, description, ingredients, instructions,
+            preparationTime, category, userId);
+
+    property.firePropertyChange("ADD", recipe, null);
+    return recipe;
+  }
+
+  @Override public void deleteRecipe(int id)
+      throws RemoteException, SQLException
   {
     model.deleteRecipe(id);
   }
@@ -92,9 +104,28 @@ public class RemoteModelManager implements RemoteModel, LocalListener<Recipe, In
     return model.searchRecipes(searchString);
   }
 
-  @Override public RecipeList getRecipesForUser(int id) throws SQLException, RemoteException
+  @Override public RecipeList getRecipesForUser(int id)
+      throws SQLException, RemoteException
   {
     return model.getRecipesForUser(id);
+  }
+
+  @Override public ListOfIngredients getIngredientsForRecipe(int recipeId)
+      throws SQLException, RemoteException
+  {
+    return model.getIngredientsForRecipe(recipeId);
+  }
+
+  @Override public String getComment(int id)
+      throws SQLException, RemoteException
+  {
+    return model.getComment(id);
+  }
+
+  @Override public String createComment(int Id, int user, String text)
+      throws SQLException, RemoteException
+  {
+    return model.createComment(Id, user, text);
   }
 
   @Override public boolean addListener(
@@ -113,7 +144,8 @@ public class RemoteModelManager implements RemoteModel, LocalListener<Recipe, In
 
   @Override public void propertyChange(ObserverEvent<Recipe, Ingredient> event)
   {
-    property.firePropertyChange(event.getPropertyName(), event.getValue1(), null);
+    property
+        .firePropertyChange(event.getPropertyName(), event.getValue1(), null);
   }
 
   public void close()

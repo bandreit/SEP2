@@ -14,8 +14,8 @@
    <children>
       <TableView fx:id="recipeList" layoutX="77.0" layoutY="100.0" prefHeight="200.0" prefWidth="446.0">
         <columns>
+          <TableColumn fx:id="recipeColumn" prefWidth="75.0" style="-fx-underline: true;" text="Recipe" />
           <TableColumn fx:id="categoryColumn" prefWidth="75.0" text="Category" />
-          <TableColumn fx:id="recipeColumn" prefWidth="75.0" text="Recipe" />
             <TableColumn fx:id="descriptionColumn" prefWidth="75.0" text="Description" />
         </columns>
          <columnResizePolicy>
@@ -43,6 +43,6 @@
            </items>
        </ChoiceBox>
       <Label layoutX="384.0" layoutY="49.0" text="Filter:" />
-      <TextField layoutX="77.0" layoutY="45.0" onKeyReleased="#searchRecipes" fx:id="searchString"/>
+      <TextField fx:id="searchString" layoutX="77.0" layoutY="45.0" onKeyReleased="#searchRecipes" />
    </children>
 </AnchorPane>

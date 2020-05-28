@@ -10,13 +10,13 @@ import java.util.ArrayList;
 
 public class ModelManager implements Model
 {
-//  private RecipeList recipeList;
+  //  private RecipeList recipeList;
   private UserList userList;
   private PropertyChangeAction<Recipe, Recipe> property;
 
   public ModelManager()
   {
-//    this.recipeList = new RecipeList();
+    //    this.recipeList = new RecipeList();
     this.userList = new UserList();
     this.property = new PropertyChangeProxy<>(this);
   }
@@ -42,6 +42,24 @@ public class ModelManager implements Model
     return RecipeDAOImpl.getInstance().searchRecipes(searchString);
   }
 
+  @Override public ListOfIngredients getIngredientsForRecipe(int recipeId)
+      throws SQLException
+  {
+    return IngredientDAOImpl.getInstance().getIngredientsForRecipe(recipeId);
+  }
+
+  @Override public String getComment(int id)
+      throws SQLException, RemoteException
+  {
+    return CommentDAOImpl.getInstance().getComments(id);
+  }
+
+  @Override public String createComment(int Id, int user, String text)
+      throws SQLException, RemoteException
+  {
+    return CommentDAOImpl.getInstance().create(Id, user, text);
+  }
+
   @Override public int login(String username, String password)
       throws SQLException
   {
@@ -61,7 +79,7 @@ public class ModelManager implements Model
       throw new IllegalAccessError("Username is already taken");
     }
     else
-    userList.addUser(UserDAOImpl.getInstance().create(user, password, email));
+      userList.addUser(UserDAOImpl.getInstance().create(user, password, email));
   }
 
   @Override public Recipe createRecipe(String recipeName, String description,
@@ -74,7 +92,10 @@ public class ModelManager implements Model
     //store the ids of the ingredients from the recipe to later add in the relation table
     for (int i = 0; i < ingredients.getSize(); i++)
     {
-      ingredientIds.add(IngredientDAOImpl.getInstance().create(ingredients.getIngredient(i).getIngredient(), ingredients.getIngredient(i).getAmount(), ingredients.getIngredient(i).getMeasurement()).getId());
+      ingredientIds.add(IngredientDAOImpl.getInstance()
+          .create(ingredients.getIngredient(i).getIngredient(),
+              ingredients.getIngredient(i).getAmount(),
+              ingredients.getIngredient(i).getMeasurement()).getId());
     }
 
     Recipe recipe = RecipeDAOImpl.getInstance()
@@ -87,6 +108,15 @@ public class ModelManager implements Model
           .addIngredientsToRecipe(recipe.getId(), ingredientId);
     }
     return recipe;
+  }
+
+  @Override public Recipe editRecipe(int id, String recipeName,
+      String description, ListOfIngredients ingredients, String instructions,
+      int preparationTime, String category, int userId) throws SQLException
+  {
+    return RecipeDAOImpl.getInstance()
+        .editRecipe(id, recipeName, description, ingredients, instructions,
+            preparationTime, category, userId);
   }
 
   @Override public void deleteRecipe(int id) throws SQLException

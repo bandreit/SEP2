@@ -6,6 +6,9 @@ import javafx.stage.Stage;
 import model.LocalModel;
 import viewmodel.ViewModelFactory;
 
+import java.rmi.RemoteException;
+import java.sql.SQLException;
+
 public class ViewHandler
 {
   private Stage primaryStage;
@@ -21,6 +24,7 @@ public class ViewHandler
   }
 
   public void openView(String id)
+      throws RemoteException, SQLException
   {
     this.currentVC = ViewControllerFactory.getViewController(id,this, factory);
     Region root = currentVC.getRoot();
@@ -37,7 +41,7 @@ public class ViewHandler
     primaryStage.show();
   }
 
-  public void start(Stage primaryStage)
+  public void start(Stage primaryStage) throws RemoteException, SQLException
   {
     this.primaryStage = primaryStage;
     openView("LogInView");

@@ -13,6 +13,9 @@ public interface LocalModel extends LocalSubject<Recipe, Ingredient>
   void close(Recipe recipe);
 
   Recipe createRecipe(String recipeName, String description,
+    ListOfIngredients ingredients, String instructions, int preparationTime,
+    String category) throws RemoteException;
+  Recipe editRecipe(int id, String recipeName, String description,
       ListOfIngredients ingredients, String instructions, int preparationTime,
       String category) throws RemoteException;
   void addFullIngredientWithQtyAndAMeasurement(Ingredient ingredient);
@@ -23,4 +26,9 @@ public interface LocalModel extends LocalSubject<Recipe, Ingredient>
   RecipeList searchRecipes(String searchString) throws RemoteException, SQLException;
   void deleteRecipe(int id) throws RemoteException, SQLException;
   RecipeList getRecipesForUser() throws RemoteException, SQLException;
+  ListOfIngredients getIngredientsForRecipe(int recipeId)
+      throws SQLException, RemoteException;
+  String getComment(int id)  throws SQLException, RemoteException;
+  public String createComment(int Id, int user, String text)
+      throws SQLException, RemoteException;
 }
