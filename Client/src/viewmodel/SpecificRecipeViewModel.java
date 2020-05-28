@@ -15,7 +15,8 @@ import java.rmi.RemoteException;
 import java.sql.SQLException;
 import java.util.Optional;
 
-public class SpecificRecipeViewModel implements LocalListener<Recipe, Ingredient>
+public class SpecificRecipeViewModel
+    implements LocalListener<Recipe, Ingredient>
 {
   private LocalModel model;
   private Recipe recipe;
@@ -28,7 +29,6 @@ public class SpecificRecipeViewModel implements LocalListener<Recipe, Ingredient
   private StringProperty writeComment;
   private StringProperty comments;
 
-
   public SpecificRecipeViewModel(LocalModel model)
   {
     this.model = model;
@@ -40,7 +40,7 @@ public class SpecificRecipeViewModel implements LocalListener<Recipe, Ingredient
     this.directions = new SimpleStringProperty();
     this.writeComment = new SimpleStringProperty();
     this.comments = new SimpleStringProperty();
-    this.model.addListener(this,"Comment");
+    this.model.addListener(this, "Comment");
 
   }
 
@@ -60,11 +60,13 @@ public class SpecificRecipeViewModel implements LocalListener<Recipe, Ingredient
   {
     if (writeComment.get() != null)
     {
-      model.createComment(recipe.getId(), User.getInstance().getUserID() ,writeComment.get());
+      model.createComment(recipe.getId(), User.getInstance().getUserID(),
+          writeComment.get());
       writeComment.setValue("");
       updateComments();
     }
   }
+
   private void setIngredients() throws SQLException, RemoteException
   {
     ListOfIngredients ingredients = model
@@ -84,7 +86,6 @@ public class SpecificRecipeViewModel implements LocalListener<Recipe, Ingredient
   {
     this.comments.setValue(model.getComment(recipe.getId()));
   }
-
 
   public StringProperty getRecipeNameProperty()
   {
@@ -115,31 +116,34 @@ public class SpecificRecipeViewModel implements LocalListener<Recipe, Ingredient
   {
     return directions;
   }
+
   public StringProperty getWriteComment()
   {
     return writeComment;
   }
+
   public StringProperty getComments()
   {
     return comments;
   }
+
   private boolean confirmation()
   {
     RecipeList savedRecipeList = model.getSavedRecipeList();
-    for (int i = 0; i < savedRecipeList.getSize() ; i++)
+    for (int i = 0; i < savedRecipeList.getSize(); i++)
     {
       if (savedRecipeList.getRecipe(i).getOwnerId() == recipe.getOwnerId())
       {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Somebody commented under your comment");
-        alert.setHeaderText("Somebody commented on " + recipe.getId() + recipe.getRecipeName());
+        alert.setHeaderText(
+            "Somebody commented on " + recipe.getId() + recipe.getRecipeName());
         Optional<ButtonType> result = alert.showAndWait();
         return (result.isPresent()) && (result.get() == ButtonType.OK);
       }
     }
     return false;
   }
-
 
   @Override public void propertyChange(ObserverEvent<Recipe, Ingredient> event)
   {

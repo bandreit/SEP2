@@ -121,7 +121,7 @@ public class LocalModelManager
   @Override public RecipeList searchRecipes(String searchString)
       throws RemoteException, SQLException
   {
-
+    return clientModel.searchRecipes(searchString);
   }
 
   @Override public void deleteRecipe(int id)
@@ -132,9 +132,8 @@ public class LocalModelManager
 
   @Override public void propertyChange(ObserverEvent<Recipe, Ingredient> event)
   {
-    System.out.println(event.getPropertyName());
-    property
-        .firePropertyChange(event.getPropertyName(), event.getValue1(), null);
+
+    property.firePropertyChange(event.getPropertyName(), event.getValue1(), null);
   }
 
   @Override public void close(Recipe recipe)

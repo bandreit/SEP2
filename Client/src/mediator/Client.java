@@ -36,7 +36,7 @@ public class Client implements ClientModel, RemoteListener<Recipe, Ingredient>
     this.remoteModel = (RemoteModel) Naming
         .lookup("rmi://" + host + ":1099/Recipes");
     UnicastRemoteObject.exportObject(this, 0);
-    this.remoteModel.addListener(this, "ADD");
+    this.remoteModel.addListener(this, "ADD","Comment");
     this.property = new PropertyChangeProxy<>(this, true);
   }
 
