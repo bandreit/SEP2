@@ -21,9 +21,18 @@ class Rema1000Scrapper {
 
         $(discountsList).map((index) => {
           const item = $(discountsList[index]).html();
+
+          const category = $(discountsList[index])
+            .parent()
+            .parent()
+            .find(".header .title")
+            .text()
+            .replace(/\n/g, "")
+            .replace(/\t/g, "");
+
           if (!item) return;
 
-          const discount = this.getDiscountInformation(item);
+          const discount = this.getDiscountInformation(item, category);
           return discounts.push(discount);
         });
 
@@ -31,8 +40,8 @@ class Rema1000Scrapper {
       });
   };
 
-  public getDiscountInformation = (html: string) => {
-    const image = $(".image img", html).attr("src");
+  public getDiscountInformation = (html: string, category) => {
+    const imageUrl = $(".image img", html).attr("src");
     const title = $(".title", html).text();
     const details = $(".extra", html).children().first().text();
 
@@ -46,13 +55,14 @@ class Rema1000Scrapper {
      * and the uid is 61114
      */
 
-    const uid = image.split("item/")[1].split("/")[0];
+    const uid = imageUrl.split("item/")[1].split("/")[0];
     const link = `${ScrapperConfig.rema1000.base}/varer/${uid}`;
 
     return {
       title,
       details,
-      image,
+      imageUrl,
+      category,
       discountPrice: this.htmlPriceToValue(discountPrice),
       normalPrice: this.htmlPriceToValue(normalPrice),
       link,
