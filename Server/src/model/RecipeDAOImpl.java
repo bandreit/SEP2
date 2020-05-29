@@ -26,7 +26,7 @@ public class RecipeDAOImpl implements RecipeDAO
   {
     return DriverManager.getConnection(
         "jdbc:postgresql://localhost:5432/postgres?currentSchema=recipenetwork",
-        "postgres", "1234");
+        "postgres", "1");
   }
 
   @Override public Recipe createRecipe(String recipeName, String description,
@@ -198,7 +198,7 @@ public class RecipeDAOImpl implements RecipeDAO
     {
       searchString = searchString.replaceAll("\\s+", "");
       String[] ingredientsArray = searchString.split(",");
-      String sql = "Select distinct r.name, r.description, r.category, r.id, r.instructions, r.preperation_time from recipes r inner join recipe_ingredien_connection c on r.id = c.recipeid \n"
+      String sql = "Select distinct r.name, r.description, r.category, r.id, r.instructions, r.preperation_time, r.owner_id from recipes r inner join recipe_ingredien_connection c on r.id = c.recipeid \n"
           + "\tinner join ingredients i on c.ingredientid = i.id where i.name LIKE ?";
       for (int i = 0; i < ingredientsArray.length - 1; i++)
       {
