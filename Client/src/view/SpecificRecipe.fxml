@@ -190,17 +190,13 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="305.0" prefWidth="386.0" style="-fx-background-color: white; -fx-border-color: white;">
                      <children>
-                        <VBox layoutX="1.0" prefHeight="200.0" prefWidth="380.0">
+                        <VBox layoutX="1.0" prefHeight="500.0" prefWidth="380.0">
                            <children>
-                              <VBox prefHeight="110.0" prefWidth="194.0">
-                                 <children>
-                                    <Label fx:id="comments" alignment="TOP_LEFT" prefHeight="305.0" prefWidth="381.0" style="-fx-line-spacing: 0.4em;" text="Comments.." wrapText="true">
-                                       <font>
-                                          <Font size="15.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </VBox>
+                              <Label fx:id="comments" alignment="TOP_LEFT" prefHeight="500.0" prefWidth="381.0" style="-fx-line-spacing: 0.4em;" text="Comments.." wrapText="true">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
                            </children>
                         </VBox>
                      </children>
