@@ -12,14 +12,12 @@ public class RecipeTable
   private IntegerProperty id;
   private StringProperty category;
   private StringProperty recipes;
-  private StringProperty description;
 
   public RecipeTable(Recipe recipe)
   {
     this.id = new SimpleIntegerProperty(recipe.getId());
-    this.category=new SimpleStringProperty(recipe.getCategory());
+    this.category=new SimpleStringProperty(recipe.getCategory() + "\n" + recipe.getDescription());
     this.recipes=new SimpleStringProperty(recipe.getRecipeName());
-    this.description=new SimpleStringProperty(recipe.getDescription());
   }
 
   public IntegerProperty getIdProperty() { return id;}
@@ -34,8 +32,4 @@ public class RecipeTable
     return recipes;
   }
 
-  public StringProperty getDescriptionProperty()
-  {
-    return description;
-  }
 }

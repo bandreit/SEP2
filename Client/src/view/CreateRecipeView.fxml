@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="500.0" prefWidth="816.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.CreateRecipeViewController">
+<AnchorPane prefHeight="500.0" prefWidth="816.0" style="-fx-background-color: ffc560;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.CreateRecipeViewController">
     <children>
       <HBox layoutX="2.0" layoutY="84.0" prefHeight="315.0" prefWidth="798.0">
          <children>
@@ -23,7 +23,7 @@
                <children>
                   <VBox prefHeight="43.0" prefWidth="406.0">
                      <children>
-                          <Label text="Recipe title">
+                          <Label text="Recipe title" textFill="#793f00">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>
@@ -33,7 +33,7 @@
                   </VBox>
                   <VBox prefHeight="58.0" prefWidth="397.0">
                      <children>
-                          <Label text="Description">
+                          <Label text="Description" textFill="#793f00">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>
@@ -43,7 +43,7 @@
                   </VBox>
                   <VBox prefHeight="45.0" prefWidth="406.0">
                      <children>
-                          <Label text="Preparation time (minutes)">
+                          <Label text="Preparation time (minutes)" textFill="#793f00">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>
@@ -53,7 +53,7 @@
                   </VBox>
                   <VBox prefHeight="90.0" prefWidth="397.0">
                      <children>
-                          <Label text="Instructions for recipe">
+                          <Label text="Instructions for recipe" textFill="#793f00">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>
@@ -63,12 +63,12 @@
                   </VBox>
                   <VBox prefHeight="30.0" prefWidth="406.0">
                      <children>
-                          <Label text="Category">
+                          <Label text="Category" textFill="#793f00">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>
                         </Label>
-                          <ChoiceBox fx:id="category" prefHeight="30.0" prefWidth="142.0" style="-fx-font-size: 14;" value="Lunch">
+                          <ChoiceBox fx:id="category" prefHeight="30.0" prefWidth="142.0" style="-fx-font-size: 14; -fx-background-color: white;" value="Lunch">
                               <items>
                                   <FXCollections fx:factory="observableArrayList">
                                       <String fx:value="Breakfast" />
@@ -174,7 +174,7 @@
       </HBox>
       <HBox alignment="CENTER" layoutX="3.0" prefHeight="100.0" prefWidth="798.0">
          <children>
-              <Label text="New Recipe">
+              <Label text="New Recipe" textFill="#793f00">
                   <font>
                       <Font name="System Bold" size="27.0" />
                   </font>

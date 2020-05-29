@@ -26,7 +26,6 @@ public class AllRecipesViewController extends ViewController
   @FXML private TableView<RecipeTable> recipeList;
   @FXML private TableColumn<RecipeTable, String> categoryColumn;
   @FXML private TableColumn<RecipeTable, String> recipeColumn;
-  @FXML private TableColumn<RecipeTable, String> descriptionColumn;
 
   public AllRecipesViewController()
   {
@@ -42,8 +41,10 @@ public class AllRecipesViewController extends ViewController
         cellData -> cellData.getValue().getCategoryProperty());
     recipeColumn.setCellValueFactory(
         cellData -> cellData.getValue().getRecipeProperty());
-    descriptionColumn.setCellValueFactory(
-        cellData -> cellData.getValue().getDescriptionProperty());
+    categoryColumn.prefWidthProperty().bind(recipeList.widthProperty().multiply(0.7));
+    recipeColumn.prefWidthProperty().bind(recipeList.widthProperty().multiply(0.3));
+    categoryColumn.setResizable(false);
+    recipeColumn.setResizable(false);
     searchString.textProperty().bindBidirectional(
         super.getViewModels().getAllRecipesViewModel()
             .getSearchStringProperty());

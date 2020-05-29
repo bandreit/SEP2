@@ -38,8 +38,8 @@ public class CreateRecipeViewModel implements LocalListener<Recipe, Ingredient>
   {
     this.model = model;
     this.ingredientName = new SimpleStringProperty();
-    this.quantity = new SimpleIntegerProperty();
-    this.measurement = new SimpleStringProperty();
+    this.quantity = new SimpleIntegerProperty(100);
+    this.measurement = new SimpleStringProperty("g");
     this.time = new SimpleStringProperty();
     this.description = new SimpleStringProperty();
     this.recipeName = new SimpleStringProperty();
