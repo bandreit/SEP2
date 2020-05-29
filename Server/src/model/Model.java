@@ -25,4 +25,6 @@ public interface Model extends LocalSubject<Recipe, Recipe>
   String getComment(int id)  throws SQLException, RemoteException;
   public String createComment(int Id, int user, String text)
       throws SQLException, RemoteException;
+  RecipeList searchRecipesByIngredients(String searchString)
+      throws SQLException;
 }

@@ -104,6 +104,12 @@ public class RemoteModelManager
     return model.searchRecipes(searchString);
   }
 
+  @Override public RecipeList searchRecipesByIngredients(String searchString)
+      throws RemoteException, SQLException
+  {
+    return model.searchRecipesByIngredients(searchString);
+  }
+
   @Override public RecipeList getRecipesForUser(int id)
       throws SQLException, RemoteException
   {

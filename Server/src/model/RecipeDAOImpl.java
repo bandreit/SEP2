@@ -192,6 +192,43 @@ public class RecipeDAOImpl implements RecipeDAO
     }
   }
 
+  @Override public RecipeList searchRecipesByIngredients(String searchString) throws SQLException
+  {
+    try (Connection connection = getConnection())
+    {
+      searchString = searchString.replaceAll("\\s+", "");
+      String[] ingredientsArray = searchString.split(",");
+      String sql = "Select distinct r.name, r.description, r.category, r.id, r.instructions, r.preperation_time from recipes r inner join recipe_ingredien_connection c on r.id = c.recipeid \n"
+          + "\tinner join ingredients i on c.ingredientid = i.id where i.name LIKE ?";
+      for (int i = 0; i < ingredientsArray.length - 1; i++)
+      {
+        sql += " or i.name LIKE ? ";
+      }
+      PreparedStatement statement = connection
+          .prepareStatement(sql);
+      statement.setString(1, "%" + searchString + "%");
+      for (int i = 0; i < ingredientsArray.length - 1; i++)
+      {
+        statement.setString(i+2, "%" + ingredientsArray[i] + "%");
+      }
+      ResultSet resultSet = statement.executeQuery();
+      RecipeList result = new RecipeList();
+      while (resultSet.next())
+      {
+        String name = resultSet.getString("name");
+        String description = resultSet.getString("description");
+        String category = resultSet.getString("category");
+        int recipeId = resultSet.getInt("id");
+        String instructions = resultSet.getString("instructions");
+        int preparation_time = resultSet.getInt("preperation_time");
+        Recipe recipe = new Recipe(recipeId, name, description, instructions,
+            preparation_time, category);
+        result.addRecipe(recipe);
+      }
+      return result;
+    }
+  }
+
   @Override public void deleteRecipe(int id)
       throws SQLException
   {

@@ -43,6 +43,7 @@
            </items>
        </ChoiceBox>
       <Label layoutX="384.0" layoutY="49.0" text="Filter:" />
-      <TextField fx:id="searchString" layoutX="77.0" layoutY="45.0" onKeyReleased="#searchRecipes" />
+      <TextField fx:id="searchString" layoutX="77.0" layoutY="45.0" onKeyReleased="#searchRecipes" prefHeight="26.0" prefWidth="252.0" promptText="Seach for a recipe" />
+      <TextField fx:id="searchIngredients" layoutX="77.0" layoutY="14.0" onKeyReleased="#searchRecipesByIngredients" prefHeight="26.0" prefWidth="252.0" promptText="Put in here some ingeretiends that you have" />
    </children>
 </AnchorPane>

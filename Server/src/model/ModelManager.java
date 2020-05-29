@@ -60,6 +60,12 @@ public class ModelManager implements Model
     return CommentDAOImpl.getInstance().create(Id, user, text);
   }
 
+  @Override public RecipeList searchRecipesByIngredients(String searchString)
+      throws SQLException
+  {
+    return RecipeDAOImpl.getInstance().searchRecipesByIngredients(searchString);
+  }
+
   @Override public int login(String username, String password)
       throws SQLException
   {

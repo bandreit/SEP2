@@ -22,6 +22,7 @@ public class AllRecipesViewController extends ViewController
 {
   @FXML private ChoiceBox filter;
   @FXML private TextField searchString;
+  @FXML private TextField searchIngredients;
   @FXML private TableView<RecipeTable> recipeList;
   @FXML private TableColumn<RecipeTable, String> categoryColumn;
   @FXML private TableColumn<RecipeTable, String> recipeColumn;
@@ -46,6 +47,9 @@ public class AllRecipesViewController extends ViewController
     searchString.textProperty().bindBidirectional(
         super.getViewModels().getAllRecipesViewModel()
             .getSearchStringProperty());
+    searchIngredients.textProperty().bindBidirectional(
+        super.getViewModels().getAllRecipesViewModel()
+            .getSearchStringForIngredientsProperty());
     recipeList.setItems(viewModels.getAllRecipesViewModel().getList());
     recipeList.setOnMouseClicked((MouseEvent event) -> {
       if (event.getButton().equals(MouseButton.PRIMARY)
@@ -78,6 +82,15 @@ public class AllRecipesViewController extends ViewController
     if (keyEvent.getCode() == KeyCode.ENTER)
     {
       super.getViewModels().getAllRecipesViewModel().searchRecipes();
+    }
+  }
+
+  public void searchRecipesByIngredients(KeyEvent keyEvent)
+      throws RemoteException, SQLException
+  {
+    if (keyEvent.getCode() == KeyCode.ENTER)
+    {
+      super.getViewModels().getAllRecipesViewModel().searchRecipesByIngredients();
     }
   }
 }
