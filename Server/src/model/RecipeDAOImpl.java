@@ -221,7 +221,7 @@ public class RecipeDAOImpl implements RecipeDAO
         int recipeId = resultSet.getInt("id");
         String instructions = resultSet.getString("instructions");
         int preparation_time = resultSet.getInt("preperation_time");
-        int owner_id = resultSet.getInt("preperation_time");
+        int owner_id = resultSet.getInt("owner_id");
         Recipe recipe = new Recipe(recipeId, name, description, instructions,
             preparation_time, category, owner_id);
         result.addRecipe(recipe);
