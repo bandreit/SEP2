@@ -24,7 +24,7 @@
                                     <Font size="19.0" />
                                  </font>
                               </Button>
-                              <Label fx:id="recipeName" prefHeight="46.0" prefWidth="327.0" text="DISCOUNTS" textFill="#d28731">
+                              <Label fx:id="recipeName" prefHeight="46.0" prefWidth="327.0" text="DISCOUNTS" textFill="#8f5615">
                                  <font>
                                     <Font name="System Bold" size="30.0" />
                                  </font>

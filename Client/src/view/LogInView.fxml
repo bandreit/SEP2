@@ -10,19 +10,31 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="405.0" prefWidth="526.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.LogInViewController">
+<AnchorPane prefHeight="405.0" prefWidth="526.0" style="-fx-background-color: ffc560;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.LogInViewController">
    <children>
-      <Button fx:id="logIn" layoutX="196.0" layoutY="280.0" mnemonicParsing="false" onAction="#loginButtonPressed" prefHeight="26.0" prefWidth="149.0" text="Log in" />
-      <Text layoutX="196.0" layoutY="88.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Log In" textAlignment="CENTER" wrappingWidth="148.79999999999995">
+      <Button fx:id="logIn" layoutX="196.0" layoutY="273.0" mnemonicParsing="false" onAction="#loginButtonPressed" prefHeight="26.0" prefWidth="149.0" style="-fx-background-color: b38022;" text="LOG IN" textFill="WHITE">
          <font>
-            <Font size="30.0" />
+            <Font name="System Bold" size="14.0" />
+         </font></Button>
+      <Text fill="#8f5615" layoutX="196.0" layoutY="88.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LOG IN" textAlignment="CENTER" wrappingWidth="148.79999999999995">
+         <font>
+            <Font name="System Bold" size="30.0" />
          </font>
       </Text>
       <TextField fx:id="username" layoutX="196.0" layoutY="139.0" prefHeight="26.0" prefWidth="149.0" />
-      <PasswordField fx:id="password" layoutX="196.0" layoutY="188.0" />
-      <Text layoutX="125.0" layoutY="156.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username:" wrappingWidth="60.000012207031205" />
-      <Text layoutX="125.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password:" wrappingWidth="60.000012207031205" />
-      <Button fx:id="register" layoutX="196.0" layoutY="312.0" mnemonicParsing="false" onAction="#openRegisterPage" prefHeight="26.0" prefWidth="149.0" text="Register" />
+      <PasswordField fx:id="password" layoutX="197.0" layoutY="188.0" />
+      <Text fill="WHITE" layoutX="99.0" layoutY="159.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username:" wrappingWidth="85.5999877929687">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font></Text>
+      <Text fill="WHITE" layoutX="99.0" layoutY="206.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password:" wrappingWidth="85.5999877929687">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font></Text>
+      <Button fx:id="register" layoutX="196.0" layoutY="312.0" mnemonicParsing="false" onAction="#openRegisterPage" prefHeight="26.0" prefWidth="149.0" style="-fx-background-color: b38022;" text="REGISTER" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></Button>
       <HBox alignment="CENTER" layoutX="-15.0" layoutY="232.0" prefHeight="40.0" prefWidth="543.0">
          <children>
             <Label fx:id="errorLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="18.0" prefWidth="257.0" textFill="RED">

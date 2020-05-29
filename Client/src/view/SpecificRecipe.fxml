@@ -29,7 +29,7 @@
                                     <Font size="19.0" />
                                  </font>
                               </Button>
-                              <Label fx:id="recipeName" prefHeight="46.0" prefWidth="327.0" text="Chicken Pasta" textFill="#d28731">
+                              <Label fx:id="recipeName" prefHeight="46.0" prefWidth="327.0" text="Chicken Pasta" textFill="#8f5615">
                                  <font>
                                     <Font name="System Bold" size="30.0" />
                                  </font>
@@ -105,7 +105,7 @@
                                                          <children>
                                                             <Label fx:id="description" prefHeight="130.0" prefWidth="221.0" text="Description...." wrapText="true">
                                                                <font>
-                                                                  <Font name="System Italic" size="13.0" />
+                                                                  <Font name="System Italic" size="15.0" />
                                                                </font>
                                                                <opaqueInsets>
                                                                   <Insets />
