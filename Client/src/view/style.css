@@ -1,0 +1,11 @@
+.tab-pane .tab-header-area .tab-header-background {
+    -fx-opacity: 0;
+    -fx-cell-size: 25px;
+}
+
+.tab-pane .tab-label {
+-fx-text-fill: white;
+-fx-font-size: 16px;
+-fx-font-weight: Bold;
+
+}

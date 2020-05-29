@@ -6,7 +6,7 @@ class Rema1000Scrapper {
   public getDiscountsCount = () => {
     return new ScrapperService(ScrapperConfig.rema1000.discounts)
       .advancedFetch()
-      .then(html => {
+      .then((html) => {
         const itemContainers = $(".product-wrap", html);
         return itemContainers.length;
       });
@@ -15,15 +15,24 @@ class Rema1000Scrapper {
   public getDiscounts = () => {
     return new ScrapperService(ScrapperConfig.rema1000.discounts)
       .advancedFetch()
-      .then(html => {
+      .then((html) => {
         const discountsList = $(".product", html);
         const discounts: any = [];
 
-        $(discountsList).map(index => {
+        $(discountsList).map((index) => {
           const item = $(discountsList[index]).html();
+
+          const category = $(discountsList[index])
+            .parent()
+            .parent()
+            .find(".header .title")
+            .text()
+            .replace(/\n/g, "")
+            .replace(/\t/g, "");
+
           if (!item) return;
 
-          const discount = this.getDiscountInformation(item);
+          const discount = this.getDiscountInformation(item, category);
           return discounts.push(discount);
         });
 
@@ -31,13 +40,10 @@ class Rema1000Scrapper {
       });
   };
 
-  public getDiscountInformation = (html: string) => {
-    const image = $(".image img", html).attr("src");
+  public getDiscountInformation = (html: string, category) => {
+    const imageUrl = $(".image img", html).attr("src");
     const title = $(".title", html).text();
-    const details = $(".extra", html)
-      .children()
-      .first()
-      .text();
+    const details = $(".extra", html).children().first().text();
 
     // The UI shows wrong classes
     const normalPrice = $(".price-discount", html).html();
@@ -49,29 +55,24 @@ class Rema1000Scrapper {
      * and the uid is 61114
      */
 
-    const uid = image.split("item/")[1].split("/")[0];
+    const uid = imageUrl.split("item/")[1].split("/")[0];
     const link = `${ScrapperConfig.rema1000.base}/varer/${uid}`;
 
     return {
-      uid: `${ScrapperConfig.rema1000.name}-${uid}`,
       title,
       details,
-      categoryId: "TO CHANGE",
-      storeId: "TO CHANGE",
+      imageUrl,
+      category,
       discountPrice: this.htmlPriceToValue(discountPrice),
       normalPrice: this.htmlPriceToValue(normalPrice),
-      image,
-      link
+      link,
     };
   };
 
   private htmlPriceToValue = (html: string | null) => {
     if (!html) return html;
 
-    return html
-      .replace("<span>", ".")
-      .replace("</span>", "")
-      .replace(",", ".");
+    return html.replace("<span>", ".").replace("</span>", "").replace(",", ".");
   };
 }
 
