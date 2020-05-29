@@ -27,4 +27,5 @@ public interface RemoteModel extends RemoteSubject<Recipe, Ingredient>, Remote
   String getComment(int id)  throws SQLException, RemoteException;
 public String createComment(int Id, int user, String text)
       throws SQLException, RemoteException;
+  ListOfDiscountItems getDiscountItems() throws SQLException, RemoteException;
 }

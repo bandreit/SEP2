@@ -135,6 +135,12 @@ public class RemoteModelManager
     return model.createComment(Id, user, text);
   }
 
+  @Override public ListOfDiscountItems getDiscountItems()
+      throws SQLException, RemoteException
+  {
+    return model.getDiscountItems();
+  }
+
   @Override public boolean addListener(
       GeneralListener<Recipe, Ingredient> listener, String... propertyNames)
       throws RemoteException

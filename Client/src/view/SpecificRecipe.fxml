@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="670.0" prefWidth="420.0" style="-fx-background-color: ffc560;" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.SpecificRecipeController">
+<AnchorPane prefHeight="670.0" prefWidth="419.0" style="-fx-background-color: ffc560;" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.SpecificRecipeController">
    <children>
       <VBox prefHeight="627.0" prefWidth="404.0">
          <children>
@@ -84,7 +84,7 @@
                                                             <Font name="System Bold" size="12.0" />
                                                          </font>
                                                       </Label>
-                                                      <Label fx:id="category" alignment="TOP_LEFT" prefHeight="34.0" prefWidth="156.0" text="Category" textFill="#828282">
+                                                      <Label fx:id="category" alignment="TOP_LEFT" onMouseClicked="#openDiscounts" prefHeight="34.0" prefWidth="156.0" style="-fx-underline: true;" text="Category" textFill="#828282">
                                                          <font>
                                                             <Font name="System Bold Italic" size="14.0" />
                                                          </font>

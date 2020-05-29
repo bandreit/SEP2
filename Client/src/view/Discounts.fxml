@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="424.0" prefWidth="419.0" style="-fx-background-color: ffc560;" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.DiscountsController">
+   <children>
+      <VBox prefHeight="430.0" prefWidth="404.0">
+         <children>
+            <HBox alignment="CENTER_LEFT" prefHeight="46.0" prefWidth="404.0">
+               <children>
+                  <VBox prefHeight="62.0" prefWidth="394.0">
+                     <children>
+                        <HBox alignment="CENTER" prefHeight="70.0" prefWidth="385.0">
+                           <children>
+                              <Button mnemonicParsing="false" onAction="#goBack" prefHeight="42.0" prefWidth="55.0" style="-fx-background-color: ffc560;" text="⬅" textFill="WHITE">
+                                 <font>
+                                    <Font size="19.0" />
+                                 </font>
+                              </Button>
+                              <Label fx:id="recipeName" prefHeight="46.0" prefWidth="327.0" text="DISCOUNTS" textFill="#d28731">
+                                 <font>
+                                    <Font name="System Bold" size="30.0" />
+                                 </font>
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <padding>
+                                    <Insets left="5.0" />
+                                 </padding>
+                              </Label>
+                           </children>
+                        </HBox>
+                     </children>
+                     <padding>
+                        <Insets left="5.0" />
+                     </padding>
+                  </VBox>
+               </children>
+            </HBox>
+            <VBox prefHeight="371.0" prefWidth="404.0">
+               <children>
+                  <ListView fx:id="list" prefHeight="382.0" prefWidth="404.0" />
+               </children>
+            </VBox>
+         </children>
+         <padding>
+            <Insets top="10.0" />
+         </padding>
+      </VBox>
+   </children>
+</AnchorPane>

@@ -136,6 +136,11 @@ public class Client implements ClientModel, RemoteListener<Recipe, Ingredient>
     return remoteModel.createComment(Id, user, text);
   }
 
+  @Override public ListOfDiscountItems getDiscountItems() throws SQLException, RemoteException
+  {
+    return remoteModel.getDiscountItems();
+  }
+
   @Override public void propertyChange(ObserverEvent<Recipe, Ingredient> event)
       throws RemoteException
   {

@@ -13,6 +13,7 @@ public class ViewModelFactory
   private MyRecipesViewModel myRecipesViewModel;
   private AllRecipesViewModel allRecipesViewModel;
   private SpecificRecipeViewModel specificRecipeViewModel;
+  private DiscountsViewModel discountsViewModel;
 
   public ViewModelFactory(LocalModel model) throws RemoteException, SQLException
   {
@@ -22,6 +23,7 @@ public class ViewModelFactory
     this.allRecipesViewModel=new AllRecipesViewModel(model);
     this.myRecipesViewModel=new MyRecipesViewModel(model);
     this.specificRecipeViewModel = new SpecificRecipeViewModel(model);
+    this.discountsViewModel = new DiscountsViewModel(model);
   }
 
   public CreateRecipeViewModel getCreateRecipeViewModel()
@@ -51,5 +53,10 @@ public class ViewModelFactory
   public SpecificRecipeViewModel getSpecificRecipeViewModel()
   {
     return specificRecipeViewModel;
+  }
+
+  public DiscountsViewModel getDiscountsViewModel()
+  {
+    return discountsViewModel;
   }
 }

@@ -71,6 +71,12 @@ public class LocalModelManager
     return clientModel.getIngredientsForRecipe(recipeId);
   }
 
+  @Override public ListOfDiscountItems getDiscountItems()
+      throws SQLException, RemoteException
+  {
+    return clientModel.getDiscountItems();
+  }
+
   @Override public String getComment(int id)
       throws SQLException, RemoteException
   {

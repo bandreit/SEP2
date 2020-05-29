@@ -66,6 +66,12 @@ public class ModelManager implements Model
     return RecipeDAOImpl.getInstance().searchRecipesByIngredients(searchString);
   }
 
+  @Override public ListOfDiscountItems getDiscountItems()
+      throws SQLException, RemoteException
+  {
+    return DiscountDAOImpl.getInstance().getDiscountItems();
+  }
+
   @Override public int login(String username, String password)
       throws SQLException
   {

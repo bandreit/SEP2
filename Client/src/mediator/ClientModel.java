@@ -34,4 +34,5 @@ public interface ClientModel extends LocalSubject<Recipe, Ingredient>
   public String createComment(int Id, int user, String text)
       throws SQLException, RemoteException;
 
+  ListOfDiscountItems getDiscountItems() throws SQLException, RemoteException;
 }

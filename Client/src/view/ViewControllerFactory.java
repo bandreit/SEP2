@@ -58,6 +58,8 @@ public class ViewControllerFactory
         return new MyRecipesViewController();
       case "SpecificRecipe":
         return new SpecificRecipeController();
+      case "Discounts":
+        return new DiscountsController();
       default:
         throw new IllegalArgumentException("No such id for view controller");
     }

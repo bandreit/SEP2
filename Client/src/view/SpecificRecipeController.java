@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Region;
 import viewmodel.ViewModelFactory;
 
@@ -53,5 +54,11 @@ public class SpecificRecipeController extends ViewController
       throws RemoteException, SQLException
   {
   super.getViewModels().getSpecificRecipeViewModel().setComment();
+  }
+
+  public void openDiscounts(MouseEvent mouseEvent)
+      throws RemoteException, SQLException
+  {
+    super.getHandler().openView("Discounts");
   }
 }
