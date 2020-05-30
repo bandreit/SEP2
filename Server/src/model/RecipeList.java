@@ -62,4 +62,17 @@ public class RecipeList implements Serializable
     return null;
   }
 
+  /**
+   * Method adding a Recipe object to the ArrayList
+   * @param recipe a Recipe object
+   * @throws IllegalArgumentException if the recipe is a null object
+   */
+  public void addRecipe(Recipe recipe)
+  {
+    if (recipe == null)
+    {
+      throw new IllegalArgumentException("A null recipe");
+    }
+    recipes.add(recipe);
+  }
 }
