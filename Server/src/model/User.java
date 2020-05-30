@@ -1,37 +1,70 @@
 package model;
 
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
+/**
+ * A class representing  a user
+ *
+ * @author Edvinas Andrijauskas
+ * @version 1.0 - May 2020
+ */
+
 public class User
 {
-  private int id;
-  private String username;
-  private String email;
-  private String password;
+  private int ID;
+  private static User instance;
+  private static Lock lock = new ReentrantLock();
 
-  public User(int id, String username, String email, String password)
+  /**
+   * One-argument constructor
+   *
+   * @param ID user id
+   */
+  private User(int ID)
   {
-    this.id = id;
-    this.username = username;
-    this.email = email;
-    this.password = password;
+    this.ID = ID;
   }
 
-  public int getId()
+  /**
+   * Getter for singleton instance
+   *
+   * @param ID we are getting a User with set id
+   */
+  public static void getInstance(int ID)
   {
-    return id;
+    if (instance == null)
+    {
+      synchronized (lock)
+      {
+        if (instance == null)
+        {
+          instance = new User(ID);
+        }
+      }
+    }
   }
 
-  public String getUsername()
+  /**
+   * Getter for singleton instance
+   *
+   * @return getting user
+   */
+  public static User getInstance()
   {
-    return username;
+    synchronized (lock)
+    {
+      return instance;
+    }
   }
 
-  public String getEmail()
+  /**
+   * Getter for user id
+   *
+   * @return Id as an integer
+   */
+  public int getUserID()
   {
-    return email;
-  }
-
-  public String getPassword()
-  {
-    return password;
+    return ID;
   }
 }
