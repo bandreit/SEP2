@@ -45,8 +45,8 @@ public class LogInViewModel
         {
           model.setUser(userId);
           return true;
-        };
-          errorLabel.set("Wrong password!");
+        }
+        errorLabel.set("Wrong password!");
       }
       catch (Exception e)
       {

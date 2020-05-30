@@ -20,8 +20,8 @@ public class ViewModelFactory
     this.logInViewModel = new LogInViewModel(model);
     this.registerViewModel = new RegisterViewModel(model);
     this.createRecipeViewModel = new CreateRecipeViewModel(model);
-    this.allRecipesViewModel=new AllRecipesViewModel(model);
-    this.myRecipesViewModel=new MyRecipesViewModel(model);
+    this.allRecipesViewModel = new AllRecipesViewModel(model);
+    this.myRecipesViewModel = new MyRecipesViewModel(model);
     this.specificRecipeViewModel = new SpecificRecipeViewModel(model);
     this.discountsViewModel = new DiscountsViewModel(model);
   }
@@ -30,6 +30,7 @@ public class ViewModelFactory
   {
     return createRecipeViewModel;
   }
+
   public LogInViewModel getLogInViewModel()
   {
     return logInViewModel;

@@ -49,7 +49,6 @@ public class CreateRecipeViewModel implements LocalListener<Recipe, Ingredient>
     this.isEditing = false;
     updateIngredients();
     this.model.addListener(this, "addIngredient");
-
   }
 
   public StringProperty getDeleteErrorLabel()
@@ -204,13 +203,6 @@ public class CreateRecipeViewModel implements LocalListener<Recipe, Ingredient>
     });
   }
 
-  //  public Recipe recipe()
-  //  {
-  //    return new Recipe(recipeName.get(), description.get(),
-  //        model.getListOfIngredients(), instructions.get(),
-  //        Integer.parseInt(time.get()), category.get());
-  //  }
-
   public Recipe createRecipe() throws RemoteException
   {
     try
@@ -225,14 +217,15 @@ public class CreateRecipeViewModel implements LocalListener<Recipe, Ingredient>
       return null;
     }
   }
-  /// GET THE CATEGORY FROM THE VIEW
 
-  public Recipe editRecipe() throws RemoteException {
+  public Recipe editRecipe() throws RemoteException
+  {
     try
     {
-      return model.editRecipe(recipe.getId(),recipeName.get(), description.get(),
-          model.getListOfIngredients(), instructions.get(),
-          Integer.parseInt(time.get()), category.get());
+      return model
+          .editRecipe(recipe.getId(), recipeName.get(), description.get(),
+              model.getListOfIngredients(), instructions.get(),
+              Integer.parseInt(time.get()), category.get());
     }
     catch (Exception e)
     {
@@ -268,15 +261,17 @@ public class CreateRecipeViewModel implements LocalListener<Recipe, Ingredient>
     time.setValue(Integer.toString(recipe.getPreparationTime()));
     description.setValue(recipe.getDescription());
     instructions.setValue(recipe.getInstructions());
-    ListOfIngredients ingredients  = model.getIngredientsForRecipe(id);
+    ListOfIngredients ingredients = model.getIngredientsForRecipe(id);
 
-    for(int i = 0; i < ingredients.getSize(); i++) {
-      listOfIngredients.add(new CreateRecipeTableRowData(ingredients.getIngredient(i)));
+    for (int i = 0; i < ingredients.getSize(); i++)
+    {
+      listOfIngredients
+          .add(new CreateRecipeTableRowData(ingredients.getIngredient(i)));
     }
-
   }
 
-  public boolean getIsEditing() {
+  public boolean getIsEditing()
+  {
     return isEditing;
   }
 }

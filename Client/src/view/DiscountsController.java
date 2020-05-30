@@ -30,16 +30,19 @@ public class DiscountsController extends ViewController
     super.init(viewHandler, viewModels, root);
     DiscountsViewModel discountsViewModel = super.getViewModels()
         .getDiscountsViewModel();
-    list.setItems(discountsViewModel
-        .getDiscounts(super.getViewModels().getSpecificRecipeViewModel().getCategoryProperty().get()));
-    list.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>()
-    {
-      public void changed(ObservableValue<? extends String> ov,
-          final String oldValue, final String newValue)
-      {
-        System.out.println(newValue);
-        discountsViewModel.openLink(newValue);
-      }});
+    list.setItems(discountsViewModel.getDiscounts(
+        super.getViewModels().getSpecificRecipeViewModel().getCategoryProperty()
+            .get()));
+    list.getSelectionModel().selectedItemProperty()
+        .addListener(new ChangeListener<String>()
+        {
+          public void changed(ObservableValue<? extends String> ov,
+              final String oldValue, final String newValue)
+          {
+            System.out.println(newValue);
+            discountsViewModel.openLink(newValue);
+          }
+        });
   }
 
   public void goBack(ActionEvent actionEvent)

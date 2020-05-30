@@ -41,8 +41,10 @@ public class AllRecipesViewController extends ViewController
         cellData -> cellData.getValue().getCategoryProperty());
     recipeColumn.setCellValueFactory(
         cellData -> cellData.getValue().getRecipeProperty());
-    categoryColumn.prefWidthProperty().bind(recipeList.widthProperty().multiply(0.7));
-    recipeColumn.prefWidthProperty().bind(recipeList.widthProperty().multiply(0.3));
+    categoryColumn.prefWidthProperty()
+        .bind(recipeList.widthProperty().multiply(0.7));
+    recipeColumn.prefWidthProperty()
+        .bind(recipeList.widthProperty().multiply(0.3));
     categoryColumn.setResizable(false);
     recipeColumn.setResizable(false);
     searchString.textProperty().bindBidirectional(
@@ -59,7 +61,9 @@ public class AllRecipesViewController extends ViewController
         try
         {
           super.getHandler().openView("SpecificRecipe");
-          super.getViewModels().getSpecificRecipeViewModel().setRecipe(recipeList.getSelectionModel().getSelectedItem().getIdProperty().get());
+          super.getViewModels().getSpecificRecipeViewModel().setRecipe(
+              recipeList.getSelectionModel().getSelectedItem().getIdProperty()
+                  .get());
         }
         catch (RemoteException | SQLException e)
         {
@@ -91,7 +95,8 @@ public class AllRecipesViewController extends ViewController
   {
     if (keyEvent.getCode() == KeyCode.ENTER)
     {
-      super.getViewModels().getAllRecipesViewModel().searchRecipesByIngredients();
+      super.getViewModels().getAllRecipesViewModel()
+          .searchRecipesByIngredients();
     }
   }
 }

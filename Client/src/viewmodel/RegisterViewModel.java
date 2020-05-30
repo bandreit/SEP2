@@ -61,7 +61,6 @@ public class RegisterViewModel
       }
       catch (Exception e)
       {
-//        e.printStackTrace();
         errorLabel.setValue(e.getMessage());
       }
     }

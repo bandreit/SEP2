@@ -146,7 +146,8 @@ public class AllRecipesViewModel implements LocalListener<Recipe, Ingredient>
     }
     else
     {
-      recipes = model.searchRecipesByIngredients(searchStringForIngredients.get());
+      recipes = model
+          .searchRecipesByIngredients(searchStringForIngredients.get());
     }
     list.clear();
     for (int i = 0; i < recipes.getSize(); i++)

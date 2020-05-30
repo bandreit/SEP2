@@ -27,8 +27,8 @@ public class IngredientDAOImpl implements IngredientDAO
         "postgres", "1");
   }
 
-  @Override public Ingredient create(String ingredient, int amount, String measurement)
-      throws SQLException
+  @Override public Ingredient create(String ingredient, int amount,
+      String measurement) throws SQLException
   {
     try (Connection connection = getConnection())
     {
@@ -57,8 +57,8 @@ public class IngredientDAOImpl implements IngredientDAO
   {
     try (Connection connection = getConnection())
     {
-      PreparedStatement statement = connection
-          .prepareStatement("select distinct i.id, i.name, i.amount, i.measurement from recipes r\n"
+      PreparedStatement statement = connection.prepareStatement(
+          "select distinct i.id, i.name, i.amount, i.measurement from recipes r\n"
               + "\tinner join recipe_ingredien_connection c on c.recipeid = ?\n"
               + "\tinner join ingredients i on c.ingredientid = i.id;");
       statement.setInt(1, id);
@@ -70,7 +70,8 @@ public class IngredientDAOImpl implements IngredientDAO
         String name = resultSet.getString("name");
         int amount = resultSet.getInt("amount");
         String measurement = resultSet.getString("measurement");
-        Ingredient ingredient = new Ingredient(ingredientId, name, amount, measurement);
+        Ingredient ingredient = new Ingredient(ingredientId, name, amount,
+            measurement);
         result.addIngredient(ingredient);
       }
       return result;

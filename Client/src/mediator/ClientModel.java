@@ -21,7 +21,6 @@ public interface ClientModel extends LocalSubject<Recipe, Ingredient>
   RecipeList searchRecipesByIngredients(String searchString)
       throws RemoteException, SQLException;
   void deleteRecipe(int id) throws RemoteException, SQLException;
-
   void close() throws Exception;
   RecipeList getRecipesForUser(int id) throws SQLException, RemoteException;
   ListOfIngredients getIngredientsForRecipe(int recipeId)
@@ -30,9 +29,7 @@ public interface ClientModel extends LocalSubject<Recipe, Ingredient>
       ListOfIngredients ingredients, String instructions, int preparationTime,
       String category, int userID) throws RemoteException;
   String getComment(int id) throws SQLException, RemoteException;
-
   public String createComment(int Id, int user, String text)
       throws SQLException, RemoteException;
-
   ListOfDiscountItems getDiscountItems() throws SQLException, RemoteException;
 }

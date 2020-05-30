@@ -16,11 +16,15 @@ public class RecipeTable
   public RecipeTable(Recipe recipe)
   {
     this.id = new SimpleIntegerProperty(recipe.getId());
-    this.category=new SimpleStringProperty(recipe.getCategory() + "\n" + recipe.getDescription());
-    this.recipes=new SimpleStringProperty(recipe.getRecipeName());
+    this.category = new SimpleStringProperty(
+        recipe.getCategory() + "\n" + recipe.getDescription());
+    this.recipes = new SimpleStringProperty(recipe.getRecipeName());
   }
 
-  public IntegerProperty getIdProperty() { return id;}
+  public IntegerProperty getIdProperty()
+  {
+    return id;
+  }
 
   public StringProperty getCategoryProperty()
   {

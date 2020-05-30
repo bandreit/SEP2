@@ -26,7 +26,8 @@ public class MyApplication extends Application
     try
     {
       server = new RemoteModelManager(model);
-    } catch (RemoteException | MalformedURLException e)
+    }
+    catch (RemoteException | MalformedURLException e)
     {
       e.printStackTrace();
     }

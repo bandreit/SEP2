@@ -14,8 +14,8 @@ public class Recipe implements Serializable
   private String category;
   private int ownerId;
 
-  public Recipe(int id, String recipeName, String description, String instructions, int preparationTime,
-      String category, int ownerId)
+  public Recipe(int id, String recipeName, String description,
+      String instructions, int preparationTime, String category, int ownerId)
   {
     this.id = id;
     this.recipeName = recipeName;
@@ -26,29 +26,8 @@ public class Recipe implements Serializable
     this.ownerId = ownerId;
   }
 
-//  public Recipe(String recipeName, String description, String instructions, int preparationTime,
-//      String category)
-//  {
-//    this.recipeName = recipeName;
-//    this.description = description;
-//    this.instructions = instructions;
-//    this.preparationTime = preparationTime;
-//    this.category = category;
-//  }
-//
-//  public Recipe(String recipeName, String description, ListOfIngredients ingredients,String instructions, int preparationTime,
-//      String category)
-//  {
-//    this.recipeName = recipeName;
-//    this.description = description;
-//    this.ingredients = ingredients;
-//    this.instructions = instructions;
-//    this.preparationTime = preparationTime;
-//    this.category = category;
-//  }
-
-  public Recipe(String recipeName, String description, String instructions, int preparationTime,
-      String category)
+  public Recipe(String recipeName, String description, String instructions,
+      int preparationTime, String category)
   {
     this.recipeName = recipeName;
     this.description = description;
@@ -57,7 +36,8 @@ public class Recipe implements Serializable
     this.category = category;
   }
 
-  public Recipe(String recipeName, String description, ListOfIngredients ingredients,String instructions, int preparationTime,
+  public Recipe(String recipeName, String description,
+      ListOfIngredients ingredients, String instructions, int preparationTime,
       String category)
   {
     this.recipeName = recipeName;
@@ -108,12 +88,10 @@ public class Recipe implements Serializable
     return category;
   }
 
-
   public int getOwnerId()
   {
     return ownerId;
   }
-
 
   @Override public String toString()
   {

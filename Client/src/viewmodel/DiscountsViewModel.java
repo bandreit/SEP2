@@ -33,14 +33,18 @@ public class DiscountsViewModel
     this.discounts = FXCollections.observableArrayList();
   }
 
-  private void setDiscounts(String category) throws SQLException, RemoteException
+  private void setDiscounts(String category)
+      throws SQLException, RemoteException
   {
     discountItems = model.getDiscountItems();
     for (int i = 0; i < discountItems.getSize(); i++)
     {
       if (discountItems.getDiscountItem(i).getCategory().equals(category))
       {
-        discounts.add(discountItems.getDiscountItem(i).getTitle() + ": " + discountItems.getDiscountItem(i).getDiscountPrice() + "DKK\n FROM " + discountItems.getDiscountItem(i).getNormalPrice() + "DKK");
+        discounts.add(
+            discountItems.getDiscountItem(i).getTitle() + ": " + discountItems
+                .getDiscountItem(i).getDiscountPrice() + "DKK\n FROM "
+                + discountItems.getDiscountItem(i).getNormalPrice() + "DKK");
       }
     }
   }
@@ -58,9 +62,12 @@ public class DiscountsViewModel
     String url = discountItems.getDiscountItemLinkByName(discountItem);
     if (url != null)
     {
-      try {
+      try
+      {
         Desktop.getDesktop().browse(new URL(url).toURI());
-      } catch (IOException | URISyntaxException e) {
+      }
+      catch (IOException | URISyntaxException e)
+      {
         e.printStackTrace();
       }
     }

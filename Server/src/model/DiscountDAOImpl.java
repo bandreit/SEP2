@@ -43,9 +43,10 @@ public class DiscountDAOImpl implements DiscountDAO
         String imageUrl = resultSet.getString("details");
         String category = resultSet.getString("category");
         String discountPrice = resultSet.getString("discountprice");
-        String normalPrice= resultSet.getString("normalprice");
+        String normalPrice = resultSet.getString("normalprice");
         String link = resultSet.getString("link");
-        DiscountItem discountItem = new DiscountItem(id, title, imageUrl, category, discountPrice, normalPrice, link);
+        DiscountItem discountItem = new DiscountItem(id, title, imageUrl,
+            category, discountPrice, normalPrice, link);
         result.addDiscountItem(discountItem);
       }
       return result;

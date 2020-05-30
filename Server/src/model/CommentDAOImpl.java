@@ -11,6 +11,7 @@ public class CommentDAOImpl implements CommentDAO
   {
     DriverManager.registerDriver(new org.postgresql.Driver());
   }
+
   private Connection getConnection() throws SQLException
   {
     return DriverManager.getConnection(

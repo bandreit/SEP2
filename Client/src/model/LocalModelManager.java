@@ -10,6 +10,7 @@ import utility.observer.subject.PropertyChangeProxy;
 
 import java.io.IOException;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.sql.SQLException;
 
 public class LocalModelManager
@@ -33,7 +34,6 @@ public class LocalModelManager
     {
       e.printStackTrace();
     }
-
   }
 
   @Override public int login(String user, String password) throws Exception
@@ -136,7 +136,6 @@ public class LocalModelManager
     return clientModel.searchRecipesByIngredients(searchString);
   }
 
-
   @Override public void deleteRecipe(int id)
       throws RemoteException, SQLException
   {
@@ -146,12 +145,13 @@ public class LocalModelManager
   @Override public void propertyChange(ObserverEvent<Recipe, Ingredient> event)
   {
 
-    property.firePropertyChange(event.getPropertyName(), event.getValue1(), null);
+    property
+        .firePropertyChange(event.getPropertyName(), event.getValue1(), null);
   }
 
-  @Override public void close(Recipe recipe)
+  @Override public void close(Recipe recipe) throws Exception
   {
-    //hz
+    clientModel.close();
   }
 
   @Override public RecipeList getSavedRecipeList()

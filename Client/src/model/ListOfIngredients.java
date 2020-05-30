@@ -27,7 +27,6 @@ public class ListOfIngredients implements Serializable
     return ingredients.get(index);
   }
 
-
   @Override public String toString()
   {
     return "ListOfIngredients{" + "ingredients=" + ingredients + '}';

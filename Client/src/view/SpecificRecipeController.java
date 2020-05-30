@@ -33,14 +33,27 @@ public class SpecificRecipeController extends ViewController
       throws RemoteException, SQLException
   {
     super.init(viewHandler, viewModels, root);
-    recipeName.textProperty().bindBidirectional(super.getViewModels().getSpecificRecipeViewModel().getRecipeNameProperty());
-    category.textProperty().bindBidirectional(super.getViewModels().getSpecificRecipeViewModel().getCategoryProperty());
-    time.textProperty().bindBidirectional(super.getViewModels().getSpecificRecipeViewModel().getTimeProperty());
-    description.textProperty().bindBidirectional(super.getViewModels().getSpecificRecipeViewModel().getDescriptionProperty());
-    ingredients.textProperty().bindBidirectional(super.getViewModels().getSpecificRecipeViewModel().getIngredientsProperty());
-    directions.textProperty().bindBidirectional(super.getViewModels().getSpecificRecipeViewModel().getDirectionsProperty());
-    writeComment.textProperty().bindBidirectional(super.getViewModels().getSpecificRecipeViewModel().getWriteComment());
-    comments.textProperty().bindBidirectional(super.getViewModels().getSpecificRecipeViewModel().getComments());
+    recipeName.textProperty().bindBidirectional(
+        super.getViewModels().getSpecificRecipeViewModel()
+            .getRecipeNameProperty());
+    category.textProperty().bindBidirectional(
+        super.getViewModels().getSpecificRecipeViewModel()
+            .getCategoryProperty());
+    time.textProperty().bindBidirectional(
+        super.getViewModels().getSpecificRecipeViewModel().getTimeProperty());
+    description.textProperty().bindBidirectional(
+        super.getViewModels().getSpecificRecipeViewModel()
+            .getDescriptionProperty());
+    ingredients.textProperty().bindBidirectional(
+        super.getViewModels().getSpecificRecipeViewModel()
+            .getIngredientsProperty());
+    directions.textProperty().bindBidirectional(
+        super.getViewModels().getSpecificRecipeViewModel()
+            .getDirectionsProperty());
+    writeComment.textProperty().bindBidirectional(
+        super.getViewModels().getSpecificRecipeViewModel().getWriteComment());
+    comments.textProperty().bindBidirectional(
+        super.getViewModels().getSpecificRecipeViewModel().getComments());
   }
 
   public void goBack(ActionEvent actionEvent)
@@ -49,11 +62,10 @@ public class SpecificRecipeController extends ViewController
     super.getHandler().openView("AllRecipes");
   }
 
-
   public void AddComment(ActionEvent actionEvent)
       throws RemoteException, SQLException
   {
-  super.getViewModels().getSpecificRecipeViewModel().setComment();
+    super.getViewModels().getSpecificRecipeViewModel().setComment();
   }
 
   public void openDiscounts(MouseEvent mouseEvent)

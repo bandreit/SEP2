@@ -36,7 +36,7 @@ public class Client implements ClientModel, RemoteListener<Recipe, Ingredient>
     this.remoteModel = (RemoteModel) Naming
         .lookup("rmi://" + host + ":1099/Recipes");
     UnicastRemoteObject.exportObject(this, 0);
-    this.remoteModel.addListener(this, "ADD","Comment");
+    this.remoteModel.addListener(this, "ADD", "Comment");
     this.property = new PropertyChangeProxy<>(this, true);
   }
 
@@ -100,7 +100,14 @@ public class Client implements ClientModel, RemoteListener<Recipe, Ingredient>
 
   @Override public void close() throws Exception
   {
-    //idk
+    try
+    {
+      UnicastRemoteObject.unexportObject(this, true);
+    }
+    catch (Exception e)
+    {
+      throw new IllegalStateException("Cannot unexport RMI object", e);
+    }
   }
 
   @Override public RecipeList getRecipesForUser(int id)
@@ -136,7 +143,8 @@ public class Client implements ClientModel, RemoteListener<Recipe, Ingredient>
     return remoteModel.createComment(Id, user, text);
   }
 
-  @Override public ListOfDiscountItems getDiscountItems() throws SQLException, RemoteException
+  @Override public ListOfDiscountItems getDiscountItems()
+      throws SQLException, RemoteException
   {
     return remoteModel.getDiscountItems();
   }

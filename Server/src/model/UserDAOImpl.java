@@ -26,7 +26,6 @@ public class UserDAOImpl implements UserDAO
         "jdbc:postgresql://localhost:5432/postgres?currentSchema=recipenetwork",
         "postgres", "1");
   }
-//  reksis1999
 
   @Override public User create(String username, String password, String email)
       throws SQLException
@@ -74,7 +73,8 @@ public class UserDAOImpl implements UserDAO
     return null;
   }
 
-  @Override public boolean doesUserExist(String searchString) throws SQLException
+  @Override public boolean doesUserExist(String searchString)
+      throws SQLException
   {
     try (Connection connection = getConnection())
     {

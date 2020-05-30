@@ -10,13 +10,11 @@ import java.util.ArrayList;
 
 public class ModelManager implements Model
 {
-  //  private RecipeList recipeList;
   private UserList userList;
   private PropertyChangeAction<Recipe, Recipe> property;
 
   public ModelManager()
   {
-    //    this.recipeList = new RecipeList();
     this.userList = new UserList();
     this.property = new PropertyChangeProxy<>(this);
   }
