@@ -16,7 +16,7 @@ public class Ingredient implements Serializable
   private String measurement;
 
   /**
-   *
+   * The constructor initiates the class instances
    * @param id - unique id for the ingredient
    * @param ingredient - ingredient name
    * @param amount - ingredient amount
