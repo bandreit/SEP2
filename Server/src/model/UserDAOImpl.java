@@ -103,14 +103,4 @@ public class UserDAOImpl implements UserDAO
     }
     return -1;
   }
-
-  @Override public void update(User user) throws SQLException
-  {
-
-  }
-
-  @Override public void delete(User user) throws SQLException
-  {
-
-  }
 }
