@@ -3,10 +3,10 @@ package model;
 import java.io.Serializable;
 
 /**
- * A class representing date and time
+ * A class representing the discount item
  *
  * @author Grigore Budac
- * @version 1.0-June 2020
+ * @version 1.0-May 2020
  */
 public class DiscountItem implements Serializable
 {
