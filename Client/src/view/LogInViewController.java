@@ -7,6 +7,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
+import viewmodel.LogInViewModel;
 import viewmodel.ViewModelFactory;
 
 import java.awt.*;
@@ -20,6 +21,7 @@ public class LogInViewController extends ViewController
   @FXML Label errorLabel;
   @FXML Button logIn;
   @FXML Button register;
+  private LogInViewModel logInViewModel;
 
   public LogInViewController()
   {
@@ -31,12 +33,13 @@ public class LogInViewController extends ViewController
       throws RemoteException, SQLException
   {
     super.init(viewHandler, viewModels, root);
+    logInViewModel = super.getViewModels().getLogInViewModel();
     username.textProperty().bindBidirectional(
-        super.getViewModels().getLogInViewModel().getUsernameProperty());
+        logInViewModel.getUsernameProperty());
     password.textProperty().bindBidirectional(
-        super.getViewModels().getLogInViewModel().getPasswordProperty());
+        logInViewModel.getPasswordProperty());
     errorLabel.textProperty()
-        .bind(super.getViewModels().getLogInViewModel().getErrorProperty());
+        .bind(logInViewModel.getErrorProperty());
   }
 
   public void openRegisterPage(ActionEvent event)
@@ -51,9 +54,9 @@ public class LogInViewController extends ViewController
 
   public void loginButtonPressed() throws RemoteException, SQLException
   {
-    if (super.getViewModels().getLogInViewModel().loginButtonPressed())
+    if (logInViewModel.loginButtonPressed())
     {
-      super.getViewModels().getLogInViewModel().clear();
+      logInViewModel.clear();
       super.getHandler().openView("AllRecipes");
     }
   }

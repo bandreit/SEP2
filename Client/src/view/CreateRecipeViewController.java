@@ -6,6 +6,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.Region;
 import javafx.util.StringConverter;
+import viewmodel.CreateRecipeViewModel;
+import viewmodel.MyRecipesViewModel;
 import viewmodel.ViewModelFactory;
 
 import java.rmi.RemoteException;
@@ -27,6 +29,8 @@ public class CreateRecipeViewController extends ViewController
   @FXML private TableColumn<CreateRecipeTableRowData, Integer> quantityColumn;
   @FXML private TableColumn<CreateRecipeTableRowData, String> measurementColumn;
   @FXML private TableView<CreateRecipeTableRowData> ingredientsList;
+  private CreateRecipeViewModel createRecipeViewModel;
+  private MyRecipesViewModel myRecipesViewModel;
 
   public CreateRecipeViewController()
   {
@@ -38,21 +42,21 @@ public class CreateRecipeViewController extends ViewController
       throws RemoteException, SQLException
   {
     super.init(viewHandler, viewModels, root);
-    recipeName.textProperty().bindBidirectional(
-        super.getViewModels().getCreateRecipeViewModel().getRecipeName());
-    description.textProperty().bindBidirectional(
-        super.getViewModels().getCreateRecipeViewModel().getDescription());
-    time.textProperty().bindBidirectional(
-        super.getViewModels().getCreateRecipeViewModel().getTime());
-    instructions.textProperty().bindBidirectional(
-        super.getViewModels().getCreateRecipeViewModel().getInstructions());
-    ingredientNameField.textProperty().bindBidirectional(
-        super.getViewModels().getCreateRecipeViewModel().getIngredientName());
-    deleteErrorLabel.textProperty().bindBidirectional(
-        super.getViewModels().getCreateRecipeViewModel().getDeleteErrorLabel());
+    createRecipeViewModel = super.getViewModels().getCreateRecipeViewModel();
+    myRecipesViewModel = super.getViewModels().getMyRecipesViewModel();
+    recipeName.textProperty()
+        .bindBidirectional(createRecipeViewModel.getRecipeName());
+    description.textProperty()
+        .bindBidirectional(createRecipeViewModel.getDescription());
+    time.textProperty().bindBidirectional(createRecipeViewModel.getTime());
+    instructions.textProperty()
+        .bindBidirectional(createRecipeViewModel.getInstructions());
+    ingredientNameField.textProperty()
+        .bindBidirectional(createRecipeViewModel.getIngredientName());
+    deleteErrorLabel.textProperty()
+        .bindBidirectional(createRecipeViewModel.getDeleteErrorLabel());
     Bindings.bindBidirectional(quantityField.textProperty(),
-        super.getViewModels().getCreateRecipeViewModel().getQuantity(),
-        new StringConverter<Number>()
+        createRecipeViewModel.getQuantity(), new StringConverter<Number>()
         {
           @Override public String toString(Number n)
           {
@@ -76,10 +80,10 @@ public class CreateRecipeViewController extends ViewController
           }
         });
 
-    measurementField.valueProperty().bindBidirectional(
-        super.getViewModels().getCreateRecipeViewModel().getMeasurement());
-    category.valueProperty().bindBidirectional(
-        super.getViewModels().getCreateRecipeViewModel().getCategory());
+    measurementField.valueProperty()
+        .bindBidirectional(createRecipeViewModel.getMeasurement());
+    category.valueProperty()
+        .bindBidirectional(createRecipeViewModel.getCategory());
 
     ingredientColumn
         .setCellValueFactory(cellData -> cellData.getValue().getIngredient());
@@ -88,32 +92,29 @@ public class CreateRecipeViewController extends ViewController
     measurementColumn
         .setCellValueFactory(cellData -> cellData.getValue().getMeasurement());
 
-    ingredientsList.setItems(
-        super.getViewModels().getCreateRecipeViewModel().getAllIngredients());
+    ingredientsList.setItems(createRecipeViewModel.getAllIngredients());
   }
 
   public void onAddIngredient(ActionEvent actionEvent)
   {
-    super.getViewModels().getCreateRecipeViewModel().createIngredient();
+    createRecipeViewModel.createIngredient();
   }
 
   public void onCreate(ActionEvent actionEvent)
       throws RemoteException, SQLException
   {
-    if (super.getViewModels().getCreateRecipeViewModel().validateRecipeFields())
+    if (createRecipeViewModel.validateRecipeFields())
     {
-      if (super.getViewModels().getCreateRecipeViewModel().getIsEditing())
+      if (createRecipeViewModel.getIsEditing())
       {
-        super.getViewModels().getMyRecipesViewModel().editRecipe(
-            super.getViewModels().getCreateRecipeViewModel().editRecipe());
+        myRecipesViewModel.editRecipe(createRecipeViewModel.editRecipe());
       }
       else
       {
-        super.getViewModels().getMyRecipesViewModel().addRecipe(
-            super.getViewModels().getCreateRecipeViewModel().createRecipe());
+        myRecipesViewModel.addRecipe(createRecipeViewModel.createRecipe());
       }
 
-      super.getViewModels().getCreateRecipeViewModel().clear();
+      createRecipeViewModel.clear();
       super.getHandler().openView("AllRecipes");
     }
   }
@@ -134,8 +135,7 @@ public class CreateRecipeViewController extends ViewController
       boolean remove = confirmation();
       if (remove)
       {
-        super.getViewModels().getCreateRecipeViewModel()
-            .remove(selectedItem.getIngredient().get());
+        createRecipeViewModel.remove(selectedItem.getIngredient().get());
         ingredientsList.getSelectionModel().clearSelection();
         getViewModels().getCreateRecipeViewModel()
             .remove(selectedItem.getIngredient().get());

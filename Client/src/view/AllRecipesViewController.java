@@ -11,6 +11,7 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Region;
 import org.w3c.dom.Text;
+import viewmodel.AllRecipesViewModel;
 import viewmodel.ViewModelFactory;
 
 import java.net.URL;
@@ -26,6 +27,7 @@ public class AllRecipesViewController extends ViewController
   @FXML private TableView<RecipeTable> recipeList;
   @FXML private TableColumn<RecipeTable, String> categoryColumn;
   @FXML private TableColumn<RecipeTable, String> recipeColumn;
+  private AllRecipesViewModel allRecipesViewModel;
 
   public AllRecipesViewController()
   {
@@ -37,6 +39,7 @@ public class AllRecipesViewController extends ViewController
       throws RemoteException, SQLException
   {
     super.init(viewHandler, viewModels, root);
+    allRecipesViewModel = super.getViewModels().getAllRecipesViewModel();
     categoryColumn.setCellValueFactory(
         cellData -> cellData.getValue().getCategoryProperty());
     recipeColumn.setCellValueFactory(
@@ -47,12 +50,10 @@ public class AllRecipesViewController extends ViewController
         .bind(recipeList.widthProperty().multiply(0.3));
     categoryColumn.setResizable(false);
     recipeColumn.setResizable(false);
-    searchString.textProperty().bindBidirectional(
-        super.getViewModels().getAllRecipesViewModel()
-            .getSearchStringProperty());
+    searchString.textProperty()
+        .bindBidirectional(allRecipesViewModel.getSearchStringProperty());
     searchIngredients.textProperty().bindBidirectional(
-        super.getViewModels().getAllRecipesViewModel()
-            .getSearchStringForIngredientsProperty());
+        allRecipesViewModel.getSearchStringForIngredientsProperty());
     recipeList.setItems(viewModels.getAllRecipesViewModel().getList());
     recipeList.setOnMouseClicked((MouseEvent event) -> {
       if (event.getButton().equals(MouseButton.PRIMARY)
@@ -71,8 +72,7 @@ public class AllRecipesViewController extends ViewController
         }
       }
     });
-    filter.valueProperty().bindBidirectional(
-        super.getViewModels().getAllRecipesViewModel().getFilter());
+    filter.valueProperty().bindBidirectional(allRecipesViewModel.getFilter());
   }
 
   public void onMyRecipes(ActionEvent actionEvent)
@@ -86,7 +86,7 @@ public class AllRecipesViewController extends ViewController
   {
     if (keyEvent.getCode() == KeyCode.ENTER)
     {
-      super.getViewModels().getAllRecipesViewModel().searchRecipes();
+      allRecipesViewModel.searchRecipes();
     }
   }
 
@@ -95,8 +95,7 @@ public class AllRecipesViewController extends ViewController
   {
     if (keyEvent.getCode() == KeyCode.ENTER)
     {
-      super.getViewModels().getAllRecipesViewModel()
-          .searchRecipesByIngredients();
+      allRecipesViewModel.searchRecipesByIngredients();
     }
   }
 }

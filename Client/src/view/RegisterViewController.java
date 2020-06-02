@@ -6,6 +6,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Region;
+import viewmodel.RegisterViewModel;
 import viewmodel.ViewModelFactory;
 
 import java.rmi.RemoteException;
@@ -18,6 +19,7 @@ public class RegisterViewController extends ViewController
   @FXML Label errorLabel;
   @FXML PasswordField confirmPassword;
   @FXML TextField email;
+  private   RegisterViewModel registerViewModel;
 
   public RegisterViewController()
   {
@@ -29,17 +31,19 @@ public class RegisterViewController extends ViewController
       throws RemoteException, SQLException
   {
     super.init(viewHandler, viewModels, root);
+    registerViewModel = super.getViewModels()
+        .getRegisterViewModel();
     username.textProperty().bindBidirectional(
-        super.getViewModels().getRegisterViewModel().getUsernameProperty());
+        registerViewModel.getUsernameProperty());
     password.textProperty().bindBidirectional(
-        super.getViewModels().getRegisterViewModel().getPasswordProperty());
+        registerViewModel.getPasswordProperty());
     errorLabel.textProperty()
-        .bind(super.getViewModels().getRegisterViewModel().getErrorProperty());
+        .bind(registerViewModel.getErrorProperty());
     confirmPassword.textProperty().bindBidirectional(
-        super.getViewModels().getRegisterViewModel()
+        registerViewModel
             .getConfirmPasswordProperty());
     email.textProperty().bindBidirectional(
-        super.getViewModels().getRegisterViewModel().getEmailProperty());
+        registerViewModel.getEmailProperty());
   }
 
   public void backToLogIn(MouseEvent mouseEvent)
@@ -50,10 +54,10 @@ public class RegisterViewController extends ViewController
 
   public void RegisterButtonPressed() throws RemoteException, SQLException
   {
-    if (super.getViewModels().getRegisterViewModel().registerAccount())
+    if (registerViewModel.registerAccount())
     {
       super.getHandler().openView("LogInView");//move on if correct
-      super.getViewModels().getRegisterViewModel().clear();
+      registerViewModel.clear();
     }
   }
 

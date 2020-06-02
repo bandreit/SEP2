@@ -4,6 +4,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.Region;
+import viewmodel.AllRecipesViewModel;
+import viewmodel.CreateRecipeViewModel;
+import viewmodel.MyRecipesViewModel;
 import viewmodel.ViewModelFactory;
 
 import java.rmi.RemoteException;
@@ -16,6 +19,9 @@ public class MyRecipesViewController extends ViewController
   @FXML private TableView<RecipeTable> myRecipeList;
   @FXML private TableColumn<RecipeTable, String> categoryColumn;
   @FXML private TableColumn<RecipeTable, String> recipeColumn;
+  private AllRecipesViewModel allRecipesViewModel;
+  private CreateRecipeViewModel createRecipeViewModel;
+  private MyRecipesViewModel myRecipesViewModel;
 
   public MyRecipesViewController()
   {
@@ -27,6 +33,9 @@ public class MyRecipesViewController extends ViewController
       throws RemoteException, SQLException
   {
     super.init(viewHandler, viewModels, root);
+    allRecipesViewModel = super.getViewModels().getAllRecipesViewModel();
+    createRecipeViewModel = super.getViewModels().getCreateRecipeViewModel();
+    myRecipesViewModel = super.getViewModels().getMyRecipesViewModel();
     categoryColumn.setCellValueFactory(
         cellData -> cellData.getValue().getCategoryProperty());
     recipeColumn.setCellValueFactory(
@@ -46,11 +55,12 @@ public class MyRecipesViewController extends ViewController
   {
     try
     {
-      super.getViewModels().getCreateRecipeViewModel().setRecipe(
+      createRecipeViewModel.setRecipe(
           myRecipeList.getSelectionModel().getSelectedItem().getIdProperty()
               .get());
       super.getHandler().openView("CreateRecipeView");
-    } catch (Exception e)
+    }
+    catch (Exception e)
     {
       deleteErrorLabel.setText("No recipe selected");
     }
@@ -72,13 +82,10 @@ public class MyRecipesViewController extends ViewController
       boolean remove = confirmation();
       if (remove)
       {
-        super.getViewModels().getMyRecipesViewModel()
-            .removeRecipe(selectedItem.getIdProperty().get());
+        myRecipesViewModel.removeRecipe(selectedItem.getIdProperty().get());
         myRecipeList.getSelectionModel().clearSelection();
-        super.getViewModels().getAllRecipesViewModel()
-            .removeRecipe(selectedItem.getIdProperty().get());
-        super.getViewModels().getMyRecipesViewModel()
-            .deleteRecipe(selectedItem.getIdProperty().get());
+        allRecipesViewModel.removeRecipe(selectedItem.getIdProperty().get());
+        myRecipesViewModel.deleteRecipe(selectedItem.getIdProperty().get());
       }
     }
     catch (Exception e)
