@@ -53,12 +53,12 @@ public class Client implements ClientModel, RemoteListener<Recipe, Ingredient>
     }
   }
 
-  @Override public void register(String user, String password, String email,
+  @Override public int register(String user, String password, String email,
       String confirmPassword) throws RemoteException
   {
     try
     {
-      remoteModel.register(user, password, email, confirmPassword);
+      return remoteModel.register(user, password, email, confirmPassword);
     }
     catch (Exception e)
     {

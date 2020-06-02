@@ -10,7 +10,7 @@ public interface ClientModel extends LocalSubject<Recipe, Ingredient>
 {
   int login(String username, String password)
       throws RemoteException, SQLException, Exception;
-  void register(String user, String password, String email,
+  int register(String user, String password, String email,
       String confirmPassword) throws RemoteException, SQLException;
   Recipe createRecipe(String recipeName, String description,
       ListOfIngredients ingredients, String instructions, int preparationTime,

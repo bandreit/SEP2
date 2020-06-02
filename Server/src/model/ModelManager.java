@@ -81,7 +81,7 @@ public class ModelManager implements Model
       return UserDAOImpl.getInstance().logInUser(username, password);
   }
 
-  @Override public void register(String user, String password, String email,
+  @Override public int register(String user, String password, String email,
       String confirmPassword) throws SQLException, RemoteException
   {
     if (UserDAOImpl.getInstance().doesUserExist(user))
@@ -89,7 +89,11 @@ public class ModelManager implements Model
       throw new IllegalAccessError("Username is already taken");
     }
     else
-      userList.addUser(UserDAOImpl.getInstance().create(user, password, email));
+    {
+      User userFromDB = UserDAOImpl.getInstance().create(user, password, email);
+      userList.addUser(userFromDB);
+      return userFromDB.getId();
+    }
   }
 
   @Override public Recipe createRecipe(String recipeName, String description,

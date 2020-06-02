@@ -57,10 +57,10 @@ public class RemoteModelManager
     return model.login(username, password);
   }
 
-  @Override public void register(String user, String password, String email,
+  @Override public int register(String user, String password, String email,
       String confirmPassword) throws SQLException, RemoteException
   {
-    model.register(user, password, email, confirmPassword);
+    return model.register(user, password, email, confirmPassword);
   }
 
   @Override public Recipe createRecipe(String recipeName, String description,

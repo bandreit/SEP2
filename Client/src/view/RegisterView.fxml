@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="425.0" prefWidth="295.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.RegisterViewController">
+<AnchorPane prefHeight="425.0" prefWidth="295.0" style="-fx-background-color: ffc560;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.RegisterViewController">
    <children>
       <TextField fx:id="username" layoutX="67.0" layoutY="91.0" />
       <TextField fx:id="email" layoutX="65.0" layoutY="158.0" />

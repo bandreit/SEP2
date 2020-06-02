@@ -8,7 +8,7 @@ import java.sql.SQLException;
 public interface Model extends LocalSubject<Recipe, Recipe>
 {
   int login(String username, String password) throws SQLException;
-  void register(String user, String password, String email,
+  int register(String user, String password, String email,
       String confirmPassword) throws SQLException, RemoteException;
   Recipe createRecipe(String recipeName, String description,
       ListOfIngredients ingredients, String instructions, int preparationTime,

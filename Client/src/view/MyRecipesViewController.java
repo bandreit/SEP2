@@ -44,11 +44,16 @@ public class MyRecipesViewController extends ViewController
 
   public void onEditRecipe() throws RemoteException, SQLException
   {
-    super.getHandler().openView("CreateRecipeView");
-
-    super.getViewModels().getCreateRecipeViewModel().setRecipe(
-        myRecipeList.getSelectionModel().getSelectedItem().getIdProperty()
-            .get());
+    try
+    {
+      super.getViewModels().getCreateRecipeViewModel().setRecipe(
+          myRecipeList.getSelectionModel().getSelectedItem().getIdProperty()
+              .get());
+      super.getHandler().openView("CreateRecipeView");
+    } catch (Exception e)
+    {
+      deleteErrorLabel.setText("No recipe selected");
+    }
   }
 
   public void backToAllRecipes(ActionEvent actionEvent)
@@ -78,7 +83,7 @@ public class MyRecipesViewController extends ViewController
     }
     catch (Exception e)
     {
-      deleteErrorLabel.setText("Item not found: " + e.getMessage());
+      deleteErrorLabel.setText("Nothing selected");
     }
   }
 

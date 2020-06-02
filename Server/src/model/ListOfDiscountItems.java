@@ -43,15 +43,6 @@ public class ListOfDiscountItems implements Serializable
   }
 
   /**
-   * A method returning the representation of instance variables
-   * @return String containing all the discount items displayed
-   */
-  @Override public String toString()
-  {
-    return "ListOfDiscountItems{" + "discountItems=" + discountItems + '}';
-  }
-
-  /**
    * A getter for the list of discounts size
    *
    * @return list of discount items size as an integer

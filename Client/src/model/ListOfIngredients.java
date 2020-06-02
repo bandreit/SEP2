@@ -27,6 +27,10 @@ public class ListOfIngredients implements Serializable
    */
   public void addIngredient(Ingredient ingredient)
   {
+    if (ingredient == null)
+    {
+      throw new IllegalArgumentException("Empty ingredient");
+    }
     ingredients.add(ingredient);
   }
 
@@ -36,7 +40,13 @@ public class ListOfIngredients implements Serializable
    */
   public void removeIngredient(String ingredientName)
   {
-    ingredients.remove(ingredientName);
+    for (int i = 0; i < ingredients.size(); i++)
+    {
+      if (ingredients.get(i).getIngredient().equals(ingredientName))
+      {
+        ingredients.remove(ingredients.get(i));
+      }
+    }
   }
 
   /**

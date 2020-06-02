@@ -16,7 +16,7 @@ public class CommentDAOImpl implements CommentDAO
   {
     return DriverManager.getConnection(
         "jdbc:postgresql://localhost:5432/postgres?currentSchema=recipenetwork",
-        "postgres", "1");
+        "postgres", "1234");
   }
 
   public static synchronized CommentDAOImpl getInstance() throws SQLException

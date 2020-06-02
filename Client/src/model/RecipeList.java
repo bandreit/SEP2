@@ -38,6 +38,7 @@ public class RecipeList implements Serializable
    *
    * @param index index is an integer, which shows the position in the arrayList
    * @return asked recipe
+   * @throws IndexOutOfBoundsException if there is no Recipe at specific index
    */
   public Recipe getRecipe(int index)
   {
@@ -46,6 +47,7 @@ public class RecipeList implements Serializable
 
   /**
    * A getter for specific recipe by id from the arrayList
+   *
    * @param id id of the recipe
    * @return asked recipe
    */
@@ -64,6 +66,7 @@ public class RecipeList implements Serializable
 
   /**
    * Method adding a Recipe object to the ArrayList
+   *
    * @param recipe a Recipe object
    * @throws IllegalArgumentException if the recipe is a null object
    */

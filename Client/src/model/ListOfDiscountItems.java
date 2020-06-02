@@ -15,7 +15,7 @@ public class ListOfDiscountItems implements Serializable
 
   /**
    * Zero argument constructor.
-   * the discountItems Arraylist is initialized
+   * the discountItems ArrayList is initialized
    */
   public ListOfDiscountItems()
   {
@@ -40,15 +40,6 @@ public class ListOfDiscountItems implements Serializable
   public DiscountItem getDiscountItem(int index)
   {
     return discountItems.get(index);
-  }
-
-  /**
-   * A method returning the representation of instance variables
-   * @return String containing all the discount items displayed
-   */
-  @Override public String toString()
-  {
-    return "ListOfDiscountItems{" + "discountItems=" + discountItems + '}';
   }
 
   /**

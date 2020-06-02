@@ -1,5 +1,6 @@
 package model;
 
+import java.io.Serializable;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -10,7 +11,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * @version 1.0 - May 2020
  */
 
-public class User
+public class User implements Serializable
 {
   private int ID;
   private static User instance;

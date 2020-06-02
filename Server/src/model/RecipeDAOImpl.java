@@ -26,7 +26,7 @@ public class RecipeDAOImpl implements RecipeDAO
   {
     return DriverManager.getConnection(
         "jdbc:postgresql://localhost:5432/postgres?currentSchema=recipenetwork",
-        "postgres", "1");
+        "postgres", "1234");
   }
 
   @Override public Recipe createRecipe(String recipeName, String description,
@@ -80,7 +80,7 @@ public class RecipeDAOImpl implements RecipeDAO
       if (keys.next())
       {
         return new Recipe(keys.getInt(1), recipeName, description, instructions,
-            preparationTime, category, id);
+            preparationTime, category, userId);
       }
       else
       {
@@ -236,9 +236,18 @@ public class RecipeDAOImpl implements RecipeDAO
     try (Connection connection = getConnection())
     {
       PreparedStatement statement = connection
-          .prepareStatement("DELETE FROM recipes WHERE id = ?");
+          .prepareStatement("DELETE FROM recipes WHERE id = ?", PreparedStatement.RETURN_GENERATED_KEYS);
       statement.setInt(1, id);
       statement.executeUpdate();
+      ResultSet keys = statement.getGeneratedKeys();
+      if (keys.next())
+      {
+        System.out.println("Deleted Recipe");
+      }
+      else
+      {
+        throw new SQLException("No such recipe");
+      }
     }
   }
 

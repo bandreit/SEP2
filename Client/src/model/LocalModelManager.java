@@ -10,7 +10,6 @@ import utility.observer.subject.PropertyChangeProxy;
 
 import java.io.IOException;
 import java.rmi.RemoteException;
-import java.rmi.server.UnicastRemoteObject;
 import java.sql.SQLException;
 
 public class LocalModelManager
@@ -89,10 +88,10 @@ public class LocalModelManager
     return clientModel.createComment(Id, user, text);
   }
 
-  @Override public void register(String user, String password, String email,
+  @Override public int register(String user, String password, String email,
       String confirmPassword) throws RemoteException, SQLException
   {
-    clientModel.register(user, password, email, confirmPassword);
+    return clientModel.register(user, password, email, confirmPassword);
   }
 
   @Override public void addFullIngredientWithQtyAndAMeasurement(
