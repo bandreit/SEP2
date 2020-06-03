@@ -49,7 +49,7 @@
                   </VBox>
                </children>
             </HBox>
-            <HBox prefHeight="385.0" prefWidth="404.0">
+            <HBox prefHeight="385.0" prefWidth="414.0">
                <children>
                   <VBox prefHeight="359.0" prefWidth="422.0">
                      <children>
@@ -57,9 +57,9 @@
                           <tabs>
                             <Tab style="-fx-background-color: ffc560;" text="Ingredients">
                               <content>
-                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="300.0" prefWidth="519.0" style="-fx-background-color: white;">
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="634.0" prefWidth="410.0" style="-fx-background-color: white;">
                                        <children>
-                                          <VBox layoutX="5.0" layoutY="14.0" prefHeight="314.0" prefWidth="390.0">
+                                          <VBox layoutX="5.0" layoutY="14.0" prefHeight="574.0" prefWidth="390.0">
                                              <children>
                                                 <HBox prefHeight="26.0" prefWidth="206.0">
                                                    <children>
@@ -121,7 +121,7 @@
                                                       </VBox>
                                                    </children>
                                                 </HBox>
-                                                <Label fx:id="ingredients" alignment="TOP_LEFT" prefHeight="156.0" prefWidth="384.0" style="-fx-line-spacing: 0.4em;" text="List.." wrapText="true">
+                                                <Label fx:id="ingredients" alignment="TOP_LEFT" prefHeight="195.0" prefWidth="370.0" style="-fx-line-spacing: 0.4em;" text="List.." wrapText="true">
                                                    <font>
                                                       <Font size="15.0" />
                                                    </font>

@@ -35,4 +35,5 @@ public interface LocalModel extends LocalSubject<Recipe, Ingredient>
   public String createComment(int Id, int user, String text)
       throws SQLException, RemoteException;
   RecipeList getSavedRecipeList();
+  void removeIngredientsFromList();
 }

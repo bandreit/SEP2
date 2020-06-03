@@ -159,6 +159,11 @@ public class LocalModelManager
     property.firePropertyChange("addIngredient", null, ingredient);
   }
 
+  @Override public void removeIngredientsFromList()
+  {
+    ingredientList = new ListOfIngredients();
+  }
+
   @Override public boolean addListener(
       GeneralListener<Recipe, Ingredient> listener, String... propertyNames)
   {
