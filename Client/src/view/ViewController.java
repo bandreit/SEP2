@@ -15,7 +15,6 @@ public abstract class ViewController
 
   public ViewController()
   {
-
   }
 
   public Region getRoot()

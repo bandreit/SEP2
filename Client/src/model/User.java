@@ -18,7 +18,7 @@ public class User implements Serializable
   private static Lock lock = new ReentrantLock();
 
   /**
-   * One-argument constructor
+   * One-argument private constructor
    *
    * @param ID user id
    */

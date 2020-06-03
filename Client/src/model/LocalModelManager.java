@@ -94,12 +94,6 @@ public class LocalModelManager
     return clientModel.register(user, password, email, confirmPassword);
   }
 
-  @Override public void addFullIngredientWithQtyAndAMeasurement(
-      Ingredient ingredient)
-  {
-    ingredientList.addIngredient(ingredient);
-    property.firePropertyChange("addIngredient", null, ingredient);
-  }
 
   @Override public ListOfIngredients getListOfIngredients()
   {
@@ -141,12 +135,6 @@ public class LocalModelManager
     clientModel.deleteRecipe(id);
   }
 
-  @Override public void propertyChange(ObserverEvent<Recipe, Ingredient> event)
-  {
-
-    property
-        .firePropertyChange(event.getPropertyName(), event.getValue1(), null);
-  }
 
   @Override public void close(Recipe recipe) throws Exception
   {
@@ -156,6 +144,19 @@ public class LocalModelManager
   @Override public RecipeList getSavedRecipeList()
   {
     return recipeList;
+  }
+
+  @Override public void propertyChange(ObserverEvent<Recipe, Ingredient> event)
+  {
+    property
+        .firePropertyChange(event.getPropertyName(), event.getValue1(), null);
+  }
+
+  @Override public void addFullIngredientWithQtyAndAMeasurement(
+      Ingredient ingredient)
+  {
+    ingredientList.addIngredient(ingredient);
+    property.firePropertyChange("addIngredient", null, ingredient);
   }
 
   @Override public boolean addListener(
